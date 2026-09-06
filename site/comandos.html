@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Os comandos — UTF-SDD</title>
+<meta name="description" content="O que digitar em cada fase do método UTF-SDD, o que sai de cada comando e qual portão ele fecha.">
+<link rel="icon" href="assets/portao.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400;700&amp;family=JetBrains+Mono:wght@400;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&amp;display=swap">
+<link rel="stylesheet" href="assets/estilo.css">
+</head>
+<body>
+
+<header class="topo">
+  <div class="topo-interno">
+    <a class="selo" href="index.html">
+      <svg class="marca" viewBox="0 0 32 24" aria-hidden="true"><path d="M6 3v18M26 3v18M6 9h20M6 15h20"/></svg>
+      UTF-SDD
+    </a>
+    <nav aria-label="Seções do site">
+      <a href="index.html">Início</a>
+      <a href="ciclo.html">O ciclo</a>
+      <a href="comandos.html" aria-current="page">Comandos</a>
+      <a href="papeis.html">Papéis</a>
+      <a href="duvidas.html">Dúvidas</a>
+    </nav>
+  </div>
+</header>
+
+<main class="pagina">
+
+  <h1>Os comandos</h1>
+
+  <p class="abertura">Um comando por fase. Nenhum deles decide alguma coisa por você: os de
+  documento são entrevistas — uma pergunta por vez, você responde, o agente organiza e
+  escreve.</p>
+
+  <h2>Fase 0, uma vez por projeto</h2>
+
+  <p>Seis comandos, nesta ordem. Cada linha termina numa decisão sua, e
+  <strong>cada passo só começa com o anterior commitado</strong> — os comandos conferem isso e
+  param se faltar.</p>
+
+  <div class="rolagem largo">
+  <table>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">O que produz</th><th scope="col">O que você faz</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/utf-prd</code></td>
+        <td><code>docs/prd.md</code> — glossário, atores, histórias, regras de negócio</td>
+        <td class="voce">Lê inteiro, ajusta e commita; leva o tema ao professor</td>
+      </tr>
+      <tr>
+        <td><code>/utf-backlog</code></td>
+        <td>Uma Issue por história <code>Ready</code>, mais o roteiro do Kanban</td>
+        <td class="voce">Aprova a lista antes de as Issues serem criadas</td>
+      </tr>
+      <tr>
+        <td><code>/utf-flows</code></td>
+        <td><code>docs/user-flows.md</code> — as jornadas e os pontos de desistência</td>
+        <td class="voce">Decide o que acontece em cada ponto de desistência e commita</td>
+      </tr>
+      <tr>
+        <td><code>/utf-design</code></td>
+        <td><code>docs/design-tokens.md</code> — paleta, espaçamento, tipografia e o protótipo</td>
+        <td class="voce">Decide os tokens e commita</td>
+      </tr>
+      <tr>
+        <td><code>/utf-architecture</code></td>
+        <td><code>docs/architecture.md</code> — estrutura, entidades, estados, contratos</td>
+        <td class="voce">Lê e commita</td>
+      </tr>
+      <tr>
+        <td><code>/utf-setup</code></td>
+        <td><code>apps/</code> — o monorepo, com a suíte de testes verde e vazia de regras</td>
+        <td class="voce">Ratifica as decisões e abre o primeiro PR, com a etiqueta <code>manutencao</code></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="nota">
+    <p><strong>O <code>/utf-backlog</code> roda mais de uma vez.</strong> A cada leva de
+    histórias promovidas a <code>Ready</code> no PRD, rode de novo para criar as Issues
+    correspondentes. Os outros cinco rodam uma vez só.</p>
+  </div>
+
+  <h2>Uma vez por história</h2>
+
+  <div class="rolagem largo">
+  <table>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Quando</th><th scope="col">O que acontece</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/utf-issue 27</code></td>
+        <td>No começo e no fim da história</td>
+        <td>Na primeira vez, cria a branch, faz as perguntas, escreve a spec e — depois da sua
+        aprovação — o plano. Rodado de novo com o plano terminado, atualiza os documentos e
+        despacha o auditor-final para o PR. Rodado no meio, retoma de onde parou.</td>
+      </tr>
+      <tr>
+        <td><code>/utf-task 1</code></td>
+        <td>Uma vez <strong>por tarefa</strong> do plano</td>
+        <td>Roda o ciclo inteiro da tarefa: tutor, implementador, dois revisores, triagem,
+        leitura do diff e commit. Devolve o controle a você no fim.</td>
+      </tr>
+      <tr>
+        <td><code>/utf-task</code></td>
+        <td>Sem número</td>
+        <td>Executa a próxima tarefa pendente do <code>plan.md</code> e avisa quando não houver
+        mais nenhuma.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2>O tutor, do começo ao fim</h2>
+
+  <p>O tutor não escreve código, não corrige nada e não opina sobre qualidade. Ele tem uma
+  função só: te ensinar o que acabou de ser feito, para você chegar na defesa sem precisar
+  dele.</p>
+
+  <div class="rolagem largo">
+  <table>
+    <thead>
+      <tr><th scope="col">Comando</th><th scope="col">Quando</th><th scope="col">A pergunta que ele responde</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>/utf-tutor prd</code>, <code>flows</code>, <code>design</code>, <code>architecture</code></td>
+        <td>Na Fase 0, antes de commitar cada documento</td>
+        <td>O que essas decisões significam tecnicamente, no <em>meu</em> documento?</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor setup</code></td>
+        <td>Depois do scaffold (o <code>/utf-setup</code> já chama sozinho)</td>
+        <td>O que são todos esses arquivos que eu não escrevi?</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor spec</code></td>
+        <td>Antes de aprovar a spec</td>
+        <td>O que essa decisão me obriga a fazer depois?</td>
+      </tr>
+      <tr>
+        <td>automático</td>
+        <td>Antes de cada tarefa, dentro do <code>/utf-task</code></td>
+        <td>O que essa tarefa vai construir, com quais conceitos, e o que eu procuro no diff?</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor passo 3</code></td>
+        <td>Antes do commit (o <code>/utf-task</code> já chama sozinho)</td>
+        <td>A leitura do diff arquivo por arquivo, no seu ritmo.</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor 3</code></td>
+        <td>Depois de uma tarefa</td>
+        <td>O que esse diff faz e por que assim? Ele também devolve o nome oficial dos
+        conceitos que apareceram e três perguntas que um professor poderia fazer.</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor antes 3</code></td>
+        <td>Para reouvir</td>
+        <td>A explicação pré-implementação daquela tarefa, de novo.</td>
+      </tr>
+      <tr>
+        <td><code>/utf-tutor prova</code></td>
+        <td>Antes de escrever o PR</td>
+        <td>O simulado da defesa: uma pergunta por vez, com correção das suas respostas e a
+        lista de arquivos para reler.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="pare">
+    <p><strong>O tutor não pode ser usado durante a defesa.</strong> Ele existe para você
+    chegar lá sem precisar dele. Se você não souber responder às três perguntas que ele faz no
+    fim, o trabalho daquela tarefa ainda não acabou.</p>
+  </div>
+
+  <h2>O que precisa estar configurado</h2>
+
+  <p>O <code>/utf-backlog</code>, o <code>/utf-setup</code> e cada <code>/utf-issue</code>
+  falam com o GitHub. Para eles funcionarem você precisa do <code>gh</code> autenticado, com
+  os escopos <code>repo</code>, <code>workflow</code> e <code>project</code>:</p>
+
+  <p><code>gh auth login</code></p>
+
+  <p>O MCP do GitHub resolve do mesmo jeito, se você preferir. Sem um dos dois, backlog,
+  etiquetas e Pull Requests não saem. Com o MCP Context7 disponível, os fluxos conferem as
+  versões das ferramentas na documentação atual antes de decidir a stack.</p>
+
+  <h2>Falar também funciona</h2>
+
+  <p>Dizer “vamos trabalhar na Issue 27” em português dispara o mesmo fluxo — as regras do
+  projeto mandam o agente abrir o workflow correspondente. Os comandos com barra são só o
+  caminho mais curto e o que menos deixa margem para o agente entender outra coisa.</p>
+
+  <div class="adiante">
+    <h2>Próximo</h2>
+    <p><a href="papeis.html">Quem escreve, quem revisa e por que a trava importa</a></p>
+  </div>
+
+</main>
+
+<footer class="rodape">
+  <div class="rodape-interno">
+    <p>UTF-SDD — método da disciplina de Tópicos Especiais, UTFPR.</p>
+    <p>O passo a passo operacional está no
+      <a href="https://github.com/utfpr-gp/utf-sdd-template/blob/main/docs/tutorial-sdd.md">tutorial</a>;
+      o porquê de cada regra, no
+      <a href="https://github.com/utfpr-gp/utf-sdd-template/blob/main/docs/guia-sdd.md">guia da disciplina</a>.</p>
+    <p><a href="https://github.com/utfpr-gp/utf-sdd-template">github.com/utfpr-gp/utf-sdd-template</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
