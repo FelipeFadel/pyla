@@ -38,6 +38,24 @@ ainda não existe.
 | [docs/architecture.md](docs/architecture.md) | Onde as coisas moram — ⬜ ainda não preenchido |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Como se trabalha aqui: fluxo Git, portões e ciclo de cada história |
 
+## Identidade visual
+
+A paleta vem de caixas de feira — engradado azul, tomate, vagem, cítrico. O nome de cada
+token diz o papel, nunca a cor: `primaria` continua verdadeiro se o azul mudar.
+
+| Token | | Papel |
+| --- | --- | --- |
+| `primaria` | `#293379` | ação principal — confirmar compra, assinar |
+| `perigo` | `#b81817` | erro de validação, excluir, pagamento recusado |
+| `sucesso` | `#607829` | compra confirmada, pagamento aprovado |
+| `atencao` | `#e5a300` | selo premium e anel de foco de teclado |
+
+Tipografia **Saira Stencil One** nos títulos — a letra vazada com que se marca caixa de
+feira — e **Saira** no corpo. Espaçamento em múltiplos de 4, uma progressão só.
+
+Cada decisão está justificada em [docs/design-tokens.md](docs/design-tokens.md),
+inclusive as que foram descartadas e por quê.
+
 ## Estado do projeto
 
 Fase 0 — planejamento. PRD, jornadas e tokens de design fechados; arquitetura e
