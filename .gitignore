@@ -1,0 +1,9 @@
+# Configuração local do Claude Code (contém segredos — nunca versionar)
+.claude/settings.local.json
+
+# Dependências e build
+node_modules/
+dist/
+build/
+.env
+.env.local

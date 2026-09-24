@@ -105,7 +105,7 @@ entre lojas e a exportação dos dados.
 > Toda story nasce `Draft` — **só você promove a `Ready`**; `Live` é quando o PR
 > da história mescla (o auditor final confere).
 
-### US01 — Criar conta e autenticar · `Must Have` · `S–M` · Status: `⚪ Draft`
+### US01 — Criar conta e autenticar · `Must Have` · `S–M` · Status: `🟡 Ready`
 
 <!-- Status: `⚪ Draft` (não codificar) · `🟡 Ready` (vira Issue) · `🟢 Live` (PR mesclado) -->
 
@@ -126,7 +126,7 @@ compras e meus preços fiquem guardados só para mim e protegidos de acesso alhe
 
 ---
 
-### US02 — Registrar uma compra item a item · `Must Have` · `L` · Status: `⚪ Draft`
+### US02 — Registrar uma compra item a item · `Must Have` · `L` · Status: `🟡 Ready`
 
 **Como** usuário autenticado, **eu quero** registrar uma compra inteira de uma vez —
 loja, data e cada item com quantidade, tamanho da embalagem e preço pago — **para
@@ -153,7 +153,7 @@ referência de preço nas próximas comparações.
 
 ---
 
-### US03 — Ver o resumo do mês por categoria e por loja · `Must Have` · `M` · Status: `⚪ Draft`
+### US03 — Ver o resumo do mês por categoria e por loja · `Must Have` · `M` · Status: `🟡 Ready`
 
 **Como** usuário autenticado, **eu quero** ver, para o mês corrente, quanto gastei em
 cada categoria e em cada loja, **para que** eu saiba para onde o dinheiro foi sem
@@ -172,7 +172,7 @@ montar planilha nem somar nada.
 
 ---
 
-### US04 — Comparar custo por unidade entre produtos · `Must Have` · `S–M` · Status: `⚪ Draft`
+### US04 — Comparar custo por unidade entre produtos · `Must Have` · `S–M` · Status: `🟡 Ready`
 
 **Como** usuário autenticado, **eu quero** comparar duas ou mais embalagens de
 tamanhos e preços diferentes pelo custo por quilo, litro ou unidade, **para que**
@@ -191,7 +191,7 @@ eu saiba na hora qual compensa, sem fazer conta de cabeça.
 
 ---
 
-### US05 — Ver o histórico de preço de um produto · `Must Have` · `M` · Status: `⚪ Draft`
+### US05 — Ver o histórico de preço de um produto · `Must Have` · `M` · Status: `🟡 Ready`
 
 **Como** usuário autenticado, **eu quero** ver por quanto, onde e quando um produto já
 foi comprado, **para que** eu julgue se o preço da prateleira agora está bom.
@@ -208,7 +208,7 @@ foi comprado, **para que** eu julgue se o preço da prateleira agora está bom.
 
 ---
 
-### US06 — Assinar o premium (pagamento recorrente em sandbox) · `Must Have` · `L` · Status: `⚪ Draft`
+### US06 — Assinar o premium (pagamento recorrente em sandbox) · `Must Have` · `L` · Status: `🟡 Ready`
 
 **Como** usuário gratuito, **eu quero** contratar a assinatura premium pagando por um
 meio seguro, **para que** eu libere o histórico completo, a evolução do gasto, a
@@ -227,7 +227,7 @@ comparação entre lojas e a exportação.
 
 ---
 
-### US07 — Confirmação assíncrona do pagamento via webhook · `Must Have` · `M` · Status: `⚪ Draft`
+### US07 — Confirmação assíncrona do pagamento via webhook · `Must Have` · `M` · Status: `🟡 Ready`
 
 **Como** dono do produto, **eu quero** que o Pyla receba do gateway a confirmação do
 pagamento por webhook, com a assinatura da notificação verificada, **para que** o
@@ -262,7 +262,7 @@ subiram" de "eu comprei mais", **para que** eu entenda a causa da variação.
 
 ---
 
-### US09 — Comparar custo médio entre lojas · `Should Have` · `M` · Status: `⚪ Draft`
+### US09 — Comparar custo médio entre lojas · `Should Have` · `M` · Status: `🟡 Ready`
 
 **Como** usuário premium, **eu quero** ver, por produto ou por categoria, qual loja tem
 saído mais barata, **para que** eu decida onde comprar.
@@ -278,7 +278,7 @@ saído mais barata, **para que** eu decida onde comprar.
 
 ---
 
-### US10 — Exportar os dados · `Should Have` · `S` · Status: `⚪ Draft`
+### US10 — Exportar os dados · `Should Have` · `S` · Status: `🟡 Ready`
 
 **Como** usuário premium, **eu quero** baixar minhas compras e preços num arquivo,
 **para que** eu use os dados fora do Pyla.
@@ -310,7 +310,7 @@ que** o resumo reflita a forma como eu penso meus gastos.
 
 ---
 
-### US12 — Gerenciar a assinatura · `Should Have` · `S` · Status: `⚪ Draft`
+### US12 — Gerenciar a assinatura · `Should Have` · `S` · Status: `🟡 Ready`
 
 **Como** usuário premium, **eu quero** ver o estado da minha assinatura e cancelar a
 renovação, **para que** eu controle o que pago.
@@ -326,7 +326,7 @@ renovação, **para que** eu controle o que pago.
 
 ---
 
-### US13 — Ver o preço colaborativo de um produto em outras lojas · `Should Have` · `M–L` · Status: `⚪ Draft`
+### US13 — Ver o preço colaborativo de um produto em outras lojas · `Should Have` · `M–L` · Status: `🟡 Ready`
 
 **Como** usuário premium, **eu quero** ver o preço típico de um produto em outras
 lojas, agregado e anônimo, a partir do que outros usuários registraram, **para
@@ -344,7 +344,7 @@ que** eu saiba se vale procurar em outro lugar.
 
 ---
 
-### US14 — Corrigir uma compra registrada · `Must Have` · `S–M` · Status: `⚪ Draft`
+### US14 — Corrigir uma compra registrada · `Must Have` · `S–M` · Status: `🟡 Ready`
 
 **Como** usuário autenticado, **eu quero** editar ou excluir uma compra que já
 registrei, **para que** um erro de lançamento não distorça meu controle de gasto
