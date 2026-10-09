@@ -1,7 +1,7 @@
 # 🎨 Tokens de Design
 
 **Projeto:** Pyla — controle de gastos de mercado com comparação colaborativa de preços
-**Versão:** 0.9.0 · revisão via `/utf-design` contra o protótipo — 4 blocos de tokens e protótipo registrados; falta confirmar o link público
+**Versão:** 1.0.0 · revisão via `/utf-design` contra o protótipo — 4 blocos de tokens e protótipo com link público registrados
 **Última atualização:** 2026-10-08
 
 > 🤖 **Este documento existe para a IA parar de inventar um botão diferente a cada
@@ -188,9 +188,10 @@ documento, não o protótipo, que o desenhou só com texto vermelho.
 
 ## Protótipo
 
-**Link:** https://stitch.withgoogle.com/projects/14093580883373874346 (Stitch, projeto
-"Pyla Grocery Tracker") — registrado pelo aluno em 2026-10-08, substituindo o rascunho
-de 2026-09-20.
+**Link:** https://stitch.withgoogle.com/preview/14093580883373874346?node-id=494ddf8c28484334bdcaefcc21961c93
+(Stitch, projeto "Pyla Grocery Tracker") — link de visualização do protótipo, registrado
+pelo aluno em 2026-10-08, substituindo o rascunho de 2026-09-20. Conferido em janela
+anônima: abre sem login.
 
 **Telas do protótipo** (as das jornadas do `user-flows.md`, não telas soltas — é isso que
 faz o protótipo virar insumo da prototipagem assistida em vez de decoração):
@@ -206,6 +207,3 @@ faz o protótipo virar insumo da prototipagem assistida em vez de decoração):
 **Fora do protótipo, por decisão do aluno (2026-10-08):** a calculadora de custo por
 unidade (US04) e a edição/exclusão de compras (US14) não têm tela. São histórias
 `Must Have`; ficam sem referência visual.
-
-**Pendência:** o link ainda não foi confirmado como visualizável por quem não tem conta
-Google — numa janela anônima, o Stitch pediu login. Conferir antes da entrega.
