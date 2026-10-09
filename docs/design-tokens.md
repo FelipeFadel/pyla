@@ -1,8 +1,8 @@
 # 🎨 Tokens de Design
 
 **Projeto:** Pyla — controle de gastos de mercado com comparação colaborativa de preços
-**Versão:** 0.4.0 · em construção via `/utf-design` — 4 blocos de tokens aprovados; protótipo pendente
-**Última atualização:** 2026-09-20
+**Versão:** 0.9.0 · revisão via `/utf-design` contra o protótipo — 4 blocos de tokens e protótipo registrados; falta confirmar o link público
+**Última atualização:** 2026-10-08
 
 > 🤖 **Este documento existe para a IA parar de inventar um botão diferente a cada
 > tela.** Não é um design system — é o mínimo que dá à prototipagem assistida algo a
@@ -17,30 +17,52 @@
 Nome semântico, nunca `azul-2` — a cor muda, o papel dela não.
 
 **Origem:** paleta de hortifruti trazida pelo aluno (caixas de feira), aprovada em
-2026-09-20. Os nomes originais da referência ficam registrados como procedência, mas
-não são os tokens: o código usa o papel.
+2026-09-20. Revisada em 2026-10-08 contra o protótipo do Stitch: **o protótipo passou a
+mandar**. Os valores abaixo foram lidos do código das telas (via MCP); o papel de cada
+um foi decidido pelo aluno.
 
 | Token | Valor | Onde se usa |
 | --- | --- | --- |
-| `primaria` | `#293379` | ação principal: confirmar compra, assinar premium, salvar |
-| `superficie` | `#ffffff` | fundo de card e painel (fundo da página: `#f6f6fa`) |
-| `texto` | `#16172b` | texto padrão — quase preto puxado para o azul da primária |
-| `texto-suave` | `#5b5d75` | legenda, apoio, "Sem loja informada" |
-| `perigo` | `#b81817` | erro de validação, excluir compra, pagamento recusado |
-| `sucesso` | `#607829` | compra confirmada, pagamento aprovado, valor de desconto |
+| `primaria` | `#293379` | botão principal ("Confirmar Compra", "+ Nova Compra", "Assinar"), mês selecionado |
+| `primaria-forte` | `#101b63` | título de página; hover do botão primário |
+| `fundo` | `#f6f6fa` | fundo da página |
+| `superficie` | `#ffffff` | card e painel |
+| `superficie-suave` | `#f5f2ff` | bloco dentro de card: mês não selecionado, caixas internas, campo de seleção |
+| `superficie-media` | `#eeecff` | botão secundário com fundo, abas de estado da Assinatura, hover de item de menu |
+| `texto` | `#191a2e` | texto padrão |
+| `texto-suave` | `#454650` | legenda, apoio, "Sem loja informada" |
+| `perigo` | `#ba1a1a` | erro de validação, "Sair", cancelar assinatura |
+| `perigo-fundo` | `#ffdad6` | caixa de erro; hover de ação destrutiva |
+| `sucesso` | `#4f6618` | ícone de confirmação, valor de desconto, barras do resumo |
+| `sucesso-fundo` | `#ceea8d` | selo positivo ("Cancele quando quiser", desconto no item) |
+| `atencao` | `#ffba2c` | ícone e borda do selo premium |
+| `atencao-fundo` | `#ffdeaa` | selo "Plano Gratuito · Assinar", selo Premium, faixa de convite |
+| `foco` | `#e5a300` | anel de foco de teclado, em todas as telas |
 | `desabilitado` | `#c3c4d2` | controle inativo (nunca carrega informação sozinho) |
-| `atencao` | `#e5a300` | selo premium, convite para assinar, foco de teclado |
 
-**Procedência das cores:** `primaria` ← blue crate · `perigo` ← tomatoe red ·
-`sucesso` ← green beans · `atencao` ← citrus yellow.
+**Procedência das cores:** as quatro cores-base da caixa de feira continuam sendo a
+semente do tema no Stitch — `primaria` ← blue crate (`#293379`), `sucesso` ← green beans
+(`#607829`), `foco` ← citrus yellow (`#e5a300`) e o quase-preto `#16172b` do texto. Os
+demais tons foram derivados pelo Stitch a partir delas.
 
 **Decisões registradas:**
 
-- **Laranja e verde-alface da referência ficaram de fora.** Seis papéis cobrem as telas
-  das jornadas do `user-flows.md`. Cor sem papel definido é cor que a IA aplica sem
-  critério — exatamente o problema que este documento existe para evitar.
-- **`atencao` acumula dois papéis:** selo/convite premium e anel de foco de teclado. É a
-  única cor da paleta que contrasta com `primaria` tanto em fundo claro quanto escuro.
+- **O protótipo manda na paleta (2026-10-08).** O Stitch não aplica os valores-base
+  literalmente: ele gera uma família de tons a partir deles, e é essa família que as
+  telas usam. Registrar os valores de 20/09 deixaria o documento descrevendo um produto
+  que não existe; o documento passou a registrar o que as telas de fato usam.
+- **`foco` virou token próprio.** Antes, `atencao` acumulava selo premium e anel de foco.
+  O protótipo separou os dois: o anel segue no cítrico `#e5a300` (o que mais contrasta
+  com `primaria`), e os selos usam os amarelos claros. Um papel por token.
+- **Fundos claros ganharam token** (`perigo-fundo`, `sucesso-fundo`, `atencao-fundo`).
+  Sem eles, cada tela nova inventaria um tom diferente atrás de erro, desconto e convite.
+- **Só dois lilases de superfície.** O Stitch usa um terceiro (`#e7e6ff`, 14 usos em
+  chips e um botão), quase indistinguível de `superficie-media`. Não ganha token: onde
+  aparece, deve ser trocado por `superficie-media`.
+- **Texto sobre os fundos claros fica sem token próprio.** O Stitch usa tons específicos
+  (`#93000a`, `#536a1d`, `#271900`); o documento fica enxuto e eles não são registrados.
+- **Laranja e verde-alface da referência continuam de fora.** Cor sem papel definido é
+  cor que a IA aplica sem critério.
 - **`desabilitado` nunca é o único sinal de um estado.** O PRD exige que mensagens de
   erro não sejam transmitidas só por cor; o mesmo vale para controle inativo.
 
@@ -48,18 +70,33 @@ não são os tokens: o código usa o papel.
 
 ## Escala de espaçamento
 
-Uma progressão só, usada em tudo. Base 4, dobrando — aprovada em 2026-09-20.
+Uma progressão só, usada em tudo. Base 4, dobrando — aprovada em 2026-09-20; unidade e
+nomes revisados em 2026-10-08 para coincidir com o protótipo.
 
-| Token | Valor | Onde se usa |
-| --- | --- | --- |
-| `xs` | `4px` | rótulo e campo; respiro dentro de uma linha |
-| `sm` | `8px` | ícone e texto; interior de badge; gap entre linhas de lista |
-| `md` | `16px` | padding de card; distância entre campos de formulário |
-| `lg` | `24px` | padding de painel; gap entre blocos |
-| `xl` | `32px` | entre seções da mesma tela |
-| `2xl` | `48px` | respiro do topo da página |
+| Token | Valor | Equivale a | Onde se usa |
+| --- | --- | --- | --- |
+| `space-xxs` | `0.25rem` | 4px | rótulo e campo; respiro dentro de uma linha |
+| `space-xs` | `0.5rem` | 8px | ícone e texto; interior de badge; gap entre linhas de lista |
+| `space-sm` | `1rem` | 16px | padding de card; distância entre campos; margem lateral da tela no celular |
+| `space-md` | `1.5rem` | 24px | padding de painel; gap entre blocos |
+| `space-lg` | `2rem` | 32px | entre seções da mesma tela; margem lateral no desktop |
+| `space-xl` | `3rem` | 48px | respiro do topo da página |
+
+A coluna "Equivale a" é só referência, com a fonte padrão do navegador (1rem = 16px).
 
 **Decisões registradas:**
+
+- **Em rem, não em px (2026-10-08).** rem acompanha o tamanho de texto escolhido no
+  navegador: quem aumenta a fonte por baixa visão vê os espaços crescerem junto, em vez
+  de a letra crescer e o layout apertar. É também a unidade do código gerado pelo Stitch,
+  então documento e código falam a mesma língua.
+- **Nomes do Stitch (`space-xxs` … `space-xl`), não os de 20/09 (`xs` … `2xl`).** Os
+  valores eram os mesmos, mas os nomes estavam deslocados um degrau (o `xs` antigo era
+  4px; o `space-xs` do protótipo é 8px). Dois nomes para o mesmo valor é o tipo de
+  confusão que faz alguém aplicar o degrau errado; ficou o nome que já está no código.
+- **O protótipo ainda tem valores fora da escala.** Cerca de 110 usos de 2px, 6px, 10px e
+  12px no código das telas. Não viram token: ao levar uma tela para o código, cada um é
+  arredondado para o degrau mais próximo da tabela.
 
 - **Base 4, dobrando, e não uma escala mais apertada (2·4·8·12·16).** Em degraus de 12 e
   16 a diferença é pequena demais para ser óbvia: na hora de aplicar, cada tela escolhe
@@ -73,7 +110,8 @@ Uma progressão só, usada em tudo. Base 4, dobrando — aprovada em 2026-09-20.
 
 ## Tipografia
 
-Proposta "Caixa de feira" — aprovada em 2026-09-20.
+Proposta "Caixa de feira" — aprovada em 2026-09-20; mantida na revisão de 2026-10-08,
+mesmo divergindo do protótipo (ver decisões).
 
 **Famílias:** `Saira Stencil One` (display) e `Saira` (corpo), ambas do Google Fonts.
 Toda declaração leva pilha de fallback real: `"Saira Stencil One", "Trebuchet MS",
@@ -95,6 +133,13 @@ sans-serif` e `"Saira", system-ui, sans-serif`.
 - **O estêncil fica só em `titulo-pagina` e no total do mês.** Letra vazada perde a
   contraforma em corpo pequeno: em 13px de legenda ela fica ilegível. Todo o resto usa a
   Saira normal — mesma família, mesmo desenho de base, sem o vazado.
+- **O documento manda na tipografia, não o protótipo (2026-10-08).** O Stitch não oferece
+  a Saira e trocou por Chivo (títulos, números) + Work Sans (corpo, legenda) como
+  aproximação. Os tamanhos e pesos do protótipo batem com esta tabela; só a família
+  difere, e o título lá sai em peso 800 sem estêncil. **O protótipo não é referência de
+  fonte:** ao levar uma tela para o código, vale a Saira desta tabela. Diferente da
+  paleta, aqui a troca custaria o motivo da escolha — o estêncil é o que liga a
+  interface ao assunto do produto.
 - **Descartada a opção Fraunces + Inter.** A Inter é a face mais associada a interface
   gerada por IA; num projeto cujo tema é usar IA com critério, ela trabalha contra a
   defesa. A serifa também briga com o clima de hortifruti da paleta.
@@ -112,19 +157,20 @@ destrutivo) — o que muda entre elas é o fundo, não a regra de cada estado.
 
 | Estado | Aparência |
 | --- | --- |
-| normal | fundo `primaria` `#293379`, texto `#ffffff`, raio 4px, padding `8px 20px` (`sm`/`md` da escala), Saira 15px 600 |
-| hover | fundo escurece para `#1b2257`, transição de 120ms |
-| foco (teclado) | anel de `atencao` `#e5a300`, 3px, deslocado 2px, via `:focus-visible` |
+| normal | fundo `primaria` `#293379`, texto `#ffffff`, raio 4px, padding `8px 20px`, Saira 15px 600 |
+| hover | fundo escurece para `primaria-forte` `#101b63`, transição de 120ms |
+| foco (teclado) | anel de `foco` `#e5a300`, 3px, deslocado 2px, via `:focus-visible` |
 | desabilitado | fundo `desabilitado` `#c3c4d2`, texto `#62647d`, `cursor: not-allowed` |
 | carregando | mantém `primaria`, spinner à esquerda, rótulo vira "Processando…", botão inerte |
 
-**Variantes:** secundário usa fundo transparente com contorno `#c8cad8` e texto
-`primaria` — não disputa atenção com o primário. Destrutivo usa `perigo` `#b81817`
-(hover `#8f1211`).
+**Variantes:** secundário usa fundo `superficie-media` `#eeecff` e texto `primaria` —
+não disputa atenção com o primário (segue o protótipo, revisado em 2026-10-08).
+Destrutivo usa fundo `perigo` `#ba1a1a` com texto branco (hover `#8f1211`) — segue o
+documento, não o protótipo, que o desenhou só com texto vermelho.
 
 **Decisões registradas:**
 
-- **O anel de foco é `atencao`, não `primaria`.** Um anel azul em volta de um botão azul
+- **O anel de foco é `foco` (o cítrico), não `primaria`.** Um anel azul em volta de um botão azul
   não se vê. O cítrico é a única cor da paleta que contrasta com a primária em fundo
   claro e escuro. O foco visível é exigência do PRD (acessibilidade mínima do frontend),
   não enfeite: sem ele, quem navega por teclado não sabe onde está.
@@ -142,23 +188,24 @@ destrutivo) — o que muda entre elas é o fundo, não a regra de cada estado.
 
 ## Protótipo
 
-**Link:** https://stitch.withgoogle.com/projects/18150998945555448536 (Stitch)
+**Link:** https://stitch.withgoogle.com/projects/14093580883373874346 (Stitch, projeto
+"Pyla Grocery Tracker") — registrado pelo aluno em 2026-10-08, substituindo o rascunho
+de 2026-09-20.
 
-⚠️ **Provisório.** Registrado pelo aluno em 2026-09-20 como rascunho inicial — ainda não
-cobre as quatro telas abaixo nem reflete necessariamente os tokens já aprovados. Serve
-como ponto de partida, não como referência fechada para implementação.
-
-**Telas que ele deve cobrir** (as das jornadas do `user-flows.md`, não telas soltas —
-é isso que faz o protótipo virar insumo da prototipagem assistida em vez de decoração):
+**Telas do protótipo** (as das jornadas do `user-flows.md`, não telas soltas — é isso que
+faz o protótipo virar insumo da prototipagem assistida em vez de decoração):
 
 | # | Tela | Jornada / Story |
 | --- | --- | --- |
-| 1 | Registrar compra item a item (com rascunho retomável) | Jornada 2 · US02 |
-| 2 | Resumo do mês por categoria e por loja (com desconto de caixa e "Sem loja informada") | US03 |
-| 3 | Histórico de preço de um produto, com o limite do plano gratuito | US05 |
-| 4 | Assinatura: oferta, "processando pagamento" e estado ativo | Jornada 1 · US06, US07, US12 |
+| 1 | Login e Criar Conta | US01 |
+| 2 | Registrar Compra (item a item, com erro de validação e desconto de caixa) | Jornada 2 · US02 |
+| 3 | Resumo do Mês (por categoria e por loja, "Sem loja informada", meses anteriores como premium) | US03 |
+| 4 | Histórico de Preço (com o limite do plano gratuito) | US05 |
+| 5 | Planos e Assinatura Premium (oferta, processando, aguardando, recusado, ativo) | Jornada 1 · US06, US07, US12 |
 
-**Para a E1:** a entrega exige `docs/design-tokens.md` commitado. Os tokens estão
-fechados; o que falta é o protótipo cobrir as quatro telas acima com a paleta, a
-tipografia e a escala já aprovadas. Este documento passa a `1.0.0` quando isso
-acontecer e o link deixar de ser provisório.
+**Fora do protótipo, por decisão do aluno (2026-10-08):** a calculadora de custo por
+unidade (US04) e a edição/exclusão de compras (US14) não têm tela. São histórias
+`Must Have`; ficam sem referência visual.
+
+**Pendência:** o link ainda não foi confirmado como visualizável por quem não tem conta
+Google — numa janela anônima, o Stitch pediu login. Conferir antes da entrega.
