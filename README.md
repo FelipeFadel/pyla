@@ -14,9 +14,14 @@ humanos registrados.
 
 ## Stack
 
-⬜ **Pendente** — definida no `/utf-architecture`, que ainda não rodou.
-A ficha da disciplina já fixa backend NestJS + Prisma sobre PostgreSQL; o frontend
-(React, Angular ou Vue) é decisão em aberto.
+- Backend: NestJS 12, Prisma ORM 7 e PostgreSQL 18
+- Frontend: React 19, Vite 8, React Router e Tailwind CSS
+- Testes e lint: Vitest e oxlint nas duas partes da aplicação
+- Banco em produção: Neon
+- Hospedagem: API no Render, web na Vercel
+- Pagamento: Mercado Pago
+
+Para um arquivo mais detalhado, vá para -> [`docs/architecture.md`](docs/architecture.md).
 
 ## Em produção
 
@@ -30,25 +35,25 @@ ainda não existe.
 
 ## Documentação
 
-| Documento | O que responde |
-| --- | --- |
-| [docs/prd.md](docs/prd.md) | O que o produto faz: glossário, atores, 14 histórias e 23 regras de negócio |
-| [docs/user-flows.md](docs/user-flows.md) | O que a pessoa vive na tela e onde ela desiste |
-| [docs/design-tokens.md](docs/design-tokens.md) | Paleta, espaçamento, tipografia e estados de botão |
-| [docs/architecture.md](docs/architecture.md) | Onde as coisas moram — ⬜ ainda não preenchido |
-| [CONTRIBUTING.md](CONTRIBUTING.md) | Como se trabalha aqui: fluxo Git, portões e ciclo de cada história |
+| Documento                                      | O que responde                                                              |
+|------------------------------------------------|-----------------------------------------------------------------------------|
+| [docs/prd.md](docs/prd.md)                     | O que o produto faz: glossário, atores, 14 histórias e 23 regras de negócio |
+| [docs/user-flows.md](docs/user-flows.md)       | O que a pessoa vive na tela e onde ela desiste                              |
+| [docs/design-tokens.md](docs/design-tokens.md) | Paleta, espaçamento, tipografia e estados de botão                          |
+| [docs/architecture.md](docs/architecture.md)   | Onde as coisas moram — ⬜ ainda não preenchido                               |
+| [CONTRIBUTING.md](CONTRIBUTING.md)             | Como se trabalha aqui: fluxo Git, portões e ciclo de cada história          |
 
 ## Identidade visual
 
 A paleta vem de caixas de feira — engradado azul, tomate, vagem, cítrico. O nome de cada
 token diz o papel, nunca a cor: `primaria` continua verdadeiro se o azul mudar.
 
-| Token | | Papel |
-| --- | --- | --- |
-| `primaria` | `#293379` | ação principal — confirmar compra, assinar |
-| `perigo` | `#b81817` | erro de validação, excluir, pagamento recusado |
-| `sucesso` | `#607829` | compra confirmada, pagamento aprovado |
-| `atencao` | `#e5a300` | selo premium e anel de foco de teclado |
+| Token      |           | Papel                                          |
+|------------|-----------|------------------------------------------------|
+| `primaria` | `#293379` | ação principal — confirmar compra, assinar     |
+| `perigo`   | `#b81817` | erro de validação, excluir, pagamento recusado |
+| `sucesso`  | `#607829` | compra confirmada, pagamento aprovado          |
+| `atencao`  | `#e5a300` | selo premium e anel de foco de teclado         |
 
 Tipografia **Saira Stencil One** nos títulos — a letra vazada com que se marca caixa de
 feira — e **Saira** no corpo. Espaçamento em múltiplos de 4, uma progressão só.
