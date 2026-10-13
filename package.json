@@ -1,0 +1,14 @@
+{
+  "name": "pyla",
+  "private": true,
+  "description": "Monorepo do Pyla: apps/api (NestJS) e apps/web (React). Cada app tem o seu package.json.",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "test": "npm --prefix apps/api test && npm --prefix apps/web test",
+    "lint": "npm --prefix apps/api run lint && npm --prefix apps/web run lint",
+    "dev:api": "npm --prefix apps/api run start:dev",
+    "dev:web": "npm --prefix apps/web run dev"
+  }
+}
