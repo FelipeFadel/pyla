@@ -296,6 +296,11 @@ web). Os e2e da api ficam em `apps/api/test/`.
   `paidTotal`, RN08).
 - **Loja é por usuário**, como o produto. Não há catálogo global (Fora de
   escopo do PRD).
+- **Produto é único por usuário (RN10):** o par `userId` + `normalizedName`
+  é único no banco.
+- **Rascunho pode ter zero itens.** Por isso `Purchase` → `PurchaseItem` é
+  "zero ou mais" no ER; a RN03 (ao menos um item) é validada na confirmação
+  (§5.4).
 - **A base coletiva não tem `userId`.** `productKey` é o nome normalizado do
   produto + o tamanho + a unidade; `storeKey` é o nome normalizado da loja.
   `purchaseItemId` existe só para a exclusão em cascata (US14) e **nunca** sai
@@ -324,7 +329,7 @@ erDiagram
     SubscriptionOrder ||--o{ Payment : "recebe"
     Category ||--o{ Product : "classifica"
     Store |o--o{ Purchase : "local de"
-    Purchase ||--|{ PurchaseItem : "contém"
+    Purchase ||--o{ PurchaseItem : "contém"
     Product ||--o{ PurchaseItem : "aparece em"
     PurchaseItem ||--o| CollectivePricePoint : "origina"
 
@@ -384,7 +389,7 @@ erDiagram
         uuid id PK
         uuid userId FK
         string name
-        string normalizedName
+        string normalizedName "único por userId (RN10)"
         uuid categoryId FK
     }
     Purchase {
@@ -464,8 +469,8 @@ pedido para apontar (RN18).
 - **Reconciliação ativa:** um job de `@nestjs/schedule` consulta o gateway
   sobre os pedidos `PENDING` dentro do prazo. Se o pagamento consta como
   aprovado, aplica o mesmo efeito do webhook, com a mesma idempotência.
-- ⚠️ **Depende de emendar a RN16 no PRD** (ver §7.1). Até a emenda, só o
-  webhook ativa o premium.
+- A RN16 do PRD foi emendada para permitir a ativação pela reconciliação
+  ativa (pendência 1 da §7.1, resolvida).
 - O agendador roda em **toda** instância da aplicação, e a API roda com uma
   só. Mesmo assim, todo job é idempotente.
 - A frequência dos jobs é definida na spec. Cada execução acorda o Neon e
@@ -502,7 +507,7 @@ pedido para apontar (RN18).
 
 | # | Pendência | Quem resolve |
 | --- | --- | --- |
-| 1 | **Emendar a RN16** para permitir a ativação por reconciliação ativa com o gateway. Até lá, o job de reconciliação não ativa premium | Você, numa nova versão do `prd.md` |
+| 1 | ~~**Emendar a RN16** para permitir a ativação por reconciliação ativa com o gateway~~ — **resolvida**: RN16 emendada no `prd.md` | Você, numa nova versão do `prd.md` |
 | 2 | Confirmar que NestJS 12 (ESM) + Prisma 7 (client gerado) funcionam juntos. Se não funcionarem, a saída é o NestJS 11 | `/utf-setup` |
 | 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 | `/utf-setup` |
 | 4 | Conferir o lint do template `react-ts` (o `package.json` traz oxlint; um trecho do gerador ainda mostra ESLint) e adicionar o script `test` no web | `/utf-setup` |

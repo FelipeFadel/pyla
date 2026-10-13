@@ -14,8 +14,8 @@ humanos registrados.
 
 ## Stack
 
-- Backend: NestJS 12, Prisma ORM 7 e PostgreSQL 18
-- Frontend: React 19, Vite 8, React Router e Tailwind CSS
+- Backend: NestJS, Prisma ORM e PostgreSQL
+- Frontend: React, Vite, React Router e Tailwind CSS
 - Testes e lint: Vitest e oxlint nas duas partes da aplicação
 - Banco em produção: Neon
 - Hospedagem: API no Render, web na Vercel
@@ -25,13 +25,11 @@ Para um arquivo mais detalhado, vá para -> [`docs/architecture.md`](docs/archit
 
 ## Em produção
 
-- **Aplicação:** ⬜ pendente — deploy previsto para a E3
-- **API (Swagger):** ⬜ pendente
+A partir da Entrega 3.
 
 ## Quick Start
 
-⬜ **Pendente** — gerado no `/utf-setup`, que ainda não rodou. O monorepo (`apps/`)
-ainda não existe.
+A partir da Entrega 2.
 
 ## Documentação
 
@@ -40,7 +38,8 @@ ainda não existe.
 | [docs/prd.md](docs/prd.md)                     | O que o produto faz: glossário, atores, 14 histórias e 23 regras de negócio |
 | [docs/user-flows.md](docs/user-flows.md)       | O que a pessoa vive na tela e onde ela desiste                              |
 | [docs/design-tokens.md](docs/design-tokens.md) | Paleta, espaçamento, tipografia e estados de botão                          |
-| [docs/architecture.md](docs/architecture.md)   | Onde as coisas moram — ⬜ ainda não preenchido                               |
+| [docs/architecture.md](docs/architecture.md)   | Onde as coisas moram: stack, monorepo e diagrama ER                         |
+| [docs/checklist.md](docs/checklist.md)         | O que a disciplina exige e o que já foi cumprido                            |
 | [CONTRIBUTING.md](CONTRIBUTING.md)             | Como se trabalha aqui: fluxo Git, portões e ciclo de cada história          |
 
 ## Identidade visual
@@ -61,8 +60,9 @@ feira — e **Saira** no corpo. Espaçamento em múltiplos de 4, uma progressão
 Cada decisão está justificada em [docs/design-tokens.md](docs/design-tokens.md),
 inclusive as que foram descartadas e por quê.
 
+**Protótipo:** [Stitch](https://stitch.withgoogle.com/preview/14093580883373874346?node-id=494ddf8c28484334bdcaefcc21961c93)
+
 ## Estado do projeto
 
-Fase 0 — planejamento. PRD, jornadas e tokens de design fechados; arquitetura e
-scaffold pendentes. Nenhuma linha de código ainda: as histórias estão em `Draft` no PRD
-e só viram Issue depois de promovidas a `Ready`.
+Fase 0 — planejamento. PRD, jornadas, tokens de design e arquitetura fechados; as
+histórias `Ready` já estão como Issues no GitHub Projects. O código começa na Entrega 2.

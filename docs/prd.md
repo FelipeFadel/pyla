@@ -58,6 +58,7 @@ entre lojas e a exportação dos dados.
 
 | Termo                       | Significa                                                                                                                        | Não confundir com                                                                                                       |
 |:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
+| **Usuário**                 | A pessoa que tem conta no Pyla, identificada pelo e-mail. É gratuita por padrão e premium enquanto tiver assinatura ativa.       | Visitante — o visitante ainda não tem conta ou não está logado. "Conta" e "usuário" são a mesma coisa.                  |
 | **Compra**                  | Uma ida ao mercado: o conjunto de itens levados de uma vez, com uma loja e uma data.                                             | Item de compra — a compra é o todo, o item é cada linha dela.                                                           |
 | **Item de compra**          | Cada produto levado numa compra, com quantidade, peso/volume da embalagem e preço pago.                                          | Produto — o item é o produto naquela compra, com aquele preço; o produto é a coisa em si.                               |
 | **Produto**                 | Aquilo que se compra, identificado de forma estável para acompanhar preço ao longo do tempo (ex.: "arroz branco 5 kg, marca X"). | Item de compra — o produto se repete entre compras; o item é único de uma compra.                                       |
@@ -67,7 +68,9 @@ entre lojas e a exportação dos dados.
 | **Histórico de preço**      | A sequência de preços já registrados para um mesmo produto, com loja e data de cada um.                                          | Resumo do mês — o histórico é por produto ao longo do tempo; o resumo é por categoria num período.                      |
 | **Resumo do mês**           | A visão de quanto se gastou em cada categoria e em cada loja num período.                                                        | Histórico de preço — ver acima.                                                                                         |
 | **Plano / Assinatura**      | O vínculo do usuário com o Pyla: gratuito por padrão, premium enquanto a assinatura estiver ativa e paga.                        | Pagamento — a assinatura é o vínculo contínuo; o pagamento é cada cobrança dela.                                        |
+| **Pedido de assinatura**    | Cada tentativa de assinar o premium: nasce pendente e termina paga, recusada ou expirada (24 horas sem confirmação).             | Assinatura — o pedido é a tentativa; a assinatura é o vínculo que nasce quando um pedido é pago.                        |
 | **Pagamento**               | Cada cobrança da assinatura premium, processada por um gateway externo.                                                          | Assinatura — ver acima.                                                                                                 |
+| **Evento de webhook**       | Cada notificação que o gateway envia ao Pyla sobre um pagamento. Toda notificação é registrada, mesmo a inválida ou a de pedido desconhecido. | Pagamento — o evento é o aviso que chega; o pagamento é a cobrança que ele confirma.                                    |
 | **Base coletiva de preços** | O conjunto anônimo de preços de produtos por loja e data, formado pela contribuição automática de todas as compras confirmadas.  | Histórico de preço — o histórico é do próprio usuário; a base coletiva agrega preços de todos, sem identificar ninguém. |
 | **Rascunho de compra**      | Uma compra começada e ainda não confirmada; fica guardada para o usuário retomar ou descartar.                                   | Compra — só a compra confirmada conta para resumo, histórico e base coletiva.                                           |
 
@@ -147,6 +150,8 @@ referência de preço nas próximas comparações.
 - [ ] **Dado** uma compra sem nenhum item, **quando** o usuário tenta confirmar, **então** o registro é recusado — uma compra precisa de ao menos um item.
 - [ ] **Dado** que o usuário sai da tela antes de confirmar uma compra, **quando** ele volta ao Pyla, **então** encontra a compra como rascunho para retomar ou descartar; e enquanto for rascunho, ela não aparece no resumo do mês, não entra no histórico de preço nem na base coletiva.
 - [ ] **Dado** um rascunho de compra, **quando** o usuário o descarta, **então** nenhum dado dele é persistido de forma definitiva.
+- [ ] **Dado** um usuário que já tem um rascunho de compra aberto, **quando** ele inicia uma nova compra, **então** o sistema pede que ele retome ou descarte o rascunho existente — só existe um rascunho por vez.
+- [ ] **Dado** um rascunho de compra sem atividade por um prazo (definido na spec da US02), **quando** esse prazo passa, **então** o rascunho expira e é descartado sozinho.
 - [ ] **Dado** uma compra registrada com sucesso, **quando** o registro é concluído, **então** cada preço com desconto de item passa imediatamente a compor o histórico de preço daquele produto e a base coletiva anônima de preços (produto, preço unitário, loja e data, sem qualquer dado que identifique o usuário), e o usuário é informado, na própria tela de confirmação, de que preços registrados alimentam a comparação colaborativa de forma anônima.
 
 **Regras relacionadas:** RN03, RN04, RN05, RN06, RN07, RN08, RN09, RN10, RN11, RN23
@@ -220,8 +225,10 @@ comparação entre lojas e a exportação.
 - [ ] **Dado** um pagamento recusado pelo gateway, **quando** o retorno é recebido, **então** o pedido fica "recusado", o usuário continua gratuito e é informado, com opção de tentar de novo.
 - [ ] **Dado** um usuário que abandona o checkout do gateway sem concluir, **quando** ele volta ao Pyla, **então** o pedido permanece "pendente", ele continua gratuito, e nenhum acesso premium é liberado.
 - [ ] **Dado** um usuário que já tem assinatura ativa, **quando** ele tenta assinar de novo, **então** o Pyla não cria um segundo pedido e informa que a assinatura já está ativa.
+- [ ] **Dado** um usuário com um pedido pendente criado há menos de 24 horas, **quando** ele volta ao Pyla, **então** vê que tem um pagamento aguardando e pode retomar o mesmo checkout ou cancelar o pedido; se tentar assinar de novo, o Pyla não cria um segundo pedido.
+- [ ] **Dado** um pedido pendente sem confirmação, **quando** passam 24 horas da sua criação, **então** o pedido vira "expirado" sozinho, o usuário continua gratuito e a tela volta a oferecer o premium do zero.
 - [ ] **Dado** qualquer tela do fluxo, **quando** ela é exibida, **então** nenhuma chave de API do gateway aparece no cliente nem no repositório.
-- [ ] **Dado** que a ativação do premium é responsabilidade exclusiva da confirmação por webhook (US07), **quando** o usuário retorna do gateway, **então** o Pyla não concede acesso premium só pelo retorno da tela — aguarda a confirmação assíncrona.
+- [ ] **Dado** que a ativação do premium depende da confirmação do gateway — pelo webhook ou pela reconciliação ativa (US07, RN16) —, **quando** o usuário retorna do gateway, **então** o Pyla não concede acesso premium só pelo retorno da tela — aguarda a confirmação assíncrona.
 
 **Regras relacionadas:** RN16, RN17, RN20
 
@@ -241,6 +248,7 @@ pago, mesmo que o usuário feche o app.
 - [ ] **Dado** o mesmo webhook entregue duas vezes (reenvio do gateway), **quando** o segundo chega, **então** o estado não muda de novo nem gera efeito duplicado (idempotência).
 - [ ] **Dado** um webhook que notifica falha, estorno ou cancelamento de um pagamento antes concluído, **quando** processado, **então** a assinatura é marcada para não renovar, mas o acesso premium permanece até o fim do período já pago.
 - [ ] **Dado** um webhook para um pedido que o Pyla não reconhece, **quando** ele chega, **então** é registrado e ignorado com segurança, sem erro que derrube o endpoint.
+- [ ] **Dado** um pedido pendente dentro do prazo cujo webhook não chegou, **quando** a reconciliação ativa consulta o gateway e o pagamento consta como aprovado, **então** o pedido passa a "pago" e a assinatura fica "ativa", sem efeito duplicado se o webhook chegar depois.
 
 **Regras relacionadas:** RN16, RN18, RN19, RN20
 
@@ -360,7 +368,7 @@ nem a base de preços.
 - [ ] **Dado** um usuário que tenta editar ou excluir uma compra que não é dele, **quando** a requisição chega, **então** é negada.
 - [ ] **Dado** uma compra de qualquer época (inclusive de meses anteriores), **quando** o dono a corrige ou exclui, **então** a operação é permitida — não há janela de tempo para correção.
 
-**Regras relacionadas:** RN03, RN04, RN08, RN21, RN23
+**Regras relacionadas:** RN03, RN04, RN06, RN08, RN21, RN23
 
 ---
 
@@ -383,8 +391,8 @@ nem a base de preços.
 | RN13 | Uma categoria personalizada usada em registros históricos é preservada mesmo que a assinatura premium expire ou a categoria seja excluída: os itens já classificados mantêm o nome da categoria com que foram registrados.                                                                                                                                                                     |
 | RN14 | Recursos premium — resumo e histórico além do mês corrente, evolução do gasto, comparação de custo médio entre lojas, exportação, categorias personalizadas, preço colaborativo — só são acessíveis com assinatura premium ativa. O usuário gratuito que os solicita recebe um convite para assinar.                                                                                           |
 | RN15 | A comparação de custo por unidade só ocorre entre unidades da mesma família (massa com massa, volume com volume, contagem com contagem). Famílias incompatíveis: comparação recusada.                                                                                                                                                                                                          |
-| RN16 | A ativação do premium acontece exclusivamente pela confirmação de pagamento recebida por webhook. O redirecionamento do usuário ao gateway, por si só, não concede acesso.                                                                                                                                                                                                                     |
-| RN17 | Um usuário com assinatura ativa não pode gerar um novo pedido de assinatura enquanto a atual estiver vigente.                                                                                                                                                                                                                                                                                  |
+| RN16 | A ativação do premium acontece somente por confirmação de pagamento vinda do gateway: pelo webhook ou pela reconciliação ativa, em que o Pyla consulta o gateway sobre os pedidos pendentes. O redirecionamento do usuário ao gateway, por si só, não concede acesso.                                                                                                                          |
+| RN17 | Um usuário com assinatura ativa, ou com um pedido de assinatura pendente dentro do prazo, não pode gerar um novo pedido de assinatura.                                                                                                                                                                                                                                                         |
 | RN18 | O processamento de webhooks é idempotente: a mesma notificação recebida mais de uma vez não produz efeito adicional. Webhook com assinatura inválida ou para pedido desconhecido é registrado e ignorado, sem alterar estado.                                                                                                                                                                  |
 | RN19 | Cancelamento de assinatura ou estorno não derrubam o premium imediatamente: o acesso vale até o fim do período já pago. Depois disso, o usuário volta a gratuito.                                                                                                                                                                                                                              |
 | RN20 | Chaves de API e segredos do gateway nunca aparecem no cliente nem no repositório.                                                                                                                                                                                                                                                                                                              |
