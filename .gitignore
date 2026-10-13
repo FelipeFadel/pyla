@@ -5,5 +5,13 @@
 node_modules/
 dist/
 build/
+.angular/
+coverage/
+*.tsbuildinfo
+
+# Client do Prisma: gerado no install (postinstall), nunca commitado
+apps/api/src/generated/
+
+# Variáveis de ambiente: só o .env.example vai para o Git
 .env
 .env.local

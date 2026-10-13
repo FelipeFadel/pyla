@@ -1,0 +1,10 @@
+// Schema do Pyla. Os models entram pelas Issues, com spec aprovada (architecture.md §5).
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
