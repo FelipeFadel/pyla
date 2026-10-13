@@ -1,8 +1,8 @@
 # 🛠️ Architecture / Software Design Document
 
 **Projeto:** Pyla — controle de gastos de mercado com comparação colaborativa de preços
-**Versão:** 1.0.0 · gerado via `/utf-architecture`
-**Última atualização:** 2026-10-10
+**Versão:** 1.1.0 · gerado via `/utf-architecture`, ratificado no `/utf-setup`
+**Última atualização:** 2026-10-13
 
 > 🤖 **O `prd.md` responde _o quê_ o produto faz. Este responde _onde as coisas
 > moram e como se chamam_.** Detalhe de tela — rota, componente, contrato —
@@ -35,9 +35,8 @@
 > seção e o `package.json` de cada app contam a mesma história. Versão = linha
 > *major*; o pin exato vive no `package.json`.
 
-**Runtime:** Node.js **≥ 20.19 ou ≥ 22.12** (piso comum de NestJS 12 e Vite) ·
-TypeScript **6** nos dois apps. A versão exata do Node é fixada no setup
-(`engines` e `.nvmrc`).
+**Runtime:** Node.js **24**, fixado no setup em `.nvmrc` e no `engines`
+(`>=24`) da raiz e dos dois apps · TypeScript **6** nos dois apps.
 
 ### Backend — `apps/api` (fixado pela ficha)
 
@@ -222,6 +221,18 @@ TypeScript **6** nos dois apps. A versão exata do Node é fixada no setup
 
 Testes ficam ao lado do arquivo testado (`*.spec.ts` na api, `*.test.tsx` no
 web). Os e2e da api ficam em `apps/api/test/`.
+
+**Decisões do setup (ratificadas em 2026-10-13):**
+- **Scripts da raiz:** `test` e `lint` rodam api e web em sequência
+  (`npm --prefix`); `dev:api` e `dev:web` sobem cada app. A raiz não tem
+  dependências.
+- **Client do Prisma:** gerado em `apps/api/src/generated/prisma`, fora do
+  Git. O `postinstall` da api roda `prisma generate` a cada instalação.
+- **`.env` no CLI do Prisma:** o `prisma.config.ts` carrega o `.env` com
+  `process.loadEnvFile` do Node, sem a biblioteca `dotenv`.
+- **`docker-compose.yml`:** adiado para a primeira Issue que precisar de banco.
+- **Padrões do gerador mantidos:** o `nest new` traz o `@nestjs/mau` e o script
+  `deploy`. Eles ficam, mas o deploy é no Render (§7).
 
 ---
 
@@ -508,9 +519,9 @@ pedido para apontar (RN18).
 | # | Pendência | Quem resolve |
 | --- | --- | --- |
 | 1 | ~~**Emendar a RN16** para permitir a ativação por reconciliação ativa com o gateway~~ — **resolvida**: RN16 emendada no `prd.md` | Você, numa nova versão do `prd.md` |
-| 2 | Confirmar que NestJS 12 (ESM) + Prisma 7 (client gerado) funcionam juntos. Se não funcionarem, a saída é o NestJS 11 | `/utf-setup` |
-| 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 | `/utf-setup` |
-| 4 | Conferir o lint do template `react-ts` (o `package.json` traz oxlint; um trecho do gerador ainda mostra ESLint) e adicionar o script `test` no web | `/utf-setup` |
+| 2 | ~~Confirmar que NestJS 12 (ESM) + Prisma 7 (client gerado) funcionam juntos~~ — **resolvida**: o client gerado compilou com `nest build` em ESM e carregou no Node | `/utf-setup` |
+| 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 — **conferida só na documentação** (Prisma suporta PostgreSQL ≥ 9.6). Falta testar contra um banco real | Primeira Issue com banco (`docker-compose.yml`) |
+| 4 | ~~Conferir o lint do template `react-ts` e adicionar o script `test` no web~~ — **resolvida**: o template traz oxlint; o setup adicionou `test` (Vitest + jsdom) | `/utf-setup` |
 | 5 | Conferir as condições atuais do plano gratuito do Render e da Vercel e o build nativo do `bcrypt` no Render | Primeiro deploy |
 | 6 | Endpoint do Mercado Pago para a consulta ativa de pagamento | Spec da US07 |
 
@@ -521,6 +532,7 @@ pedido para apontar (RN18).
 | Data | Versão | O que mudou |
 | :--- | :----- | :---------- |
 | 2026-10-10 | 1.0.0 | Versão inicial via `/utf-architecture` |
+| 2026-10-13 | 1.1.0 | Decisões do setup ratificadas (§3), Node 24 fixado (§2), pendências 2 e 4 resolvidas e 3 conferida na documentação (§7.1) |
 
 ---
 
