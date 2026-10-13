@@ -1,0 +1,514 @@
+<!DOCTYPE html><html lang="pt-BR" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}a:focus-visible,button:focus-visible{outline:3px solid #e5a300!important;outline-offset:2px!important;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"secondary-container":"#ceea8d","background":"#fbf8ff","tertiary-container":"#4e3500","error":"#ba1a1a","inverse-primary":"#bcc2ff","on-primary-container":"#959fec","on-surface-variant":"#454650","on-secondary":"#ffffff","tertiary-fixed-dim":"#ffba2c","on-error":"#ffffff","inverse-on-surface":"#f1efff","inverse-surface":"#2e2f44","primary-fixed":"#dfe0ff","surface-tint":"#4f58a0","on-surface":"#191a2e","on-primary":"#ffffff","secondary":"#4f6618","on-background":"#191a2e","surface-dim":"#d9d7f3","primary-container":"#293379","on-secondary-container":"#536a1d","tertiary-fixed":"#ffdeaa","surface-container-highest":"#e1e0fc","surface-container-low":"#f5f2ff","on-tertiary-fixed":"#271900","outline-variant":"#c6c5d2","surface-container":"#eeecff","primary":"#101b63","surface":"#fbf8ff","on-primary-fixed":"#04105a","error-container":"#ffdad6","on-tertiary-container":"#d69800","surface-container-lowest":"#ffffff","surface-variant":"#e1e0fc","secondary-fixed-dim":"#b5d177","on-secondary-fixed":"#151f00","on-error-container":"#93000a","tertiary":"#322100","surface-container-high":"#e7e6ff","secondary-fixed":"#d1ed90","on-secondary-fixed-variant":"#384e00","outline":"#767682","surface-bright":"#fbf8ff","on-primary-fixed-variant":"#364087","primary-fixed-dim":"#bcc2ff","on-tertiary-fixed-variant":"#5f4100","on-tertiary":"#ffffff"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"space-xxs":"0.25rem","space-xs":"0.5rem","space-md":"1.5rem","space-lg":"2rem","space-xl":"3rem","gutter":"1rem","space-sm":"1rem","margin":"1rem"},"fontFamily":{"headline-card":["Chivo"],"headline-display":["Chivo"],"headline-display-mobile":["Chivo"],"currency-stat":["Chivo"],"label-caption-bold":["Work Sans"],"currency-stat-mobile":["Chivo"],"body-default":["Work Sans"],"label-caption":["Work Sans"],"body-bold":["Work Sans"],"body-medium":["Work Sans"]},"fontSize":{"headline-card":["18px",{"lineHeight":"24px","letterSpacing":"-0.01em","fontWeight":"700"}],"headline-display":["32px",{"lineHeight":"38px","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-display-mobile":["28px",{"lineHeight":"34px","letterSpacing":"-0.01em","fontWeight":"800"}],"currency-stat":["26px",{"lineHeight":"32px","fontWeight":"600"}],"label-caption-bold":["13px",{"lineHeight":"18px","fontWeight":"600"}],"currency-stat-mobile":["22px",{"lineHeight":"28px","fontWeight":"600"}],"body-default":["16px",{"lineHeight":"24px","fontWeight":"400"}],"label-caption":["13px",{"lineHeight":"18px","fontWeight":"400"}],"body-bold":["16px",{"lineHeight":"24px","fontWeight":"700"}],"body-medium":["16px",{"lineHeight":"24px","fontWeight":"500"}]}}}}</script></head><body class="bg-[#f6f6fa] font-body-default text-body-default text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-md shadow-[0_1px_8px_rgba(22,23,43,0.06)]"><div class="h-20 max-w-[1120px] mx-auto px-space-sm lg:px-space-lg flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-xs"></div><nav class="hidden xl:flex items-center gap-space-md" data-active-classes="text-primary font-body-bold"><a class="font-body-medium text-body-medium text-on-surface-variant hover:text-on-surface transition-colors py-space-xs" data-path="resumo-do-mes" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');">Resumo</a><a class="font-body-medium text-body-medium text-on-surface-variant hover:text-on-surface transition-colors py-space-xs" data-path="minhas-compras" href="#">Minhas Compras</a><a class="font-body-medium text-body-medium text-on-surface-variant hover:text-on-surface transition-colors py-space-xs" data-path="historico-de-preco" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Histórico de Preço - Pyla'}, '*');">Histórico</a></nav><div class="flex items-center gap-space-xs lg:gap-space-sm"><a class="hidden sm:inline-flex items-center px-space-xs py-space-xxs bg-tertiary-fixed text-on-tertiary-fixed font-label-caption-bold text-label-caption-bold rounded-lg border border-tertiary-fixed-dim/40 hover:bg-tertiary-fixed-dim transition-colors" data-path="assinatura-premium" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Planos e Assinatura Premium - Pyla'}, '*');">Plano Gratuito • Assinar</a><a class="inline-flex items-center justify-center h-10 px-space-sm bg-primary-container text-on-primary font-headline-card text-[14px] leading-none rounded-lg hover:bg-primary transition-colors gap-1.5 shadow-[0_1px_3px_rgba(22,23,43,0.08)]" data-path="registrar-compra" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Registrar Compra - Pyla'}, '*');"><span class="material-symbols-outlined text-[18px]">add</span><span class="">Nova Compra</span></a><div class="relative flex items-center pl-space-xxs" id="profileMenuContainer"><button aria-expanded="false" aria-haspopup="true" aria-label="Menu do usuário" class="flex items-center gap-1 p-0.5 rounded-full hover:ring-2 hover:ring-primary/40 focus:outline-none transition-all cursor-pointer" id="profileMenuButton" onclick="toggleProfileDropdown(event)" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover border border-outline-variant/60" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCm_e0HdnJIPWOA7eapYcFZKMaNl0T4np-rJ5x1d_CiiiD9fkhftnq3bK6JM5U07-86xYhRczU9lyvBcqzy6iZvc7QZX-Kk1uDVwzzkDeHFPswsntvMzWBHG37TdgMwI2q4zTmu1jL3e1c1U9eUzg7FfrGRaQn-XGJFHZZZbS8iyUEsX3w2wSasYZaGXYthy229-XHjbKld_F5wIa04QUnqBgkMzGI7zIPD9DrXADPrBUlgo6pRdwZ7Pg"><span class="material-symbols-outlined text-[18px] text-on-surface-variant hidden sm:inline-flex">expand_more</span></button><div class="hidden absolute right-0 top-full mt-2 w-56 bg-surface-container-lowest rounded-xl shadow-xl border border-outline-variant/30 py-1.5 z-50 flex flex-col" id="profileDropdown" role="menu"><div class="px-space-sm py-2 border-b border-outline-variant/30"><p class="font-body-bold text-[14px] text-on-surface leading-tight">João Silva</p><p class="font-body-default text-label-caption text-on-surface-variant truncate">joao@email.com</p></div><div class="py-1 border-b border-outline-variant/30"><a class="flex items-center gap-2 px-space-sm py-2 text-on-surface hover:bg-surface-container text-label-caption-bold transition-colors" href="#"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">person</span><span class="">Meu Perfil</span></a><a class="flex items-center gap-2 px-space-sm py-2 text-on-surface hover:bg-surface-container text-label-caption-bold transition-colors" data-path="assinatura-premium" href="#"><span class="material-symbols-outlined text-[18px] text-on-surface-variant">settings</span><span class="">Configurações</span></a></div><div class="pt-1"><a class="flex items-center gap-2 px-space-sm py-2 text-error hover:bg-error-container/40 text-label-caption-bold transition-colors cursor-pointer" data-path="login-e-criar-conta" href="#" onclick="event.preventDefault(); window.parent?.postMessage({type: 'navigate', screen: 'Login e Criar Conta - Pyla'}, '*');" role="menuitem"><span class="material-symbols-outlined text-[18px] text-error">logout</span><span class="">Sair</span></a></div></div></div></div></div></header><main class="w-full flex-1 bg-[#f6f6fa] pb-20 md:pb-0 pt-20"><div class="flex flex-col w-full">
+<div class="w-full max-w-[1120px] mx-auto px-space-sm lg:px-space-lg py-space-md flex flex-col gap-space-md">
+<!-- Top Navigation / Breadcrumb & Status Bar -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div class="flex items-center gap-space-xs">
+<a class="inline-flex items-center gap-1.5 font-label-caption-bold text-label-caption-bold text-on-surface-variant hover:text-primary transition-colors py-1 group" data-path="minhas-compras" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');">
+<span class="material-symbols-outlined text-[18px] group-hover:-translate-x-0.5 transition-transform">arrow_back</span>
+<span class="">Voltar para Minhas Compras</span>
+</a>
+<span class="text-outline-variant font-label-caption">•</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant">ID #1042</span>
+</div>
+<div class="flex items-center gap-space-xs self-start sm:self-auto">
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 bg-surface-container-high text-on-surface font-label-caption-bold text-label-caption-bold rounded">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+          Concluída em 24/10/2023
+        </span>
+<span class="inline-flex items-center gap-1 px-space-xs py-0.5 bg-tertiary-fixed text-on-tertiary-fixed font-label-caption-bold text-label-caption-bold rounded">
+<span class="material-symbols-outlined text-[15px]">edit_note</span>
+          Modo de Edição
+        </span>
+</div>
+</div>
+<!-- Main Header Card -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex items-start gap-space-sm">
+<div class="w-12 h-12 rounded bg-surface-container flex items-center justify-center text-primary-container shrink-0">
+<span class="material-symbols-outlined text-[28px]">storefront</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<h1 class="font-headline-card text-headline-card text-on-surface">Pão de Açúcar • Pinheiros</h1>
+<span class="text-on-surface-variant font-label-caption text-label-caption bg-surface-container px-2 py-0.5 rounded">Supermercado</span>
+</div>
+<p class="font-label-caption text-label-caption text-on-surface-variant mt-1">
+            Recibo emitido às 18:42 • 2 itens registrados • Pagamento Débito
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-space-xs self-end lg:self-center">
+<button aria-label="Excluir toda esta compra" class="inline-flex items-center gap-1.5 h-10 px-space-sm text-error bg-error-container/40 hover:bg-error-container text-label-caption-bold font-label-caption-bold rounded transition-colors cursor-pointer" onclick="openDeletePurchaseModal()" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_sweep</span>
+<span class="">Excluir Compra Inteira</span>
+</button>
+</div>
+</div>
+<!-- Business Rule Alert: Lock on Last Item -->
+<div class="bg-surface-container-low p-space-sm rounded flex items-start gap-space-xs shadow-sm" id="ruleAlertBox">
+<div class="text-tertiary-container mt-0.5 shrink-0">
+<span class="material-symbols-outlined text-[20px]">shield</span>
+</div>
+<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs">
+<div>
+<span class="font-label-caption-bold text-label-caption-bold text-on-surface block">
+            Regra de Integridade Orçamentária: Bloqueio do Último Item
+          </span>
+<span class="font-label-caption text-label-caption text-on-surface-variant">
+            Uma compra não pode conter 0 itens. Quando restar apenas 1 item cadastrado, sua exclusão individual é desabilitada para proteger os registros históricos.
+          </span>
+</div>
+<span class="shrink-0 font-label-caption-bold text-[12px] px-2 py-1 bg-surface-container text-on-surface-variant rounded">
+          Regra Ativa no Pyla
+        </span>
+</div>
+</div>
+<!-- Edit General Details Form Grid -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm">
+<div class="flex items-center justify-between mb-space-sm">
+<h2 class="font-headline-card text-headline-card text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px] text-primary-container">tune</span>
+          Informações Gerais da Transação
+        </h2>
+<span class="font-label-caption text-label-caption text-on-surface-variant">Edite local e data</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-sm">
+<!-- Field 1 -->
+<div class="flex flex-col gap-1">
+<label class="font-label-caption-bold text-label-caption-bold text-on-surface" for="marketName">
+            Nome do Estabelecimento <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant">shopping_cart</span>
+<input class="w-full h-11 pl-10 pr-3 bg-surface-container-lowest text-on-surface font-body-default text-[15px] rounded outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="marketName" type="text" value="Pão de Açúcar - Pinheiros">
+</div>
+</div>
+<!-- Field 2 -->
+<div class="flex flex-col gap-1">
+<label class="font-label-caption-bold text-label-caption-bold text-on-surface" for="purchaseDate">
+            Data da Compra <span class="text-error">*</span>
+</label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant">calendar_today</span>
+<input class="w-full h-11 pl-10 pr-3 bg-surface-container-lowest text-on-surface font-body-default text-[15px] rounded outline-none focus:ring-2 focus:ring-primary-container shadow-sm" id="purchaseDate" type="date" value="2023-10-24">
+</div>
+</div>
+<!-- Field 3 -->
+<div class="flex flex-col gap-1">
+<label class="font-label-caption-bold text-label-caption-bold text-on-surface" for="purchaseCategory">
+            Categoria Financeira
+          </label>
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant">sell</span>
+<select class="w-full h-11 pl-10 pr-3 bg-surface-container-lowest text-on-surface font-body-default text-[15px] rounded outline-none focus:ring-2 focus:ring-primary-container shadow-sm appearance-none" id="purchaseCategory">
+<option selected="" value="mercado">Abastecimento Mensal (Supermercado)</option>
+<option value="hortifruti">Feira e Hortifrúti</option>
+<option value="emergencial">Compra Rápida de Conveniência</option>
+<option value="atacado">Atacado / Reposição de Despensa</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 text-[18px] text-on-surface-variant pointer-events-none">arrow_drop_down</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Items Management Section -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col gap-space-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-space-xs pb-space-xs">
+<div>
+<div class="flex items-center gap-space-xs">
+<h2 class="font-headline-card text-headline-card text-on-surface">Itens Desta Compra</h2>
+<span class="font-label-caption-bold text-label-caption-bold px-2 py-0.5 bg-primary-container text-on-primary rounded" id="itemsBadgeCount">2 itens</span>
+</div>
+<p class="font-label-caption text-label-caption text-on-surface-variant mt-0.5">
+            Ajuste quantidades e valores unitários. Se precisar zerar a lista, use a exclusão completa.
+          </p>
+</div>
+<button class="inline-flex items-center gap-1.5 h-10 px-space-sm bg-surface-container hover:bg-surface-container-high text-primary-container font-label-caption-bold text-label-caption-bold rounded transition-colors self-start sm:self-auto cursor-pointer" onclick="addNewItemDemo()" type="button">
+<span class="material-symbols-outlined text-[18px]">add_circle</span>
+<span class="">Adicionar Novo Item</span>
+</button>
+</div>
+<!-- Warning Banner when Lock Triggers -->
+<div class="hidden bg-tertiary-fixed/60 p-space-sm rounded items-center gap-space-xs" id="singleItemNotice">
+<span class="material-symbols-outlined text-tertiary-container text-[20px] shrink-0">lock</span>
+<div class="flex-1 font-label-caption text-label-caption text-on-surface">
+<strong>Atenção:</strong> Resta apenas 1 item nesta compra. A exclusão deste item está desabilitada para impedir compras vazias. Para remover este registro, clique em <strong>"Excluir Compra Inteira"</strong>.
+        </div>
+</div>
+<!-- Table of Items (Desktop structured tabular view) -->
+<div class="overflow-x-auto -mx-space-md px-space-md">
+<table class="w-full text-left min-w-[700px]">
+<thead>
+<tr class="bg-surface-container text-on-surface-variant font-label-caption-bold text-label-caption-bold uppercase tracking-wider text-[11px]">
+<th class="py-2.5 px-space-sm rounded-l" scope="col">Produto / Especificação</th>
+<th class="py-2.5 px-space-xs text-center w-28" scope="col">Quantidade</th>
+<th class="py-2.5 px-space-xs text-right w-36" scope="col">Valor Unitário</th>
+<th class="py-2.5 px-space-xs text-right w-36" scope="col">Subtotal</th>
+<th class="py-2.5 px-space-sm text-center w-24 rounded-r" scope="col">Ação</th>
+</tr>
+</thead>
+<tbody class="font-body-default text-[14px]" id="itemsTableBody"><tr id="row-item-1" class="hover:bg-surface-container-low transition-colors">
+        <td class="py-3 px-space-sm">
+          <div class="flex flex-col">
+            <span class="font-body-bold text-[15px] text-on-surface">Arroz Branco Tipo 1 Camil 5kg</span>
+            <span class="font-label-caption text-label-caption text-on-surface-variant">Mercearia • Grãos e Cereais</span>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-center">
+          <div class="inline-flex items-center bg-surface-container rounded p-0.5">
+            <button type="button" onclick="adjustQty(1, -1)" aria-label="Diminuir quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">remove</span>
+            </button>
+            <span class="w-8 text-center font-body-bold text-on-surface text-[14px]">1</span>
+            <button type="button" onclick="adjustQty(1, 1)" aria-label="Aumentar quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </button>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-medium text-on-surface tabular-nums">
+          R$ 28,50
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-bold text-on-surface tabular-nums">
+          R$ 28,50
+        </td>
+        <td class="py-3 px-space-sm text-center">
+          
+        <div class="relative inline-block group">
+          <button type="button" onclick="removeItemRow(1)" class="w-9 h-9 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors cursor-pointer" aria-label="Remover Arroz Branco Tipo 1 Camil 5kg">
+            <span class="material-symbols-outlined text-[20px]">delete</span>
+          </button>
+          <div class="hidden group-hover:flex absolute right-full top-1/2 -translate-y-1/2 mr-2 z-20 bg-inverse-surface text-inverse-on-surface font-label-caption text-[11px] px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none">
+            Remover item
+          </div>
+        </div>
+      
+        </td>
+      </tr><tr id="row-item-2" class="hover:bg-surface-container-low transition-colors">
+        <td class="py-3 px-space-sm">
+          <div class="flex flex-col">
+            <span class="font-body-bold text-[15px] text-on-surface">Café Torrado Especial Melitta 500g</span>
+            <span class="font-label-caption text-label-caption text-on-surface-variant">Bebidas • Café e Matinais</span>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-center">
+          <div class="inline-flex items-center bg-surface-container rounded p-0.5">
+            <button type="button" onclick="adjustQty(2, -1)" aria-label="Diminuir quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">remove</span>
+            </button>
+            <span class="w-8 text-center font-body-bold text-on-surface text-[14px]">2</span>
+            <button type="button" onclick="adjustQty(2, 1)" aria-label="Aumentar quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </button>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-medium text-on-surface tabular-nums">
+          R$ 18,90
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-bold text-on-surface tabular-nums">
+          R$ 37,80
+        </td>
+        <td class="py-3 px-space-sm text-center">
+          
+        <div class="relative inline-block group">
+          <button type="button" onclick="removeItemRow(2)" class="w-9 h-9 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors cursor-pointer" aria-label="Remover Café Torrado Especial Melitta 500g">
+            <span class="material-symbols-outlined text-[20px]">delete</span>
+          </button>
+          <div class="hidden group-hover:flex absolute right-full top-1/2 -translate-y-1/2 mr-2 z-20 bg-inverse-surface text-inverse-on-surface font-label-caption text-[11px] px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none">
+            Remover item
+          </div>
+        </div>
+      
+        </td>
+      </tr></tbody>
+</table>
+</div>
+</div>
+<!-- Summary & Financial Projection Box + Action Footbar -->
+<div class="bg-surface-container-lowest p-space-md rounded shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-space-md">
+<!-- Left side: Calculated Metrics -->
+<div class="flex items-center gap-space-lg flex-wrap">
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Valor Total Atualizado</span>
+<div class="flex items-baseline gap-1">
+<span class="font-currency-stat text-currency-stat text-primary-container tabular-nums" id="totalDisplayAmount">R$ 66,30</span>
+<span class="font-label-caption text-[12px] text-secondary font-label-caption-bold">Preço final</span>
+</div>
+</div>
+<div class="hidden sm:block w-px h-10 bg-outline-variant/40"></div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Economia Calculada</span>
+<span class="font-body-bold text-body-bold text-secondary tabular-nums">R$ 4,90 (7,4%)</span>
+</div>
+<div class="hidden sm:block w-px h-10 bg-outline-variant/40"></div>
+<div class="flex flex-col">
+<span class="font-label-caption text-label-caption text-on-surface-variant">Itens Totais</span>
+<span class="font-body-bold text-body-bold text-on-surface" id="itemsSummaryCount">2 itens</span>
+</div>
+</div>
+<!-- Right side: Operation Buttons -->
+<div class="flex items-center gap-space-xs justify-end flex-wrap">
+<a class="inline-flex items-center justify-center h-11 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface font-body-medium text-body-medium rounded transition-colors" data-path="minhas-compras" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');">
+          Cancelar
+        </a>
+<button class="inline-flex items-center justify-center gap-1.5 h-11 px-space-md bg-primary-container hover:bg-primary text-on-primary font-body-bold text-body-bold rounded shadow-sm transition-colors cursor-pointer" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');" type="button">
+<span class="material-symbols-outlined text-[20px]">check</span>
+<span class="">Salvar Alterações</span>
+</button>
+</div>
+</div>
+<!-- Notification Toast (Feedback on save or actions) -->
+<div class="hidden fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-space-md py-space-sm rounded-lg shadow-2xl flex items-center gap-space-xs transition-opacity duration-300" id="saveToast">
+<span class="material-symbols-outlined text-[20px] text-secondary-fixed">check_circle</span>
+<span class="font-body-medium text-[14px]">Alterações da compra salvas com sucesso!</span>
+</div>
+</div>
+<!-- Modal: Excluir Compra Inteira (Destructive Confirmation) -->
+<div aria-labelledby="modalTitle" aria-modal="true" class="hidden fixed inset-0 z-50 flex items-center justify-center p-space-sm bg-inverse-surface/60 backdrop-blur-sm" id="deletePurchaseModal" role="dialog">
+<div class="bg-surface-container-lowest max-w-lg w-full rounded p-space-md shadow-2xl flex flex-col gap-space-md animate-in fade-in zoom-in-95 duration-150">
+<div class="flex items-start gap-space-sm">
+<div class="w-10 h-10 rounded bg-error-container text-error flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[24px]">warning</span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-card text-headline-card text-on-surface" id="modalTitle">
+            Excluir esta compra permanentemente?
+          </h3>
+<p class="font-body-default text-[14px] text-on-surface-variant leading-relaxed">
+            Esta ação apagará todos os dados desta compra de <strong class="text-on-surface" id="modalPriceHighlight">R$ 66,30</strong> realizada em <strong>24/10/2023</strong> no <strong>Pão de Açúcar - Pinheiros</strong>.
+          </p>
+<p class="font-label-caption-bold text-label-caption-bold text-error mt-1">
+            Essa operação removerá os índices de histórico e não poderá ser desfeita.
+          </p>
+</div>
+</div>
+<div class="bg-surface-container-low p-space-sm rounded flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">info</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant">
+          Dica: Se você deseja apenas remover itens individuais, mantenha ao menos um item registrado na compra.
+        </span>
+</div>
+<div class="flex items-center justify-end gap-space-xs pt-space-xs">
+<button class="h-11 px-space-sm bg-surface-container hover:bg-surface-container-high text-on-surface font-body-medium text-body-medium rounded transition-colors cursor-pointer" onclick="closeDeletePurchaseModal()" type="button">
+          Cancelar
+        </button>
+<button class="h-11 px-space-md bg-error hover:opacity-90 text-on-error font-body-bold text-body-bold rounded transition-opacity flex items-center gap-1.5 cursor-pointer" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');" type="button">
+<span class="material-symbols-outlined text-[18px]">delete_forever</span>
+<span class="">Sim, Excluir Compra</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+  let itemsData = [
+    { id: 1, name: "Arroz Branco Tipo 1 Camil 5kg", cat: "Mercearia • Grãos e Cereais", qty: 1, price: 28.50 },
+    { id: 2, name: "Café Torrado Especial Melitta 500g", cat: "Bebidas • Café e Matinais", qty: 2, price: 18.90 }
+  ];
+
+  let nextId = 3;
+
+  function renderTable() {
+    const tbody = document.getElementById('itemsTableBody');
+    const badge = document.getElementById('itemsBadgeCount');
+    const summaryCount = document.getElementById('itemsSummaryCount');
+    const totalDisplay = document.getElementById('totalDisplayAmount');
+    const modalPrice = document.getElementById('modalPriceHighlight');
+    const notice = document.getElementById('singleItemNotice');
+
+    const isSingleItem = itemsData.length === 1;
+
+    // Show/hide warning banner
+    if (isSingleItem) {
+      notice.classList.remove('hidden');
+      notice.classList.add('flex');
+    } else {
+      notice.classList.add('hidden');
+      notice.classList.remove('flex');
+    }
+
+    let total = 0;
+    tbody.innerHTML = '';
+
+    itemsData.forEach(item => {
+      const subtotal = item.qty * item.price;
+      total += subtotal;
+
+      const tr = document.createElement('tr');
+      tr.id = `row-item-${item.id}`;
+      tr.className = "hover:bg-surface-container-low transition-colors";
+
+      // If single item, disable delete button with specific styling & tooltip
+      const actionButtonHtml = isSingleItem ? `
+        <div class="relative inline-block group">
+          <button type="button" disabled class="w-9 h-9 rounded flex items-center justify-center text-outline-variant bg-surface-container-highest cursor-not-allowed opacity-60" aria-label="Item bloqueado">
+            <span class="material-symbols-outlined text-[18px]">lock</span>
+          </button>
+          <div class="hidden group-hover:flex absolute right-full top-1/2 -translate-y-1/2 mr-2 z-30 bg-inverse-surface text-inverse-on-surface font-label-caption text-[11px] px-3 py-1.5 rounded shadow-xl whitespace-nowrap pointer-events-none">
+            <span class="flex items-center gap-1">
+              <span class="material-symbols-outlined text-[14px] text-tertiary-fixed-dim">info</span>
+              Bloqueado: Uma compra precisa ter ao menos 1 item.
+            </span>
+          </div>
+        </div>
+      ` : `
+        <div class="relative inline-block group">
+          <button type="button" onclick="removeItemRow(${item.id})" class="w-9 h-9 rounded flex items-center justify-center text-on-surface-variant hover:text-error hover:bg-error-container/30 transition-colors cursor-pointer" aria-label="Remover ${item.name}">
+            <span class="material-symbols-outlined text-[20px]">delete</span>
+          </button>
+          <div class="hidden group-hover:flex absolute right-full top-1/2 -translate-y-1/2 mr-2 z-20 bg-inverse-surface text-inverse-on-surface font-label-caption text-[11px] px-2 py-1 rounded shadow-lg whitespace-nowrap pointer-events-none">
+            Remover item
+          </div>
+        </div>
+      `;
+
+      tr.innerHTML = `
+        <td class="py-3 px-space-sm">
+          <div class="flex flex-col">
+            <span class="font-body-bold text-[15px] text-on-surface">${item.name}</span>
+            <span class="font-label-caption text-label-caption text-on-surface-variant">${item.cat}</span>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-center">
+          <div class="inline-flex items-center bg-surface-container rounded p-0.5">
+            <button type="button" onclick="adjustQty(${item.id}, -1)" aria-label="Diminuir quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">remove</span>
+            </button>
+            <span class="w-8 text-center font-body-bold text-on-surface text-[14px]">${item.qty}</span>
+            <button type="button" onclick="adjustQty(${item.id}, 1)" aria-label="Aumentar quantidade" class="w-7 h-7 flex items-center justify-center text-on-surface-variant hover:text-on-surface hover:bg-surface-container-lowest rounded transition-colors cursor-pointer">
+              <span class="material-symbols-outlined text-[16px]">add</span>
+            </button>
+          </div>
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-medium text-on-surface tabular-nums">
+          R$ ${item.price.toFixed(2).replace('.', ',')}
+        </td>
+        <td class="py-3 px-space-xs text-right font-body-bold text-on-surface tabular-nums">
+          R$ ${subtotal.toFixed(2).replace('.', ',')}
+        </td>
+        <td class="py-3 px-space-sm text-center">
+          ${actionButtonHtml}
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+
+    const countText = `${itemsData.length} ${itemsData.length === 1 ? 'item' : 'itens'}`;
+    badge.textContent = countText;
+    summaryCount.textContent = countText;
+
+    const formattedTotal = `R$ ${total.toFixed(2).replace('.', ',')}`;
+    totalDisplay.textContent = formattedTotal;
+    modalPrice.textContent = formattedTotal;
+  }
+
+  function adjustQty(id, delta) {
+    const item = itemsData.find(i => i.id === id);
+    if (!item) return;
+    const newQty = item.qty + delta;
+    if (newQty >= 1) {
+      item.qty = newQty;
+      renderTable();
+    }
+  }
+
+  function removeItemRow(id) {
+    // If only 1 item left, strictly refuse removal according to PRD rule
+    if (itemsData.length <= 1) {
+      return;
+    }
+    itemsData = itemsData.filter(i => i.id !== id);
+    renderTable();
+  }
+
+  function addNewItemDemo() {
+    const sampleItems = [
+      { name: "Azeite de Oliva Extra Virgem Gallo 500ml", cat: "Mercearia • Óleos e Temperos", price: 34.90 },
+      { name: "Leite Integral Piracanjuba 1L", cat: "Laticínios • Leites", price: 4.89 },
+      { name: "Queijo Mussarela Fatiado 300g", cat: "Frios e Embutidos", price: 14.50 },
+      { name: "Detergente Líquido Ypê Neutro 500ml", cat: "Limpeza • Cozinha", price: 2.65 }
+    ];
+    const picked = sampleItems[Math.floor(Math.random() * sampleItems.length)];
+    itemsData.push({
+      id: nextId++,
+      name: picked.name,
+      cat: picked.cat,
+      qty: 1,
+      price: picked.price
+    });
+    renderTable();
+  }
+
+  function openDeletePurchaseModal() {
+    const modal = document.getElementById('deletePurchaseModal');
+    modal.classList.remove('hidden');
+  }
+
+  function closeDeletePurchaseModal() {
+    const modal = document.getElementById('deletePurchaseModal');
+    modal.classList.add('hidden');
+  }
+
+  function confirmDeletePurchase() {
+    closeDeletePurchaseModal();
+    // Simulate redirection back to purchases list
+    const toast = document.getElementById('saveToast');
+    toast.innerHTML = `
+      <span class="material-symbols-outlined text-[20px] text-error">delete_outline</span>
+      <span class="font-body-medium text-[14px]">Compra excluída permanentemente. Redirecionando...</span>
+    `;
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      window.location.hash = 'minhas-compras';
+    }, 1200);
+  }
+
+  function saveEditsSuccess() {
+    const toast = document.getElementById('saveToast');
+    toast.classList.remove('hidden');
+    setTimeout(() => {
+      toast.classList.add('hidden');
+    }, 3500);
+  }
+
+  // Initial render
+  document.addEventListener('DOMContentLoaded', () => {
+    renderTable();
+  });
+</script></main><footer class="w-full bg-surface-container-lowest py-space-lg shadow-[0_-1px_6px_rgba(22,23,43,0.03)]"><div class="max-w-[1120px] mx-auto px-space-sm lg:px-space-lg flex flex-col sm:flex-row items-center justify-between gap-space-sm text-center sm:text-left"><div class="flex items-center gap-space-xs"><span class="font-headline-card text-headline-card text-primary">Pyla</span><span class="font-label-caption text-label-caption text-on-surface-variant">Inteligência financeira em compras de mercado</span></div><div class="font-label-caption text-label-caption text-on-surface-variant">© 2024 Pyla Tecnologia. Todos os direitos reservados.</div></div></footer><nav class="xl:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-lowest border-t border-outline-variant/40 shadow-[0_-4px_16px_rgba(22,23,43,0.08)] z-50 flex items-center justify-around px-space-xs" data-active-classes="text-primary-container font-body-bold"><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface py-1" data-path="resumo-do-mes" href="#"><span class="material-symbols-outlined text-[22px]">analytics</span><span class="font-label-caption text-[11px] leading-tight">Resumo</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface py-1" data-path="minhas-compras" href="#"><span class="material-symbols-outlined text-[22px]">receipt_long</span><span class="font-label-caption text-[11px] leading-tight">Compras</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface py-1" data-path="comparar-custo-unidade" href="#"><span class="material-symbols-outlined text-[22px]">balance</span><span class="font-label-caption text-[11px] leading-tight">Comparar</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface py-1" data-path="historico-de-preco" href="#"><span class="material-symbols-outlined text-[22px]">trending_up</span><span class="font-label-caption text-[11px] leading-tight">Histórico</span></a><a class="flex flex-col items-center justify-center text-on-surface-variant hover:text-on-surface py-1" data-path="assinatura-premium" href="#"><span class="material-symbols-outlined text-[22px]">workspace_premium</span><span class="font-label-caption text-[11px] leading-tight">Premium</span></a></nav>
+<script class="">
+  function toggleProfileDropdown(event) {
+    event.stopPropagation();
+    const dropdown = document.getElementById('profileDropdown');
+    const button = document.getElementById('profileMenuButton');
+    if (!dropdown) return;
+    const isHidden = dropdown.classList.contains('hidden');
+    if (isHidden) {
+      dropdown.classList.remove('hidden');
+      if (button) button.setAttribute('aria-expanded', 'true');
+    } else {
+      dropdown.classList.add('hidden');
+      if (button) button.setAttribute('aria-expanded', 'false');
+    }
+  }
+
+  function handleLogout(event) {
+    event.preventDefault();
+    window.location.hash = 'login-e-criar-conta';
+  }
+
+  document.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('profileDropdown');
+    const container = document.getElementById('profileMenuContainer');
+    const button = document.getElementById('profileMenuButton');
+    if (dropdown && !dropdown.classList.contains('hidden')) {
+      if (!container || !container.contains(event.target)) {
+        dropdown.classList.add('hidden');
+        if (button) button.setAttribute('aria-expanded', 'false');
+      }
+    }
+  });
+</script>
+
+</body></html>

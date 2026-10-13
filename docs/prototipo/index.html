@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pyla — protótipo navegável</title>
+  <style>
+    :root {
+      --fundo: #f6f6fa;
+      --superficie: #ffffff;
+      --texto: #191a2e;
+      --texto-suave: #454650;
+      --primaria: #293379;
+      --foco: #e5a300;
+    }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      display: flex;
+      flex-direction: column;
+      background: var(--fundo);
+      color: var(--texto);
+      font-family: "Work Sans", system-ui, sans-serif;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding: 0.5rem 1rem;
+      background: var(--superficie);
+      border-bottom: 1px solid #c3c4d2;
+    }
+    header strong { color: var(--primaria); }
+    header span { color: var(--texto-suave); font-size: 0.8125rem; }
+    label { margin-left: auto; font-size: 0.8125rem; color: var(--texto-suave); }
+    select {
+      margin-left: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      font: inherit;
+      color: var(--texto);
+      background: var(--fundo);
+      border: 1px solid #c3c4d2;
+      border-radius: 4px;
+    }
+    select:focus-visible { outline: 3px solid var(--foco); outline-offset: 2px; }
+    iframe { flex: 1; width: 100%; border: 0; background: var(--superficie); }
+  </style>
+</head>
+<body>
+  <header>
+    <strong>Pyla</strong>
+    <span>Protótipo navegável · cópia estática das telas do Stitch (projeto "Pyla Grocery Tracker")</span>
+    <label>Ir para a tela
+      <select id="tela"></select>
+    </label>
+  </header>
+  <iframe id="quadro" title="Tela do protótipo Pyla" src="telas/login.html"></iframe>
+
+  <script>
+    // Telas do protótipo: arquivo → título que o Stitch usa nos postMessage.
+    const TELAS = [
+      { arq: "login",       titulo: "Login e Criar Conta - Pyla" },
+      { arq: "criar-conta", titulo: "Criar Conta com Erros de Validação - Pyla" },
+      { arq: "resumo",      titulo: "Resumo do Mês - Pyla" },
+      { arq: "registrar",   titulo: "Registrar Compra - Pyla" },
+      { arq: "rascunho",    titulo: "Retomar ou Descartar Rascunho - Pyla" },
+      { arq: "editar",      titulo: "Editar ou Excluir Compra - Pyla" },
+      { arq: "historico",   titulo: "Histórico de Preço - Pyla" },
+      { arq: "comparar",    titulo: "Comparar Custo por Unidade - Pyla" },
+      { arq: "planos",      titulo: "Planos e Assinatura Premium - Pyla" },
+    ];
+    const POR_TITULO = Object.fromEntries(TELAS.map(t => [t.titulo, t.arq]));
+
+    // O Stitch troca {{DATA:SCREEN:SCREEN_N}} pelo id da tela; aqui o N vira o arquivo.
+    const POR_SCREEN = { 2: "login", 6: "criar-conta", 9: "planos", 11: "login", 14: "historico", 15: "resumo", 24: "resumo" };
+
+    // data-path que as telas usam no menu e nos botões.
+    const POR_PATH = {
+      "resumo": "resumo", "resumo-do-mes": "resumo",
+      "minhas-compras": "editar",
+      "historico": "historico", "historico-de-preco": "historico",
+      "comparar": "comparar", "comparar-custo-unidade": "comparar",
+      "planos": "planos", "assinatura-premium": "planos",
+      "registrar-compra": "registrar",
+      "login": "login", "login-e-criar-conta": "login",
+    };
+
+    const quadro = document.getElementById("quadro");
+    const seletor = document.getElementById("tela");
+
+    for (const t of TELAS) {
+      const o = document.createElement("option");
+      o.value = t.arq;
+      o.textContent = t.titulo.replace(" - Pyla", "");
+      seletor.appendChild(o);
+    }
+
+    function ir(arq) {
+      if (arq) quadro.src = "telas/" + arq + ".html";
+    }
+
+    seletor.addEventListener("change", () => ir(seletor.value));
+
+    // Mesmo contrato do Stitch: a tela avisa o pai com postMessage.
+    window.addEventListener("message", (e) => {
+      if (e.data && e.data.type === "navigate") ir(POR_TITULO[e.data.screen]);
+    });
+
+    function destino(el) {
+      const onclick = el.getAttribute("onclick") || "";
+      const porTitulo = onclick.match(/screen:\s*'([^']+)'/);
+      if (porTitulo && POR_TITULO[porTitulo[1]]) return POR_TITULO[porTitulo[1]];
+
+      const porScreen = (onclick + " " + (el.dataset.screen || "")).match(/SCREEN_(\d+)/);
+      if (porScreen && POR_SCREEN[porScreen[1]]) return POR_SCREEN[porScreen[1]];
+
+      // Controle com comportamento próprio na tela (mostrar senha, simulador de erro…): não mexe.
+      if (onclick) return null;
+
+      const texto = el.textContent.replace(/\s+/g, " ").trim();
+      if (/^Retomar/i.test(texto)) return "registrar";
+      if (/^Descartar/i.test(texto)) return "resumo";
+      if (/^Sair/i.test(texto)) return "login";
+      if (/Nova Compra/i.test(texto)) return "registrar";
+
+      if (el.dataset.path && POR_PATH[el.dataset.path]) return POR_PATH[el.dataset.path];
+      if (el.type === "submit") return "resumo";
+      return null;
+    }
+
+    quadro.addEventListener("load", () => {
+      let doc;
+      try { doc = quadro.contentDocument; } catch (_) { return; }
+      if (!doc) return;
+
+      const atual = doc.location.pathname.split("/").pop().replace(".html", "");
+      if (TELAS.some(t => t.arq === atual)) seletor.value = atual;
+
+      // Formulários não recarregam a tela; o botão de envio leva à próxima.
+      doc.addEventListener("submit", (e) => e.preventDefault(), true);
+
+      doc.addEventListener("click", (e) => {
+        const el = e.target.closest("a, button");
+        if (!el) return;
+        const arq = destino(el);
+        if (arq) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          ir(arq);
+        } else if (el.tagName === "A") {
+          e.preventDefault(); // href="#" ou {{DATA:...}} não pode recarregar a página
+        }
+      }, true);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Conta - Pyla</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              DEFAULT: '#293379',
+              dark: '#1e255a',
+              light: '#eff1fb',
+              surface: '#fbf8ff',
+              dim: '#d9d7f3',
+              border: '#dcdcf0'
+            }
+          },
+          fontFamily: {
+            sans: ['Chivo', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Chivo', sans-serif;
+      background-color: #f6f5fb;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-[#f6f5fb] text-slate-800 flex flex-col justify-between py-12 px-4 selection:bg-[#293379] selection:text-white">
+
+  <!-- Container Central -->
+  <div class="w-full max-w-md mx-auto my-auto">
+    <!-- Card Principal -->
+    <div class="bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 p-8 sm:p-10 transition-all duration-200">
+      
+      <!-- Cabeçalho / Logo -->
+      <div class="flex flex-col items-center text-center mb-8">
+        <div class="flex items-center gap-2 mb-2">
+          <!-- Logo Pyla com ícone oficial -->
+          <div class="w-10 h-10 rounded-xl bg-[#293379] flex items-center justify-center text-white shadow-md shadow-[#293379]/20">
+            <span class="material-symbols-outlined text-2xl">receipt_long</span>
+          </div>
+          <span class="text-3xl font-extrabold tracking-tight text-[#293379]">Pyla</span>
+        </div>
+        <p class="text-sm text-slate-500 font-medium">Inteligência financeira em compras de mercado</p>
+      </div>
+
+      <!-- Segmented Control / Alternador de Abas -->
+      <div class="flex p-1 bg-slate-100/90 rounded-xl mb-7 border border-slate-200/50">
+        <a href="#" onclick="if (window.navigateToScreen) { navigateToScreen('{{DATA:SCREEN:SCREEN_11}}'); } else { window.location.href='{{DATA:SCREEN:SCREEN_11}}'; } return false;" class="flex-1 text-center py-2.5 text-sm font-semibold text-slate-500 hover:text-slate-800 transition-colors rounded-lg" data-screen="{{DATA:SCREEN:SCREEN_11}}">
+          Entrar
+        </a>
+        <button type="button" class="flex-1 text-center py-2.5 text-sm font-bold text-white bg-[#293379] rounded-lg shadow-sm">
+          Criar conta
+        </button>
+      </div>
+
+      <!-- Formulário de Cadastro -->
+      <form id="signup-form" class="space-y-4" onsubmit="event.preventDefault(); const hasErrors = typeof activeErrors !== 'undefined' &amp;&amp; Object.values(activeErrors).some(Boolean); if (hasErrors) { const card = document.querySelector('.bg-white.rounded-2xl'); if (card) { card.classList.add('translate-x-1'); setTimeout(() =&gt; card.classList.remove('translate-x-1'), 100); } } else { if (window.navigateToScreen) { navigateToScreen('{{DATA:SCREEN:SCREEN_24}}'); } else { window.location.href='{{DATA:SCREEN:SCREEN_24}}'; } }">
+        
+        <!-- Campo: Nome Completo -->
+        <div>
+          <label for="name" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Nome completo</label>
+          <div class="relative">
+            <input type="text" id="name" value="Mariana Silva" placeholder="Seu nome completo" class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#293379] focus:border-transparent transition-all placeholder:text-slate-400 font-medium">
+            <span id="name-status-icon" class="material-symbols-outlined absolute right-3.5 top-3 text-emerald-500 text-xl hidden">check_circle</span>
+          </div>
+          <p id="name-error" class="text-xs text-rose-600 font-medium mt-1.5 hidden flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span> Por favor, insira seu nome completo.
+          </p>
+        </div>
+
+        <!-- Campo: E-mail -->
+        <div>
+          <label for="email" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">E-mail</label>
+          <div class="relative">
+            <input type="email" id="email" value="mariana.silva@email.com" placeholder="seu@email.com" class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all placeholder:text-slate-400 font-medium border-rose-500 bg-rose-50/20 text-rose-900 focus:ring-rose-400">
+            <span id="email-status-icon" class="material-symbols-outlined absolute right-3.5 top-3 text-rose-500 text-xl">cancel</span>
+          </div>
+          <p id="email-error" class="text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span> Este e-mail já está cadastrado no Pyla.
+          </p>
+        </div>
+
+        <!-- Campo: Senha -->
+        <div>
+          <label for="password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Criar senha</label>
+          <div class="relative">
+            <input type="password" id="password" value="123456" placeholder="Mínimo 8 caracteres" class="w-full px-4 py-3 pr-11 rounded-xl border border-slate-200 bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-[#293379] focus:border-transparent transition-all placeholder:text-slate-400 font-medium">
+            <button type="button" onclick="togglePasswordVisibility('password', 'pwd-toggle')" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 focus:outline-none">
+              <span id="pwd-toggle" class="material-symbols-outlined text-xl">visibility</span>
+            </button>
+          </div>
+          <p id="password-error" class="text-xs text-rose-600 font-medium mt-1.5 hidden flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span> A senha deve ter pelo menos 8 caracteres com letras e números.
+          </p>
+        </div>
+
+        <!-- Campo: Confirmar Senha -->
+        <div>
+          <label for="confirm-password" class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Confirmar senha</label>
+          <div class="relative">
+            <input type="password" id="confirm-password" value="12345678" placeholder="Digite a senha novamente" class="w-full px-4 py-3 pr-11 rounded-xl border bg-white text-slate-800 text-sm focus:outline-none focus:ring-2 focus:border-transparent transition-all placeholder:text-slate-400 font-medium border-rose-500 bg-rose-50/20 text-rose-900 focus:ring-rose-400">
+            <button type="button" onclick="togglePasswordVisibility('confirm-password', 'confirm-pwd-toggle')" class="absolute right-3 top-3 text-slate-400 hover:text-slate-600 focus:outline-none">
+              <span id="confirm-pwd-toggle" class="material-symbols-outlined text-xl">visibility</span>
+            </button>
+          </div>
+          <p id="confirm-error" class="text-xs text-rose-600 font-medium mt-1.5 flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span> As senhas digitadas não coincidem.
+          </p>
+        </div>
+
+        <!-- Termos e Condições -->
+        <div class="pt-1">
+          <label class="flex items-start gap-2.5 cursor-pointer select-none">
+            <input type="checkbox" id="terms" class="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#293379] focus:ring-[#293379]">
+            <span class="text-xs text-slate-600 leading-relaxed">
+              Li e concordo com os <a href="#" class="text-[#293379] font-bold hover:underline">Termos de Uso</a> e <a href="#" class="text-[#293379] font-bold hover:underline">Privacidade</a>.
+            </span>
+          </label>
+          <p id="terms-error" class="text-xs text-rose-600 font-medium mt-1.5 hidden flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm">error</span> Você precisa aceitar os termos para continuar.
+          </p>
+        </div>
+
+        <!-- Banner de Erro Geral / Alerta -->
+        <div id="general-error-box" class="p-3.5 bg-rose-50 border border-rose-200 rounded-xl transition-all">
+          <div class="flex items-start gap-2.5">
+            <span class="material-symbols-outlined text-rose-600 text-xl flex-shrink-0 mt-0.5">error</span>
+            <div>
+              <p class="text-xs font-bold text-rose-800">Não foi possível concluir o cadastro</p>
+              <p id="general-error-msg" class="text-xs text-rose-700 mt-0.5">Verifique os campos destacados e tente novamente.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botão Principal de Cadastro -->
+        <button type="submit" id="btn-submit" class="w-full mt-2 py-3.5 px-4 bg-[#293379] hover:bg-[#1e255a] text-white text-sm font-bold rounded-xl shadow-md shadow-[#293379]/20 hover:shadow-lg hover:shadow-[#293379]/30 transition-all flex items-center justify-center gap-2 group active:scale-[0.99]" data-screen="{{DATA:SCREEN:SCREEN_24}}">
+          <span class="">Criar minha conta</span>
+          <span class="material-symbols-outlined text-base group-hover:translate-x-0.5 transition-transform">arrow_forward</span>
+        </button>
+      </form>
+
+      <!-- Rodapé do Card: Já tem conta? -->
+      <div class="mt-6 pt-6 border-t border-slate-100 text-center">
+        <p class="text-xs text-slate-500">
+          Já tem uma conta no Pyla? 
+          <a href="#" onclick="if (window.navigateToScreen) { navigateToScreen('{{DATA:SCREEN:SCREEN_11}}'); } else { window.location.href='{{DATA:SCREEN:SCREEN_11}}'; } return false;" class="text-[#293379] font-bold hover:underline ml-1" data-screen="{{DATA:SCREEN:SCREEN_11}}">Entrar</a>
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Simulador Interativo de Estados de Erro para o Protótipo -->
+    <div class="mt-6 bg-white/80 backdrop-blur rounded-2xl border border-slate-200/80 p-4 shadow-sm">
+      <div class="flex items-center justify-between mb-3 pb-2 border-b border-slate-100">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span class="material-symbols-outlined text-sm text-[#293379]">tune</span>
+          Simulador de Erros no Protótipo
+        </span>
+        <button onclick="resetErrors()" class="text-[11px] font-bold text-slate-500 hover:text-[#293379] hover:underline">
+          Limpar erros
+        </button>
+      </div>
+
+      <div class="grid grid-cols-2 gap-2 text-xs">
+        <button onclick="toggleError('email_duplicate')" id="btn-err-email" class="px-2.5 py-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium text-left transition-colors flex items-center justify-between border-rose-300 bg-rose-50/70 text-rose-800">
+          <span class="">E-mail já existente</span>
+          <span class="w-2 h-2 rounded-full bg-rose-500 status-dot"></span>
+        </button>
+
+        <button onclick="toggleError('password_mismatch')" id="btn-err-mismatch" class="px-2.5 py-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium text-left transition-colors flex items-center justify-between border-rose-300 bg-rose-50/70 text-rose-800">
+          <span class="">Senhas diferentes</span>
+          <span class="w-2 h-2 rounded-full bg-rose-500 status-dot"></span>
+        </button>
+
+        <button onclick="toggleError('password_weak')" id="btn-err-weak" class="px-2.5 py-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium text-left transition-colors flex items-center justify-between">
+          <span class="">Senha fraca (&lt; 8 dígitos)</span>
+          <span class="w-2 h-2 rounded-full bg-slate-300 status-dot"></span>
+        </button>
+
+        <button onclick="toggleError('terms_missing')" id="btn-err-terms" class="px-2.5 py-2 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 font-medium text-left transition-colors flex items-center justify-between">
+          <span class="">Termos desmarcados</span>
+          <span class="w-2 h-2 rounded-full bg-slate-300 status-dot"></span>
+        </button>
+      </div>
+
+      <div class="mt-2.5 pt-2 border-t border-slate-100 flex items-center justify-between">
+        <button onclick="applyAllErrors()" class="w-full py-1.5 px-3 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-lg text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
+          <span class="material-symbols-outlined text-sm">warning</span>
+          Ativar todos os erros simultâneos
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Copyright no Rodapé -->
+  <footer class="w-full text-center text-xs text-slate-400 mt-8">
+    © 2024 Pyla Tecnologia. Todos os direitos reservados.
+  </footer>
+
+  <script>
+    let activeErrors = {
+      email_duplicate: true,
+      password_mismatch: true,
+      password_weak: false,
+      terms_missing: false
+    };
+
+    function togglePasswordVisibility(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      const icon = document.getElementById(iconId);
+      if (input.type === 'password') {
+        input.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        input.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    function updateUI() {
+      // 1. Email Duplicado
+      const emailInput = document.getElementById('email');
+      const emailError = document.getElementById('email-error');
+      const emailIcon = document.getElementById('email-status-icon');
+      const btnEmail = document.getElementById('btn-err-email');
+
+      if (activeErrors.email_duplicate) {
+        emailInput.classList.add('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        emailInput.classList.remove('border-slate-200', 'focus:ring-[#293379]');
+        emailError.classList.remove('hidden');
+        emailIcon.classList.remove('hidden');
+        btnEmail.classList.add('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnEmail.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-rose-500 status-dot';
+      } else {
+        emailInput.classList.remove('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        emailInput.classList.add('border-slate-200', 'focus:ring-[#293379]');
+        emailError.classList.add('hidden');
+        emailIcon.classList.add('hidden');
+        btnEmail.classList.remove('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnEmail.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-slate-300 status-dot';
+      }
+
+      // 2. Senha Fraca
+      const pwdInput = document.getElementById('password');
+      const pwdError = document.getElementById('password-error');
+      const btnWeak = document.getElementById('btn-err-weak');
+
+      if (activeErrors.password_weak) {
+        pwdInput.classList.add('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        pwdInput.classList.remove('border-slate-200', 'focus:ring-[#293379]');
+        pwdError.classList.remove('hidden');
+        btnWeak.classList.add('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnWeak.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-rose-500 status-dot';
+      } else {
+        pwdInput.classList.remove('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        pwdInput.classList.add('border-slate-200', 'focus:ring-[#293379]');
+        pwdError.classList.add('hidden');
+        btnWeak.classList.remove('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnWeak.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-slate-300 status-dot';
+      }
+
+      // 3. Senhas Diferentes
+      const confirmInput = document.getElementById('confirm-password');
+      const confirmError = document.getElementById('confirm-error');
+      const btnMismatch = document.getElementById('btn-err-mismatch');
+
+      if (activeErrors.password_mismatch) {
+        confirmInput.classList.add('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        confirmInput.classList.remove('border-slate-200', 'focus:ring-[#293379]');
+        confirmError.classList.remove('hidden');
+        btnMismatch.classList.add('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnMismatch.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-rose-500 status-dot';
+      } else {
+        confirmInput.classList.remove('border-rose-500', 'bg-rose-50/20', 'text-rose-900', 'focus:ring-rose-400');
+        confirmInput.classList.add('border-slate-200', 'focus:ring-[#293379]');
+        confirmError.classList.add('hidden');
+        btnMismatch.classList.remove('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnMismatch.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-slate-300 status-dot';
+      }
+
+      // 4. Termos
+      const termsBox = document.getElementById('terms');
+      const termsError = document.getElementById('terms-error');
+      const btnTerms = document.getElementById('btn-err-terms');
+
+      if (activeErrors.terms_missing) {
+        termsBox.checked = false;
+        termsError.classList.remove('hidden');
+        btnTerms.classList.add('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnTerms.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-rose-500 status-dot';
+      } else {
+        termsBox.checked = true;
+        termsError.classList.add('hidden');
+        btnTerms.classList.remove('border-rose-300', 'bg-rose-50/70', 'text-rose-800');
+        btnTerms.querySelector('.status-dot').className = 'w-2 h-2 rounded-full bg-slate-300 status-dot';
+      }
+
+      // Banner Geral
+      const generalBox = document.getElementById('general-error-box');
+      const hasAnyError = Object.values(activeErrors).some(Boolean);
+      if (hasAnyError) {
+        generalBox.classList.remove('hidden');
+      } else {
+        generalBox.classList.add('hidden');
+      }
+    }
+
+    function toggleError(key) {
+      activeErrors[key] = !activeErrors[key];
+      updateUI();
+    }
+
+    function resetErrors() {
+      activeErrors = {
+        email_duplicate: false,
+        password_mismatch: false,
+        password_weak: false,
+        terms_missing: false
+      };
+      updateUI();
+    }
+
+    function applyAllErrors() {
+      activeErrors = {
+        email_duplicate: true,
+        password_mismatch: true,
+        password_weak: true,
+        terms_missing: true
+      };
+      updateUI();
+    }
+
+    function handleSubmit() {
+      const hasAnyError = Object.values(activeErrors).some(Boolean);
+      if (hasAnyError) {
+        // Balanço visual de erro
+        const card = document.querySelector('.bg-white.rounded-2xl');
+        card.classList.add('translate-x-1');
+        setTimeout(() => card.classList.remove('translate-x-1'), 100);
+      } else {
+        // Redireciona para Resumo do Mês
+        alert('Cadastro realizado com sucesso! Redirecionando para o Resumo do Mês...');
+      }
+    }
+
+    // Inicializa com os erros visíveis conforme pedido
+    document.addEventListener('DOMContentLoaded', () => {
+      updateUI();
+    });
+    updateUI();
+  </script>
+
+
+
+</body></html>

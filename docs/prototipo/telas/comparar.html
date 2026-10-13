@@ -1,0 +1,546 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Pyla • Inteligência Financeira em Compras de Mercado</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Chivo:wght@600;700;800&amp;family=Work+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-secondary-fixed":"#151f00","inverse-surface":"#2e2f44","on-surface-variant":"#454650","on-secondary-container":"#536a1d","surface-container-highest":"#e1e0fc","inverse-on-surface":"#f1efff","primary-fixed":"#dfe0ff","secondary-fixed":"#d1ed90","on-primary-fixed-variant":"#364087","outline-variant":"#c6c5d2","surface":"#fbf8ff","on-surface":"#191a2e","tertiary-fixed-dim":"#ffba2c","tertiary":"#322100","surface-tint":"#4f58a0","tertiary-fixed":"#ffdeaa","on-error":"#ffffff","secondary-container":"#ceea8d","surface-dim":"#d9d7f3","on-tertiary":"#ffffff","error-container":"#ffdad6","primary-fixed-dim":"#bcc2ff","outline":"#767682","surface-bright":"#fbf8ff","on-secondary-fixed-variant":"#384e00","surface-container-high":"#e7e6ff","on-error-container":"#93000a","on-primary":"#ffffff","on-secondary":"#ffffff","on-tertiary-fixed":"#271900","on-tertiary-fixed-variant":"#5f4100","on-background":"#191a2e","on-tertiary-container":"#d69800","secondary":"#4f6618","primary":"#101b63","error":"#ba1a1a","surface-variant":"#e1e0fc","surface-container-lowest":"#ffffff","surface-container-low":"#f5f2ff","tertiary-container":"#4e3500","background":"#fbf8ff","surface-container":"#eeecff","on-primary-fixed":"#04105a","inverse-primary":"#bcc2ff","secondary-fixed-dim":"#b5d177","primary-container":"#293379","on-primary-container":"#959fec"},borderRadius:{DEFAULT:"0.125rem",lg:"0.25rem",xl:"0.5rem",full:"0.75rem"},spacing:{"space-md":"1.5rem","space-xs":"0.5rem","space-xl":"3rem","space-lg":"2rem","space-sm":"1rem",margin:"1rem","space-xxs":"0.25rem",gutter:"1rem"},fontFamily:{"headline-display":["Chivo"],"label-caption-bold":["Work Sans"],"headline-card":["Chivo"],"currency-stat":["Chivo"],"body-medium":["Work Sans"],"body-bold":["Work Sans"],"currency-stat-mobile":["Chivo"],"headline-display-mobile":["Chivo"],"label-caption":["Work Sans"],"body-default":["Work Sans"]},fontSize:{"headline-display":["32px",{lineHeight:"38px",letterSpacing:"-0.02em",fontWeight:"800"}],"label-caption-bold":["13px",{lineHeight:"18px",fontWeight:"600"}],"headline-card":["18px",{lineHeight:"24px",letterSpacing:"-0.01em",fontWeight:"700"}],"currency-stat":["26px",{lineHeight:"32px",fontWeight:"600"}],"body-medium":["16px",{lineHeight:"24px",fontWeight:"500"}],"body-bold":["16px",{lineHeight:"24px",fontWeight:"700"}],"currency-stat-mobile":["22px",{lineHeight:"28px",fontWeight:"600"}],"headline-display-mobile":["28px",{lineHeight:"34px",letterSpacing:"-0.01em",fontWeight:"800"}],"label-caption":["13px",{lineHeight:"18px",fontWeight:"400"}],"body-default":["16px",{lineHeight:"24px",fontWeight:"400"}]}}}};</script></head><body class="bg-surface font-body-default text-body-default text-on-surface antialiased min-h-screen flex flex-col"><header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(25,26,46,0.06)]"><div class="h-16 max-w-[1120px] mx-auto px-space-lg flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><a class="flex items-center gap-space-xs focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim rounded" data-path="resumo" href="#"><span class="font-headline-display text-headline-card text-primary tracking-tight">Pyla</span></a><nav class="hidden md:flex items-center gap-space-xs" data-active-classes="bg-primary-container text-on-primary font-body-bold text-body-bold rounded-lg shadow-[0_1px_3px_rgba(22,23,43,0.04)]"><a class="px-space-xs py-space-xxs rounded-lg font-body-medium text-body-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" data-path="resumo" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Resumo do Mês - Pyla'}, '*');">Resumo</a><a class="px-space-xs py-space-xxs rounded-lg font-body-medium text-body-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" data-path="minhas-compras" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Editar ou Excluir Compra - Pyla'}, '*');">Minhas Compras</a><a aria-current="page" class="px-space-xs py-space-xxs transition-colors focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim bg-primary-container text-on-primary font-body-bold text-body-bold rounded-lg shadow-[0_1px_3px_rgba(22,23,43,0.04)]" data-path="comparar" href="#">Comparar</a><a class="px-space-xs py-space-xxs rounded-lg font-body-medium text-body-medium text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-colors focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" data-path="historico" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Histórico de Preço - Pyla'}, '*');">Histórico</a></nav></div><div class="flex items-center gap-space-sm"><a class="hidden lg:inline-flex items-center gap-space-xxs px-space-xs py-space-xxs rounded-lg bg-surface-container-high hover:bg-surface-container-highest transition-colors font-label-caption-bold text-label-caption-bold text-on-surface focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" data-path="planos" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Planos e Assinatura Premium - Pyla'}, '*');"><span class="w-2 h-2 rounded-full bg-secondary"></span><span class="">Plano Gratuito</span><span class="text-outline">•</span><span class="text-primary font-body-bold hover:underline">Assinar</span></a><button class="inline-flex items-center gap-space-xxs bg-primary-container text-on-primary px-space-sm py-space-xs rounded-lg font-headline-card text-label-caption-bold hover:bg-primary transition-colors shadow-[0_1px_3px_rgba(22,23,43,0.04)] focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" type="button" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Registrar Compra - Pyla'}, '*');"><span class="material-symbols-outlined text-[18px]">add</span><span class="">Nova Compra</span></button><div class="relative group"><button aria-expanded="false" aria-haspopup="true" class="flex items-center gap-space-xxs p-space-xxs rounded-lg hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" type="button"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1UFvrSr8ouzkSouY90LELXWVpniUqbjUj9jyCNhplpd3ii-AmSLvzg3cPFbZhL8Sb-AqRBTSX9uCi0We9a_OP495zCcfRW2GdHcqN9BuJce4I7UEI4lmw0Xpg6Lj2g98q1GRxxGCO18t29Tl9PmNQL9FZ4tnE1clPKc-CqxHRUPakYgnQ_uNiFicZBWAGtKsPRJeYh7BzA3SWCHGwzNq4lMFd3HSyuE5cKVaeWpzwv2L8XjBcnsT9ZDzdN78BdgYqMnyJZemwrr4Q"><span class="material-symbols-outlined text-on-surface-variant text-[20px]">expand_more</span></button><div class="absolute right-0 top-full mt-space-xxs w-48 bg-surface-container-lowest rounded-lg shadow-[0_4px_12px_rgba(22,23,43,0.08)] py-space-xxs hidden group-hover:block group-focus-within:block z-50"><div class="px-space-sm py-space-xxs font-label-caption text-label-caption text-on-surface-variant">Sessão ativa</div><a class="flex items-center gap-space-xs px-space-sm py-space-xs font-body-medium text-body-medium text-error hover:bg-error-container hover:text-on-error-container transition-colors" data-path="login" href="#" onclick="window.parent?.postMessage({type: 'navigate', screen: 'Login e Criar Conta - Pyla'}, '*');"><span class="material-symbols-outlined text-[18px]">logout</span><span class="">Sair</span></a></div></div></div></div></header><main class="w-full flex-1 pt-16 bg-surface max-w-[1120px] mx-auto px-space-lg"><div class="flex flex-col w-full pb-space-xl">
+<!-- Page Header -->
+<section class="flex flex-col md:flex-row md:items-end justify-between gap-space-sm pt-space-md pb-space-lg">
+<div class="space-y-space-xxs">
+<div class="inline-flex items-center gap-space-xs text-on-surface-variant font-label-caption-bold text-label-caption-bold">
+<span class="material-symbols-outlined text-[16px] text-primary">scale</span>
+<span class="">FERRAMENTA OPERACIONAL RÁPIDA</span>
+</div>
+<h1 class="font-headline-display text-headline-display text-on-surface tracking-tight">Comparar Custo por Unidade</h1>
+<p class="font-body-default text-body-default text-on-surface-variant max-w-2xl">
+        Descubra qual embalagem vale mais a pena calculando com exatidão o preço por quilograma, litro ou unidade avulsa direto no ponto de venda.
+      </p>
+</div>
+<div class="flex items-center gap-space-xs self-start md:self-auto">
+<button class="inline-flex items-center gap-space-xs px-space-sm py-space-xs rounded-lg bg-surface-container-high hover:bg-surface-container-highest text-primary font-body-bold text-label-caption-bold transition-colors focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim" id="btn-add-product" type="button">
+<span class="material-symbols-outlined text-[18px]">add</span>
+<span class="">Adicionar produto</span>
+</button>
+<button class="inline-flex items-center gap-space-xxs px-space-sm py-space-xs rounded-lg text-on-surface-variant hover:text-on-surface font-body-medium text-label-caption transition-colors" id="btn-clear" type="button">
+<span class="material-symbols-outlined text-[18px]">restart_alt</span>
+<span class="">Limpar</span>
+</button>
+</div>
+</section>
+<!-- Global Alert / Status Feedback Area -->
+<div class="hidden w-full mb-space-md" id="status-notification-zone"></div>
+<!-- Calculator Input Columns -->
+<form class="grid grid-cols-1 lg:grid-cols-2 gap-space-md items-start" id="calculator-form">
+<!-- Produto 1 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all duration-200" id="card-p1">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-headline-card text-label-caption-bold flex items-center justify-center">1</span>
+<h2 class="font-headline-card text-headline-card text-on-surface">Produto A</h2>
+</div>
+<span class="font-label-caption-bold text-label-caption-bold uppercase px-space-xs py-space-xxs bg-surface-container text-on-surface-variant rounded">Referência</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Nome Opcional -->
+<div>
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p1-name">
+            Identificação <span class="font-label-caption text-label-caption text-on-surface-variant font-normal">(opcional)</span>
+</label>
+<input class="w-full h-11 px-space-sm bg-surface-container-low text-on-surface font-body-default text-body-default rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="p1-name" placeholder="Ex: Café Torrado Tradicional" type="text" value="Café Torrado Tradicional">
+</div>
+<!-- Preço Total -->
+<div>
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p1-price">
+            Preço Total Pago <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-space-sm top-1/2 -translate-y-1/2 font-headline-card text-label-caption-bold text-on-surface-variant">R$</span>
+<input class="w-full h-11 pl-11 pr-space-sm bg-surface-container-low text-on-surface font-currency-stat text-currency-stat rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest tabular-nums transition-all" id="p1-price" min="0" step="0.01" type="number" value="9.00">
+</div>
+<p class="hidden items-center gap-1 font-label-caption text-label-caption text-error mt-space-xxs" id="p1-price-error">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span class="">Informe um preço válido maior que zero</span>
+</p>
+</div>
+<!-- Tamanho e Unidade -->
+<div class="grid grid-cols-5 gap-space-xs">
+<div class="col-span-3">
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p1-size">
+              Conteúdo Líquido <span class="text-error">*</span>
+</label>
+<input class="w-full h-11 px-space-sm bg-surface-container-low text-on-surface font-currency-stat text-currency-stat rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest tabular-nums transition-all" id="p1-size" min="0" step="any" type="number" value="500">
+</div>
+<div class="col-span-2">
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p1-unit">
+              Unidade <span class="text-error">*</span>
+</label>
+<select class="w-full h-11 px-space-xs bg-surface-container-low text-on-surface font-body-bold text-body-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest cursor-pointer transition-all" id="p1-unit">
+<option selected="" value="g">Gramas (g)</option>
+<option value="kg">Quilos (kg)</option>
+<option value="ml">Mililitros (mL)</option>
+<option value="l">Litros (L)</option>
+<option value="un">Unidade (un)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+<!-- Produto 2 Card -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all duration-200" id="card-p2">
+<div class="flex items-center justify-between pb-space-sm mb-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="w-6 h-6 rounded bg-primary text-on-primary font-headline-card text-label-caption-bold flex items-center justify-center">2</span>
+<h2 class="font-headline-card text-headline-card text-on-surface">Produto B</h2>
+</div>
+<span class="font-label-caption-bold text-label-caption-bold uppercase px-space-xs py-space-xxs bg-surface-container text-on-surface-variant rounded">Alternativa</span>
+</div>
+<div class="space-y-space-sm">
+<!-- Nome Opcional -->
+<div>
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p2-name">
+            Identificação <span class="font-label-caption text-label-caption text-on-surface-variant font-normal">(opcional)</span>
+</label>
+<input class="w-full h-11 px-space-sm bg-surface-container-low text-on-surface font-body-default text-body-default rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest transition-all" id="p2-name" placeholder="Ex: Café Torrado Pacote Econômico" type="text" value="Café Torrado Pacote Econômico">
+</div>
+<!-- Preço Total -->
+<div>
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p2-price">
+            Preço Total Pago <span class="text-error">*</span>
+</label>
+<div class="relative">
+<span class="absolute left-space-sm top-1/2 -translate-y-1/2 font-headline-card text-label-caption-bold text-on-surface-variant">R$</span>
+<input class="w-full h-11 pl-11 pr-space-sm bg-surface-container-low text-on-surface font-currency-stat text-currency-stat rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest tabular-nums transition-all" id="p2-price" min="0" step="0.01" type="number" value="16.00">
+</div>
+<p class="hidden items-center gap-1 font-label-caption text-label-caption text-error mt-space-xxs" id="p2-price-error">
+<span class="material-symbols-outlined text-[16px]">error</span>
+<span id="p2-price-error-text" class="">Informe um preço maior que zero</span>
+</p>
+</div>
+<!-- Tamanho e Unidade -->
+<div class="grid grid-cols-5 gap-space-xs">
+<div class="col-span-3">
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p2-size">
+              Conteúdo Líquido <span class="text-error">*</span>
+</label>
+<input class="w-full h-11 px-space-sm bg-surface-container-low text-on-surface font-currency-stat text-currency-stat rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest tabular-nums transition-all" id="p2-size" min="0" step="any" type="number" value="1">
+</div>
+<div class="col-span-2">
+<label class="block font-label-caption-bold text-label-caption-bold text-on-surface mb-space-xxs" for="p2-unit">
+              Unidade <span class="text-error">*</span>
+</label>
+<select class="w-full h-11 px-space-xs bg-surface-container-low text-on-surface font-body-bold text-body-medium rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:bg-surface-container-lowest cursor-pointer transition-all" id="p2-unit">
+<option value="g">Gramas (g)</option>
+<option selected="" value="kg">Quilos (kg)</option>
+<option value="ml">Mililitros (mL)</option>
+<option value="l">Litros (L)</option>
+<option value="un">Unidade (un)</option>
+</select>
+</div>
+</div>
+</div>
+</div>
+</form>
+<!-- Central Trigger Button -->
+<div class="flex justify-center my-space-lg">
+<button class="w-full sm:w-auto min-w-[280px] h-12 inline-flex items-center justify-center gap-space-xs px-space-lg rounded-lg bg-primary text-on-primary hover:bg-primary-container font-headline-card text-body-bold shadow-md hover:shadow-lg transition-all focus:outline-none focus:ring-4 focus:ring-tertiary-fixed-dim" id="btn-calculate" type="button">
+<span class="material-symbols-outlined text-[22px]">balance</span>
+<span class="">Comparar Custo-Benefício</span>
+</button>
+</div>
+<!-- Comparator Outcome Section -->
+<section class="w-full bg-surface-container-low rounded-xl p-space-md sm:p-space-lg mb-space-xl" id="results-section">
+<div class="flex items-center justify-between pb-space-sm mb-space-md">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[24px]">analytics</span>
+<h3 class="font-headline-card text-headline-card text-on-surface">Resultado da Análise Unitária</h3>
+</div>
+<span class="font-label-caption-bold text-label-caption-bold px-space-sm py-space-xxs rounded bg-secondary-container text-on-secondary-container" id="result-status-pill">
+        Cálculo ativo
+      </span>
+</div>
+<!-- Tie or Custom Notice Box -->
+<div class="hidden mb-space-md p-space-sm rounded-lg bg-surface-container-high text-on-surface flex items-center gap-space-sm" id="tie-notice">
+<span class="material-symbols-outlined text-primary text-[22px]">equalizer</span>
+<div>
+<p class="font-body-bold text-body-bold" id="tie-title">Empate exato de custo-benefício</p>
+<p class="font-label-caption text-label-caption text-on-surface-variant" id="tie-desc">Ambos os produtos têm exatamente o mesmo preço por unidade-base.</p>
+</div>
+</div>
+<!-- Cards Lado a Lado do Resultado -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-space-md">
+<!-- Resumo Produto A -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all duration-300" id="res-box-p1">
+<div class="hidden absolute -top-3 right-space-md px-space-sm py-0.5 rounded bg-secondary text-on-secondary font-label-caption-bold text-label-caption-bold shadow-sm" id="badge-p1">
+          Mais vantajoso
+        </div>
+<div class="flex flex-col h-full justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caption-bold text-label-caption-bold text-on-surface-variant">Produto A</span>
+<span class="font-label-caption text-label-caption text-outline" id="res-tag-p1">500 g</span>
+</div>
+<h4 class="font-headline-card text-headline-card text-on-surface mt-1 truncate" id="res-name-p1">Café Torrado Tradicional</h4>
+</div>
+<div class="py-space-xs">
+<span class="font-label-caption text-label-caption text-on-surface-variant block mb-1">Preço proporcional normalizado:</span>
+<div class="flex items-baseline gap-space-xxs">
+<span class="font-headline-display text-headline-display text-on-surface tabular-nums" id="res-rate-p1">R$ 18,00</span>
+<span class="font-body-bold text-body-medium text-on-surface-variant" id="res-base-p1">/ kg</span>
+</div>
+<p class="font-label-caption text-label-caption text-outline mt-1" id="res-calc-p1">R$ 9,00 por embalagem</p>
+</div>
+<div class="hidden pt-space-xs text-secondary font-body-bold text-label-caption-bold flex items-center gap-1" id="economy-box-p1">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+<span id="economy-text-p1" class="">Economia estimada</span>
+</div>
+</div>
+</div>
+<!-- Resumo Produto B -->
+<div class="relative bg-surface-container-lowest rounded-xl p-space-md shadow-sm transition-all duration-300 bg-secondary-container/20 shadow-md" id="res-box-p2">
+<div class="absolute -top-3 right-space-md px-space-sm py-0.5 rounded bg-secondary text-on-secondary font-label-caption-bold text-label-caption-bold shadow-sm" id="badge-p2">
+          Mais barato
+        </div>
+<div class="flex flex-col h-full justify-between gap-space-sm">
+<div>
+<div class="flex items-center justify-between">
+<span class="font-label-caption-bold text-label-caption-bold text-on-surface-variant">Produto B</span>
+<span class="font-label-caption text-label-caption text-outline" id="res-tag-p2">1 kg</span>
+</div>
+<h4 class="font-headline-card text-headline-card text-on-surface mt-1 truncate" id="res-name-p2">Café Torrado Pacote Econômico</h4>
+</div>
+<div class="py-space-xs">
+<span class="font-label-caption text-label-caption text-on-surface-variant block mb-1">Preço proporcional normalizado:</span>
+<div class="flex items-baseline gap-space-xxs">
+<span class="font-headline-display text-headline-display text-on-surface tabular-nums" id="res-rate-p2">R$ 16,00</span>
+<span class="font-body-bold text-body-medium text-on-surface-variant" id="res-base-p2">/ kg</span>
+</div>
+<p class="font-label-caption text-label-caption text-outline mt-1" id="res-calc-p2">R$ 16,00 por embalagem</p>
+</div>
+<div class="pt-space-xs text-secondary font-body-bold text-label-caption-bold flex items-center gap-1" id="economy-box-p2">
+<span class="material-symbols-outlined text-[18px]">trending_down</span>
+<span id="economy-text-p2" class="">Economia de 11.1% (R$ 2,00 por kg)</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Simulation Toolbar (Pyla Prototype Standard) -->
+<footer class="w-full bg-surface-container-lowest rounded-xl p-space-md shadow-md">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs">
+<span class="material-symbols-outlined text-primary text-[20px]">science</span>
+<div>
+<span class="font-headline-card text-label-caption-bold text-on-surface block">Simulador de Casos de Uso</span>
+<span class="font-label-caption text-label-caption text-on-surface-variant">Teste os 4 fluxos e validações obrigatórias com um clique</span>
+</div>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-xs">
+<button class="px-space-sm py-space-xs rounded-lg text-left bg-primary-container text-on-primary font-body-bold text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between" id="sim-state-1" type="button">
+<span class="text-[11px] opacity-80 uppercase tracking-wider">Estado 1</span>
+<span class="">Resultado Normal</span>
+</button>
+<button class="px-space-sm py-space-xs rounded-lg text-left bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-medium text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between" id="sim-state-2" type="button">
+<span class="text-[11px] text-on-surface-variant uppercase tracking-wider">Estado 2</span>
+<span class="">Empate de Custo</span>
+</button>
+<button class="px-space-sm py-space-xs rounded-lg text-left bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-medium text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between" id="sim-state-3" type="button">
+<span class="text-[11px] text-on-surface-variant uppercase tracking-wider">Estado 3</span>
+<span class="">Unidades Incompatíveis</span>
+</button>
+<button class="px-space-sm py-space-xs rounded-lg text-left bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-medium text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between" id="sim-state-4" type="button">
+<span class="text-[11px] text-on-surface-variant uppercase tracking-wider">Estado 4</span>
+<span class="">Campo Inválido</span>
+</button>
+</div>
+</div>
+</footer>
+</div>
+<script>
+  (function initPylaCalculator() {
+    const p1Name = document.getElementById('p1-name');
+    const p1Price = document.getElementById('p1-price');
+    const p1Size = document.getElementById('p1-size');
+    const p1Unit = document.getElementById('p1-unit');
+
+    const p2Name = document.getElementById('p2-name');
+    const p2Price = document.getElementById('p2-price');
+    const p2Size = document.getElementById('p2-size');
+    const p2Unit = document.getElementById('p2-unit');
+
+    const p2PriceError = document.getElementById('p2-price-error');
+    const p2PriceErrorText = document.getElementById('p2-price-error-text');
+    const p1PriceError = document.getElementById('p1-price-error');
+
+    const statusZone = document.getElementById('status-notification-zone');
+    const resultsSection = document.getElementById('results-section');
+    const tieNotice = document.getElementById('tie-notice');
+    const tieTitle = document.getElementById('tie-title');
+    const tieDesc = document.getElementById('tie-desc');
+
+    const resBoxP1 = document.getElementById('res-box-p1');
+    const resBoxP2 = document.getElementById('res-box-p2');
+    const badgeP1 = document.getElementById('badge-p1');
+    const badgeP2 = document.getElementById('badge-p2');
+    const economyP1 = document.getElementById('economy-box-p1');
+    const economyP2 = document.getElementById('economy-box-p2');
+    const economyTextP2 = document.getElementById('economy-text-p2');
+    const economyTextP1 = document.getElementById('economy-text-p1');
+
+    const resRateP1 = document.getElementById('res-rate-p1');
+    const resBaseP1 = document.getElementById('res-base-p1');
+    const resRateP2 = document.getElementById('res-rate-p2');
+    const resBaseP2 = document.getElementById('res-base-p2');
+
+    const resNameP1 = document.getElementById('res-name-p1');
+    const resNameP2 = document.getElementById('res-name-p2');
+    const resTagP1 = document.getElementById('res-tag-p1');
+    const resTagP2 = document.getElementById('res-tag-p2');
+    const resCalcP1 = document.getElementById('res-calc-p1');
+    const resCalcP2 = document.getElementById('res-calc-p2');
+
+    const simButtons = [
+      document.getElementById('sim-state-1'),
+      document.getElementById('sim-state-2'),
+      document.getElementById('sim-state-3'),
+      document.getElementById('sim-state-4')
+    ];
+
+    function highlightSimButton(activeIndex) {
+      simButtons.forEach((btn, idx) => {
+        if (idx === activeIndex) {
+          btn.className = 'px-space-sm py-space-xs rounded-lg text-left bg-primary-container text-on-primary font-body-bold text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between shadow-sm';
+        } else {
+          btn.className = 'px-space-sm py-space-xs rounded-lg text-left bg-surface-container-high hover:bg-surface-container-highest text-on-surface font-body-medium text-label-caption-bold transition-all focus:outline-none focus:ring-2 focus:ring-tertiary-fixed-dim flex flex-col justify-between';
+        }
+      });
+    }
+
+    function clearErrors() {
+      p2Price.classList.remove('bg-error-container', 'text-on-error-container');
+      p2PriceError.classList.add('hidden');
+      p2PriceError.classList.remove('flex');
+      p1PriceError.classList.add('hidden');
+      p1PriceError.classList.remove('flex');
+      statusZone.classList.add('hidden');
+      statusZone.innerHTML = '';
+    }
+
+    function showErrorBanner(message) {
+      statusZone.innerHTML = `
+        <div class="p-space-sm rounded-lg bg-error-container text-on-error-container flex items-center gap-space-sm">
+          <span class="material-symbols-outlined text-error text-[22px]">error</span>
+          <div class="flex-1 font-body-bold text-body-medium">${message}</div>
+        </div>
+      `;
+      statusZone.classList.remove('hidden');
+    }
+
+    function getUnitCategory(unit) {
+      if (unit === 'g' || unit === 'kg') return 'weight';
+      if (unit === 'ml' || unit === 'l') return 'volume';
+      if (unit === 'un') return 'count';
+      return null;
+    }
+
+    function normalizeToBase(size, unit) {
+      if (unit === 'g') return { val: size / 1000, baseUnit: 'kg' };
+      if (unit === 'kg') return { val: size, baseUnit: 'kg' };
+      if (unit === 'ml') return { val: size / 1000, baseUnit: 'L' };
+      if (unit === 'l') return { val: size, baseUnit: 'L' };
+      if (unit === 'un') return { val: size, baseUnit: 'un' };
+      return { val: size, baseUnit: unit };
+    }
+
+    function formatBRL(num) {
+      return 'R$ ' + num.toFixed(2).replace('.', ',');
+    }
+
+    function calculateComparison() {
+      clearErrors();
+
+      const price1 = parseFloat(p1Price.value);
+      const size1 = parseFloat(p1Size.value);
+      const unit1 = p1Unit.value;
+
+      const price2 = parseFloat(p2Price.value);
+      const size2 = parseFloat(p2Size.value);
+      const unit2 = p2Unit.value;
+
+      // Validation
+      let hasError = false;
+      if (isNaN(price2) || price2 <= 0) {
+        p2Price.classList.add('bg-error-container', 'text-on-error-container');
+        p2PriceError.classList.remove('hidden');
+        p2PriceError.classList.add('flex');
+        hasError = true;
+      }
+      if (isNaN(price1) || price1 <= 0) {
+        p1PriceError.classList.remove('hidden');
+        p1PriceError.classList.add('flex');
+        hasError = true;
+      }
+
+      if (hasError) {
+        resultsSection.classList.add('opacity-40', 'pointer-events-none');
+        return;
+      }
+
+      // Category match
+      const cat1 = getUnitCategory(unit1);
+      const cat2 = getUnitCategory(unit2);
+
+      if (cat1 !== cat2) {
+        const catNames = { weight: 'massa (kg/g)', volume: 'volume (L/mL)', count: 'unidade (un)' };
+        showErrorBanner(`Não é possível comparar ${catNames[cat1]} com ${catNames[cat2]}. Selecione grandezas compatíveis para cálculo exato.`);
+        resultsSection.classList.add('opacity-40', 'pointer-events-none');
+        return;
+      }
+
+      resultsSection.classList.remove('opacity-40', 'pointer-events-none');
+
+      const norm1 = normalizeToBase(size1, unit1);
+      const norm2 = normalizeToBase(size2, unit2);
+
+      const rate1 = price1 / norm1.val;
+      const rate2 = price2 / norm2.val;
+
+      // Fill basic names and labels
+      resNameP1.textContent = p1Name.value.trim() || 'Produto A';
+      resNameP2.textContent = p2Name.value.trim() || 'Produto B';
+      resTagP1.textContent = `${size1} ${unit1}`;
+      resTagP2.textContent = `${size2} ${unit2}`;
+      resCalcP1.textContent = `${formatBRL(price1)} por embalagem`;
+      resCalcP2.textContent = `${formatBRL(price2)} por embalagem`;
+
+      resRateP1.textContent = formatBRL(rate1);
+      resBaseP1.textContent = `/ ${norm1.baseUnit}`;
+      resRateP2.textContent = formatBRL(rate2);
+      resBaseP2.textContent = `/ ${norm2.baseUnit}`;
+
+      // Reset card visual cues
+      badgeP1.classList.add('hidden');
+      badgeP2.classList.add('hidden');
+      economyP1.classList.add('hidden');
+      economyP2.classList.add('hidden');
+      tieNotice.classList.add('hidden');
+
+      resBoxP1.classList.remove('bg-secondary-container/20', 'shadow-md');
+      resBoxP2.classList.remove('bg-secondary-container/20', 'shadow-md');
+
+      const diff = Math.abs(rate1 - rate2);
+
+      if (diff < 0.005) {
+        // Empate
+        tieNotice.classList.remove('hidden');
+        tieTitle.textContent = `Empate — os dois custam o mesmo por ${norm1.baseUnit}`;
+        tieDesc.textContent = `Ambas as alternativas saem por ${formatBRL(rate1)} / ${norm1.baseUnit}. A escolha depende apenas da sua necessidade de volume imediato.`;
+      } else if (rate1 < rate2) {
+        // P1 é melhor
+        badgeP1.classList.remove('hidden');
+        resBoxP1.classList.add('bg-secondary-container/20', 'shadow-md');
+        const economyPerc = (((rate2 - rate1) / rate2) * 100).toFixed(1);
+        const economyCash = (rate2 - rate1).toFixed(2);
+        economyTextP1.textContent = `Economia de ${economyPerc}% (${formatBRL(parseFloat(economyCash))} por ${norm1.baseUnit})`;
+        economyP1.classList.remove('hidden');
+      } else {
+        // P2 é melhor
+        badgeP2.classList.remove('hidden');
+        resBoxP2.classList.add('bg-secondary-container/20', 'shadow-md');
+        const economyPerc = (((rate1 - rate2) / rate1) * 100).toFixed(1);
+        const economyCash = (rate1 - rate2).toFixed(2);
+        economyTextP2.textContent = `Economia de ${economyPerc}% (${formatBRL(parseFloat(economyCash))} por ${norm2.baseUnit})`;
+        economyP2.classList.remove('hidden');
+      }
+    }
+
+    // Interactive States Simulation Buttons
+    document.getElementById('sim-state-1').addEventListener('click', () => {
+      highlightSimButton(0);
+      p1Name.value = 'Café Torrado Tradicional';
+      p1Price.value = '9.00';
+      p1Size.value = '500';
+      p1Unit.value = 'g';
+
+      p2Name.value = 'Café Torrado Pacote Econômico';
+      p2Price.value = '16.00';
+      p2Size.value = '1';
+      p2Unit.value = 'kg';
+
+      calculateComparison();
+    });
+
+    document.getElementById('sim-state-2').addEventListener('click', () => {
+      highlightSimButton(1);
+      p1Name.value = 'Café Torrado Tradicional (500g)';
+      p1Price.value = '8.00';
+      p1Size.value = '500';
+      p1Unit.value = 'g';
+
+      p2Name.value = 'Café Torrado Pacote 1kg';
+      p2Price.value = '16.00';
+      p2Size.value = '1';
+      p2Unit.value = 'kg';
+
+      calculateComparison();
+    });
+
+    document.getElementById('sim-state-3').addEventListener('click', () => {
+      highlightSimButton(2);
+      p1Name.value = 'Banana Prata';
+      p1Price.value = '8.50';
+      p1Size.value = '1';
+      p1Unit.value = 'kg';
+
+      p2Name.value = 'Banana Prata (Bandeja 6 un)';
+      p2Price.value = '7.20';
+      p2Size.value = '6';
+      p2Unit.value = 'un';
+
+      calculateComparison();
+    });
+
+    document.getElementById('sim-state-4').addEventListener('click', () => {
+      highlightSimButton(3);
+      p1Name.value = 'Café Torrado Tradicional';
+      p1Price.value = '9.00';
+      p1Size.value = '500';
+      p1Unit.value = 'g';
+
+      p2Name.value = 'Café Torrado Pacote Econômico';
+      p2Price.value = '';
+      p2Size.value = '1';
+      p2Unit.value = 'kg';
+
+      calculateComparison();
+    });
+
+    // Form buttons
+    document.getElementById('btn-calculate').addEventListener('click', calculateComparison);
+    document.getElementById('calculator-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      calculateComparison();
+    });
+
+    document.getElementById('btn-clear').addEventListener('click', () => {
+      p1Name.value = '';
+      p1Price.value = '';
+      p1Size.value = '';
+      p1Unit.value = 'kg';
+      p2Name.value = '';
+      p2Price.value = '';
+      p2Size.value = '';
+      p2Unit.value = 'kg';
+      clearErrors();
+      resultsSection.classList.add('opacity-40', 'pointer-events-none');
+    });
+
+    document.getElementById('btn-add-product').addEventListener('click', () => {
+      const toast = document.createElement('div');
+      toast.className = 'fixed bottom-6 right-6 z-50 bg-inverse-surface text-inverse-on-surface px-space-md py-space-xs rounded-lg shadow-xl font-body-medium text-body-medium transition-all';
+      toast.textContent = 'Comparador direto configurado para 2 produtos simultâneos.';
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2500);
+    });
+
+    // Run Initial State (Estado 1)
+    calculateComparison();
+  })();
+</script></main><footer class="w-full bg-surface-container-low mt-auto py-space-lg"><div class="max-w-[1120px] mx-auto px-space-lg flex flex-col md:flex-row items-center justify-between gap-space-sm text-center md:text-left"><p class="font-body-medium text-label-caption text-on-surface-variant"><span class="font-body-bold text-on-surface">Pyla</span> • Inteligência financeira em compras de mercado</p><p class="font-label-caption text-label-caption text-outline">© 2025 Pyla Tecnologia e Dados S.A. Todos os direitos reservados.</p></div></footer>
+
+</body></html>
