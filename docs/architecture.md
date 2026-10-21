@@ -178,9 +178,10 @@
 
 ## 🗂️ 3. Estrutura do Repositório (Monorepo)
 
-> Uma pasta por aplicação, cada uma com o seu `package.json`. Sem npm
-> workspaces, Nx ou Turborepo enquanto não houver código compartilhado de
-> verdade.
+> Uma pasta por aplicação, cada uma com o seu `package.json`, ligadas pelo
+> recurso nativo de **npm workspaces** (`"workspaces": ["apps/*"]` na raiz): um
+> `npm install` na raiz instala os dois apps, com um único `package-lock.json`.
+> Sem Nx ou Turborepo enquanto não houver código compartilhado de verdade.
 
 ```text
 .
@@ -224,8 +225,9 @@ web). Os e2e da api ficam em `apps/api/test/`.
 
 **Decisões do setup (ratificadas em 2026-10-13):**
 - **Scripts da raiz:** `test` e `lint` rodam api e web em sequência
-  (`npm --prefix`); `dev:api` e `dev:web` sobem cada app. A raiz não tem
-  dependências.
+  (`npm ... -w apps/<app>`); `dev:api` e `dev:web` sobem cada app. A raiz não
+  tem dependências. *(npm workspaces adotado em 2026-10-20, conforme a
+  Atividade 08; antes eram `npm --prefix`, com um lockfile por app.)*
 - **Client do Prisma:** gerado em `apps/api/src/generated/prisma`, fora do
   Git. O `postinstall` da api roda `prisma generate` a cada instalação.
 - **`.env` no CLI do Prisma:** o `prisma.config.ts` carrega o `.env` com
