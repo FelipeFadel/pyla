@@ -229,8 +229,10 @@ web). Os e2e da api ficam em `apps/api/test/`.
 - **Client do Prisma:** gerado em `apps/api/src/generated/prisma`, fora do
   Git. O `postinstall` da api roda `prisma generate` a cada instalação.
 - **`.env` no CLI do Prisma:** o `prisma.config.ts` carrega o `.env` com
-  `process.loadEnvFile` do Node, sem a biblioteca `dotenv`.
-- **`docker-compose.yml`:** adiado para a primeira Issue que precisar de banco.
+  `import 'dotenv/config'` (ficha da Atividade 08). Na aplicação, quem lê o
+  `.env` é o `ConfigModule.forRoot({ isGlobal: true })` do `AppModule`.
+- **`docker-compose.yml`:** serviço `db` com `postgres:18`, credenciais lidas
+  de `apps/api/.env` (`env_file`) e dados no volume `pyla-pg18`. *(2026-10-20)*
 - **Padrões do gerador mantidos:** o `nest new` traz o `@nestjs/mau` e o script
   `deploy`. Eles ficam, mas o deploy é no Render (§7).
 
@@ -520,7 +522,7 @@ pedido para apontar (RN18).
 | --- | --- | --- |
 | 1 | ~~**Emendar a RN16** para permitir a ativação por reconciliação ativa com o gateway~~ — **resolvida**: RN16 emendada no `prd.md` | Você, numa nova versão do `prd.md` |
 | 2 | ~~Confirmar que NestJS 12 (ESM) + Prisma 7 (client gerado) funcionam juntos~~ — **resolvida**: o client gerado compilou com `nest build` em ESM e carregou no Node | `/utf-setup` |
-| 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 — **conferida só na documentação** (Prisma suporta PostgreSQL ≥ 9.6). Falta testar contra um banco real | Primeira Issue com banco (`docker-compose.yml`) |
+| 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 — **conexão testada**: `prisma migrate status` alcançou o `postgres:18` do `docker-compose.yml`. Falta a primeira migration real | Primeira Issue com banco |
 | 4 | ~~Conferir o lint do template `react-ts` e adicionar o script `test` no web~~ — **resolvida**: o template traz oxlint; o setup adicionou `test` (Vitest + jsdom) | `/utf-setup` |
 | 5 | Conferir as condições atuais do plano gratuito do Render e da Vercel e o build nativo do `bcrypt` no Render | Primeiro deploy |
 | 6 | Endpoint do Mercado Pago para a consulta ativa de pagamento | Spec da US07 |

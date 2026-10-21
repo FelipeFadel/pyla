@@ -1,0 +1,16 @@
+# PostgreSQL 18 para desenvolvimento local (architecture.md §5.3).
+# Usuário, senha e banco vêm de apps/api/.env — credencial não entra no YAML.
+services:
+  db:
+    image: postgres:18
+    container_name: pyla-db
+    restart: unless-stopped
+    env_file: apps/api/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      # A partir do 18, a imagem guarda os dados em /var/lib/postgresql/18/docker.
+      - pyla-pg18:/var/lib/postgresql
+
+volumes:
+  pyla-pg18:
