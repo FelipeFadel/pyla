@@ -1,6 +1,6 @@
 ---
 issue: 2
-status: aprovada
+status: rascunho
 ---
 
 # US01 — Criar conta e autenticar
