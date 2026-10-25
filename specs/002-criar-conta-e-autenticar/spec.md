@@ -1,6 +1,6 @@
 ---
 issue: 2
-status: rascunho
+status: aprovada
 ---
 
 # US01 — Criar conta e autenticar
@@ -51,10 +51,10 @@ Hoje o Pyla não distingue ninguém: não existe conta, e portanto não existe "
 ## Assume que
 
 | Premissa | Issue que fecha |
-| --- | --- |
-| Nenhuma. | n/a |
+|----------|-----------------|
+| Nenhuma. | n/a             |
 
 ## Dúvidas em aberto
 
 | # | Dúvida | Quem responde |
-| --- | --- | --- |
+|---|--------|---------------|
