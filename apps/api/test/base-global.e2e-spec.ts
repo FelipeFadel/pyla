@@ -1,3 +1,6 @@
+import { mkdtempSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { Body, Controller, Get, INestApplication, Post } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { Test } from '@nestjs/testing';
@@ -141,6 +144,21 @@ describe('Validação das variáveis de ambiente no boot (e2e)', () => {
     await moduleRef.close();
   }
 
+  // O ConfigModule lê o .env a partir de process.cwd(). Rodar num diretório sem
+  // .env deixa o teste independente do .env de quem o executa.
+  const cwdOriginal = process.cwd();
+  let dirSemEnv: string;
+
+  beforeAll(() => {
+    dirSemEnv = mkdtempSync(join(tmpdir(), 'pyla-sem-env-'));
+    process.chdir(dirSemEnv);
+  });
+
+  afterAll(() => {
+    process.chdir(cwdOriginal);
+    rmSync(dirSemEnv, { recursive: true, force: true });
+  });
+
   beforeEach(() => {
     vi.stubEnv('DATABASE_URL', 'postgresql://teste:teste@localhost:5432/teste');
     vi.stubEnv('JWT_SECRET', 'segredo-de-teste');
@@ -164,7 +182,7 @@ describe('Validação das variáveis de ambiente no boot (e2e)', () => {
   it('o erro lista tudo o que falta', async () => {
     vi.stubEnv('JWT_SECRET', undefined);
     vi.stubEnv('WEB_ORIGIN', undefined);
-    vi.stubEnv('DATABASE_URL', ''); // vazio vale como ausente (o .env local não pode preencher)
+    vi.stubEnv('DATABASE_URL', ''); // vazio vale como ausente
 
     const erro = await subirAppModule().catch((e: Error) => e);
     expect(erro).toBeInstanceOf(Error);
