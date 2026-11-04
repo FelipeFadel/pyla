@@ -37,7 +37,7 @@
 
 ## Tarefas
 
-- [ ] **Tarefa 1 — Criar o model User e o PrismaService**
+- [x] **Tarefa 1 — Criar o model User e o PrismaService**
   - Cobre: passo técnico (destrava CA1, CA2, CA4 e CA9; fecha a pendência 3 do architecture §7.1)
   - Teste primeiro: teste de integração que usa o `UsersRepository`/`PrismaService` para criar dois usuários com o mesmo e-mail e espera `P2002` no segundo. Falha antes porque o model e a migration não existem.
   - Arquivos previstos: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`, `apps/api/src/prisma/prisma.module.ts`, `apps/api/src/prisma/prisma.service.ts`, `apps/api/src/users/users.module.ts`, `apps/api/src/users/users.repository.ts`, teste ao lado
