@@ -42,7 +42,7 @@
   - Teste primeiro: teste de integração que usa o `UsersRepository`/`PrismaService` para criar dois usuários com o mesmo e-mail e espera `P2002` no segundo. Falha antes porque o model e a migration não existem.
   - Arquivos previstos: `apps/api/prisma/schema.prisma`, `apps/api/prisma/migrations/`, `apps/api/src/prisma/prisma.module.ts`, `apps/api/src/prisma/prisma.service.ts`, `apps/api/src/users/users.module.ts`, `apps/api/src/users/users.repository.ts`, teste ao lado
 
-- [ ] **Tarefa 2 — Montar a base global da API**
+- [x] **Tarefa 2 — Montar a base global da API**
   - Cobre: passo técnico (destrava CA3, CA7 e a resposta de todos os CAs)
   - Teste primeiro: e2e que prova (a) campo extra ou inválido vira 400 com `details` por campo, (b) sucesso volta em `{ data }`, (c) erro desconhecido vira 500 genérico sem stack, (d) o boot falha sem `JWT_SECRET`. Falha antes porque nada disso existe no `main.ts`.
   - Arquivos previstos: `apps/api/src/main.ts`, `apps/api/src/config/` (validação das variáveis), `apps/api/src/common/` (interceptor e filtro), `apps/api/.env.example` (`JWT_SECRET`, `WEB_ORIGIN`), `docs/architecture.md` §2 (registrar `cookie-parser`), `apps/api/package.json`

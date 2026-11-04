@@ -49,6 +49,8 @@
 | Configuração | `@nestjs/config` | `ConfigModule` com validação das variáveis no boot (ID17) |
 | Autenticação | `@nestjs/jwt` | JWT em cookie `httpOnly` (ID9, ID16) |
 | Hash de senha | `bcrypt` | |
+| Leitura de cookies | `cookie-parser` | Lê o cookie de sessão no `JwtAuthGuard` (US01) |
+| Tipos do `cookie-parser` | `@types/cookie-parser` | Dependência de desenvolvimento |
 | Documentação | `@nestjs/swagger` | Contrato vivo (§2.2, ID14) |
 | Agendamento | `@nestjs/schedule` | Jobs de expiração e reconciliação (§5.4) |
 | Pagamento | Mercado Pago, **sandbox** | Cliente (SDK oficial ou HTTP direto) é decidido na spec da US06 |
