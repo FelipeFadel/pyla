@@ -47,7 +47,7 @@
   - Teste primeiro: e2e que prova (a) campo extra ou inválido vira 400 com `details` por campo, (b) sucesso volta em `{ data }`, (c) erro desconhecido vira 500 genérico sem stack, (d) o boot falha sem `JWT_SECRET`. Falha antes porque nada disso existe no `main.ts`.
   - Arquivos previstos: `apps/api/src/main.ts`, `apps/api/src/config/` (validação das variáveis), `apps/api/src/common/` (interceptor e filtro), `apps/api/.env.example` (`JWT_SECRET`, `WEB_ORIGIN`), `docs/architecture.md` §2 (registrar `cookie-parser`), `apps/api/package.json`
 
-- [ ] **Tarefa 3 — Cadastrar usuário**
+- [x] **Tarefa 3 — Cadastrar usuário**
   - Cobre: CA1, CA3, CA4
   - Teste primeiro: e2e que envia cadastro válido e espera 201, `Set-Cookie` com `HttpOnly`, corpo sem `passwordHash`, e no banco só o hash; depois e-mails e senhas inválidos (7, 73 bytes, sem letra, sem número) esperando 400 com o campo e nada gravado. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (controller, service, DTO de cadastro), `apps/api/src/users/users.repository.ts`, `apps/api/package.json` (`bcrypt`, `@nestjs/jwt`, `class-validator`, `class-transformer`)
