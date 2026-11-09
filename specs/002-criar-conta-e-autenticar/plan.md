@@ -82,7 +82,7 @@
   - Teste primeiro: testes de componente por papel e rótulo: campo de senha com `maxlength` 72, rótulo em todo campo, erro ligado ao campo por `aria-describedby`, envio por teclado, mensagem de erro em português e formulário preservado quando a requisição falha (rede), e erro genérico do login sem recarregar a tela. Falha antes porque as telas não existem.
   - Arquivos previstos: `apps/web/src/features/auth/pages/`, `apps/web/src/features/auth/components/`, `apps/web/src/features/auth/api/`, testes ao lado
 
-- [ ] **Tarefa 10 — Criar a área interna, a rota protegida e o logout**
+- [x] **Tarefa 10 — Criar a área interna, a rota protegida e o logout**
   - Cobre: CA7 (no front), CA8 (no front)
   - Teste primeiro: teste de componente em que visitante sem sessão (`/auth/me` com 401) que abre a área interna é levado ao login; usuário com sessão vê a página mínima com o e-mail dele; o botão de logout chama a API e leva ao login. Falha antes porque a rota protegida não existe.
   - Arquivos previstos: `apps/web/src/features/auth/pages/`, `apps/web/src/features/auth/api/` (hook de sessão), `apps/web/src/app/` (rota protegida)

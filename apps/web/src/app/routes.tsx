@@ -1,8 +1,9 @@
-import { createBrowserRouter } from 'react-router'
+import { createBrowserRouter, type RouteObject } from 'react-router'
+import { RequireSession } from './RequireSession'
 
-// Cada rota carrega sob demanda (lazy loading). A área interna real substitui
-// o placeholder na Tarefa 10.
-export const router = createBrowserRouter([
+// Cada rota carrega sob demanda (lazy loading). Só a área interna fica atrás
+// da sessão; login e cadastro são abertos.
+export const routes: RouteObject[] = [
   {
     path: '/login',
     lazy: async () => ({
@@ -16,9 +17,16 @@ export const router = createBrowserRouter([
     }),
   },
   {
-    path: '/',
-    lazy: async () => ({
-      Component: (await import('./placeholders/HomePlaceholder')).default,
-    }),
+    element: <RequireSession />,
+    children: [
+      {
+        path: '/',
+        lazy: async () => ({
+          Component: (await import('../features/auth/pages/HomePage')).default,
+        }),
+      },
+    ],
   },
-])
+]
+
+export const router = createBrowserRouter(routes)
