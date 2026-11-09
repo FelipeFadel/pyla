@@ -72,7 +72,7 @@
   - Teste primeiro: e2e que faz login em dois "dispositivos" (dois tokens), faz logout com o primeiro e espera 200 com cookie limpo, e que o primeiro e o segundo recebem 401 em `GET /auth/me`. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (rota e service), `apps/api/src/users/users.repository.ts` (incrementar `tokenVersion`)
 
-- [ ] **Tarefa 8 — Preparar o front: estilo, rotas e cliente HTTP**
+- [x] **Tarefa 8 — Preparar o front: estilo, rotas e cliente HTTP**
   - Cobre: passo técnico (destrava CA1, CA5, CA6, CA7, CA10 e CA11 no front)
   - Teste primeiro: teste do cliente HTTP que prova `credentials: 'include'`, a conversão de `{ data }` e do erro, e o redirecionamento ao login em 401 **exceto** nas chamadas de `/auth/login`, `/auth/register` e `/auth/me`. Falha antes porque o cliente não existe.
   - Arquivos previstos: `apps/web/vite.config.ts`, `apps/web/src/index.css` (`@theme` com os tokens), `apps/web/src/main.tsx`, `apps/web/src/app/` (rotas), `apps/web/src/shared/http/`, `apps/web/package.json` (`react-router`, `tailwindcss`, `@tailwindcss/vite`)

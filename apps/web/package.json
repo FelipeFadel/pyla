@@ -11,8 +11,11 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.5",
     "react": "^19.2.8",
-    "react-dom": "^19.2.8"
+    "react-dom": "^19.2.8",
+    "react-router": "^8.5.1",
+    "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.2",
