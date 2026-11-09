@@ -62,7 +62,7 @@
   - Teste primeiro: e2e que faz login com e-mail em outra capitalização e espera 200 com `Set-Cookie` `HttpOnly` e `Max-Age` de 7 dias; senha errada e e-mail inexistente esperando 401 com mensagem idêntica e sem cookie. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (rota, DTO de login, service)
 
-- [ ] **Tarefa 6 — Proteger as rotas e consultar a sessão**
+- [x] **Tarefa 6 — Proteger as rotas e consultar a sessão**
   - Cobre: CA7, CA5 (consulta à sessão atual)
   - Teste primeiro: e2e que chama `GET /auth/me` sem cookie, com cookie adulterado e com token expirado esperando 401, e com sessão válida esperando 200 com `{ id, email }`; e que `register` e `login` continuam abertas. Falha antes porque não há guard.
   - Arquivos previstos: `apps/api/src/auth/jwt-auth.guard.ts`, `apps/api/src/auth/public.decorator.ts`, `apps/api/src/app.module.ts` (`APP_GUARD`), `apps/api/src/main.ts` (`cookie-parser`), `apps/api/package.json`

@@ -9,6 +9,10 @@ export class UsersService {
     return this.repository.create(data);
   }
 
+  findById(id: string) {
+    return this.repository.findById(id);
+  }
+
   findByEmail(email: string) {
     return this.repository.findByEmail(email);
   }

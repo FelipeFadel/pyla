@@ -5,6 +5,7 @@ import {
   ValidationPipe,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import cookieParser from 'cookie-parser';
 import {
   AllExceptionsFilter,
   type ErrorDetail,
@@ -24,6 +25,7 @@ function toDetails(errors: ValidationError[], prefix = ''): ErrorDetail[] {
 export function configureApp(app: INestApplication): void {
   const config = app.get(ConfigService);
 
+  app.use(cookieParser());
   app.useGlobalPipes(
     new ValidationPipe({
       whitelist: true,
