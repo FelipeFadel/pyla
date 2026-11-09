@@ -87,6 +87,11 @@
   - Teste primeiro: teste de componente em que visitante sem sessão (`/auth/me` com 401) que abre a área interna é levado ao login; usuário com sessão vê a página mínima com o e-mail dele; o botão de logout chama a API e leva ao login. Falha antes porque a rota protegida não existe.
   - Arquivos previstos: `apps/web/src/features/auth/pages/`, `apps/web/src/features/auth/api/` (hook de sessão), `apps/web/src/app/` (rota protegida)
 
+- [ ] **Tarefa 11 — Corrigir a largura das telas (`max-w-md` colide com o espaçamento)**
+  - Cobre: passo técnico, achado ao rodar o app no navegador (os critérios CA1, CA5, CA6, CA7, CA8, CA10 e CA11 dependem de telas utilizáveis). No Tailwind v4 o `--spacing-md` do `@theme` (1.5rem) vale também para `max-w-md`, e as três telas (`AuthForm`, `HomePage`, `RequireSession`) ficam com 24px de largura.
+  - Teste primeiro: teste que lê o `index.css` e prova que o `@theme` declara um token de largura de container para as telas (`--container-formulario`, 28rem) e que nenhum `.tsx` de `apps/web/src` usa `max-w-`/`w-` com os nomes de espaçamento (`xxs`, `xs`, `sm`, `md`, `lg`, `xl`). Falha antes porque o token não existe e os três arquivos usam `max-w-md`.
+  - Arquivos previstos: `apps/web/src/index.css` (token de container), `apps/web/src/features/auth/components/AuthForm.tsx`, `apps/web/src/features/auth/pages/HomePage.tsx`, `apps/web/src/app/RequireSession.tsx`, teste ao lado do CSS
+
 ## Critérios sem tarefa
 
 -
