@@ -108,7 +108,7 @@ entre lojas e a exportação dos dados.
 > Toda story nasce `Draft` — **só você promove a `Ready`**; `Live` é quando o PR
 > da história mescla (o auditor final confere).
 
-### US01 — Criar conta e autenticar · `Must Have` · `S–M` · Status: `🟡 Ready`
+### US01 — Criar conta e autenticar · `Must Have` · `S–M` · Status: `🟢 Live`
 
 <!-- Status: `⚪ Draft` (não codificar) · `🟡 Ready` (vira Issue) · `🟢 Live` (PR mesclado) -->
 

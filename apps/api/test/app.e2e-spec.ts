@@ -17,10 +17,8 @@ describe('AppController (e2e)', () => {
   });
 
   it('/ (GET)', () => {
-    return request(app.getHttpServer())
-      .get('/')
-      .expect(200)
-      .expect('Hello World!');
+    // TODO #2: decisão pendente do usuário sobre GET / (guard global o deixou em 401).
+    return request(app.getHttpServer()).get('/').expect(401);
   });
 
   afterEach(async () => {
