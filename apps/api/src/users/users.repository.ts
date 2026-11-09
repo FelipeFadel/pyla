@@ -8,4 +8,8 @@ export class UsersRepository {
   create(data: { email: string; passwordHash: string }) {
     return this.prisma.user.create({ data });
   }
+
+  findByEmail(email: string) {
+    return this.prisma.user.findUnique({ where: { email } });
+  }
 }

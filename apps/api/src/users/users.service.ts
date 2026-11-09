@@ -8,4 +8,8 @@ export class UsersService {
   create(data: { email: string; passwordHash: string }) {
     return this.repository.create(data);
   }
+
+  findByEmail(email: string) {
+    return this.repository.findByEmail(email);
+  }
 }

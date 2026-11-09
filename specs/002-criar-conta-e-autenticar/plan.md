@@ -57,7 +57,7 @@
   - Teste primeiro: e2e que cadastra `a@x.com`, cadastra de novo (e com ` A@X.com `) esperando 400 genérico sem o e-mail e uma só linha no banco; e dois cadastros simultâneos (`Promise.all`) com um 201 e um 400. Falha antes porque o `P2002` ainda vira 500.
   - Arquivos previstos: `apps/api/src/auth/auth.service.ts`, `apps/api/src/common/` (tradução do `P2002` no filtro)
 
-- [ ] **Tarefa 5 — Fazer login**
+- [x] **Tarefa 5 — Fazer login**
   - Cobre: CA5 (cookie de 7 dias), CA6
   - Teste primeiro: e2e que faz login com e-mail em outra capitalização e espera 200 com `Set-Cookie` `HttpOnly` e `Max-Age` de 7 dias; senha errada e e-mail inexistente esperando 401 com mensagem idêntica e sem cookie. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (rota, DTO de login, service)
