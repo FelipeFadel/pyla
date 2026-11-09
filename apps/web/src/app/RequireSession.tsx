@@ -19,7 +19,7 @@ export function RequireSession() {
 
   if (error || !data) {
     return (
-      <main className="mx-auto flex max-w-md flex-col gap-sm p-sm pt-xl">
+      <main className="mx-auto flex max-w-formulario flex-col gap-sm p-sm pt-xl">
         <p role="alert" className="rounded bg-perigo-fundo p-sm text-perigo">
           {error?.message ?? 'Algo deu errado. Tente novamente.'}
         </p>

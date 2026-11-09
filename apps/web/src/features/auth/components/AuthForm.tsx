@@ -45,7 +45,7 @@ export function AuthForm({ title, submitLabel, passwordAutoComplete, onSubmit }:
   }
 
   return (
-    <main className="mx-auto flex max-w-md flex-col gap-md p-sm pt-xl">
+    <main className="mx-auto flex max-w-formulario flex-col gap-md p-sm pt-xl">
       <h1 className="font-display text-titulo-pagina text-primaria-forte">{title}</h1>
       <form noValidate onSubmit={handleSubmit} className="flex flex-col gap-sm">
         {generalError && (

@@ -26,7 +26,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="mx-auto flex max-w-md flex-col gap-md p-sm pt-xl">
+    <main className="mx-auto flex max-w-formulario flex-col gap-md p-sm pt-xl">
       <h1 className="font-display text-titulo-pagina text-primaria-forte">Área interna</h1>
       <p className="text-corpo text-texto">
         Você está logado como <strong>{session.email}</strong>
