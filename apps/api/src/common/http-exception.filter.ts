@@ -32,6 +32,8 @@ const DEFAULTS: Record<number, { error: string; message: string }> = {
 
 const FALLBACK = { error: 'Error', message: 'Não foi possível concluir a requisição.' };
 
+const UNIQUE_VIOLATION_MESSAGE = 'Não foi possível concluir o cadastro.';
+
 // Converte todo erro em { statusCode, error, message, details?, path, timestamp }.
 // Stack e texto de erro desconhecido ficam só no log, nunca na resposta.
 @Catch()
@@ -49,6 +51,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
     if (exception instanceof HttpException) {
       statusCode = exception.getStatus();
       custom = this.customPart(exception.getResponse());
+    } else if (this.isUniqueViolation(exception)) {
+      // P2002: unicidade violada no banco. Resposta genérica, sem o valor
+      // repetido nem o `meta` do Prisma.
+      statusCode = HttpStatus.BAD_REQUEST;
+      custom = { message: UNIQUE_VIOLATION_MESSAGE };
     } else {
       this.logger.error(
         exception instanceof Error ? exception.stack : String(exception),
@@ -64,6 +71,15 @@ export class AllExceptionsFilter implements ExceptionFilter {
       path: request.url,
       timestamp: new Date().toISOString(),
     });
+  }
+
+  // Reconhece pelo `code` para o filtro não importar o Prisma Client.
+  private isUniqueViolation(exception: unknown): boolean {
+    return (
+      typeof exception === 'object' &&
+      exception !== null &&
+      (exception as { code?: unknown }).code === 'P2002'
+    );
   }
 
   // Só aproveita o texto das exceções que carregam mensagem própria (em

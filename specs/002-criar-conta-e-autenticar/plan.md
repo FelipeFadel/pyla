@@ -52,7 +52,7 @@
   - Teste primeiro: e2e que envia cadastro válido e espera 201, `Set-Cookie` com `HttpOnly`, corpo sem `passwordHash`, e no banco só o hash; depois e-mails e senhas inválidos (7, 73 bytes, sem letra, sem número) esperando 400 com o campo e nada gravado. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (controller, service, DTO de cadastro), `apps/api/src/users/users.repository.ts`, `apps/api/package.json` (`bcrypt`, `@nestjs/jwt`, `class-validator`, `class-transformer`)
 
-- [ ] **Tarefa 4 — Recusar e-mail repetido**
+- [x] **Tarefa 4 — Recusar e-mail repetido**
   - Cobre: CA2, CA9
   - Teste primeiro: e2e que cadastra `a@x.com`, cadastra de novo (e com ` A@X.com `) esperando 400 genérico sem o e-mail e uma só linha no banco; e dois cadastros simultâneos (`Promise.all`) com um 201 e um 400. Falha antes porque o `P2002` ainda vira 500.
   - Arquivos previstos: `apps/api/src/auth/auth.service.ts`, `apps/api/src/common/` (tradução do `P2002` no filtro)
