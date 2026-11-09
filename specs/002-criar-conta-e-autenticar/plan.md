@@ -67,7 +67,7 @@
   - Teste primeiro: e2e que chama `GET /auth/me` sem cookie, com cookie adulterado e com token expirado esperando 401, e com sessão válida esperando 200 com `{ id, email }`; e que `register` e `login` continuam abertas. Falha antes porque não há guard.
   - Arquivos previstos: `apps/api/src/auth/jwt-auth.guard.ts`, `apps/api/src/auth/public.decorator.ts`, `apps/api/src/app.module.ts` (`APP_GUARD`), `apps/api/src/main.ts` (`cookie-parser`), `apps/api/package.json`
 
-- [ ] **Tarefa 7 — Fazer logout**
+- [x] **Tarefa 7 — Fazer logout**
   - Cobre: CA8
   - Teste primeiro: e2e que faz login em dois "dispositivos" (dois tokens), faz logout com o primeiro e espera 200 com cookie limpo, e que o primeiro e o segundo recebem 401 em `GET /auth/me`. Falha antes porque a rota não existe.
   - Arquivos previstos: `apps/api/src/auth/` (rota e service), `apps/api/src/users/users.repository.ts` (incrementar `tokenVersion`)

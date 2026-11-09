@@ -50,11 +50,27 @@ export class AuthController {
     return user;
   }
 
+  @Post('logout')
+  @HttpCode(200)
+  async logout(
+    @Req() req: Request & { user: { id: string; email: string } },
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.authService.logout(req.user.id);
+    res.clearCookie(SESSION_COOKIE, this.cookieOptions());
+  }
+
+  private cookieOptions() {
+    return {
+      httpOnly: true,
+      sameSite: 'lax' as const,
+      secure: this.config.get('NODE_ENV') === 'production',
+    };
+  }
+
   private setSessionCookie(res: Response, token: string) {
     res.cookie(SESSION_COOKIE, token, {
-      httpOnly: true,
-      sameSite: 'lax',
-      secure: this.config.get('NODE_ENV') === 'production',
+      ...this.cookieOptions(),
       maxAge: SESSION_MAX_AGE_MS,
     });
   }

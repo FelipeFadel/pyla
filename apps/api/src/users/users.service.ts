@@ -16,4 +16,8 @@ export class UsersService {
   findByEmail(email: string) {
     return this.repository.findByEmail(email);
   }
+
+  async invalidateSessions(id: string) {
+    await this.repository.incrementTokenVersion(id);
+  }
 }

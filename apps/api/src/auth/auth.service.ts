@@ -47,4 +47,8 @@ export class AuthService {
     });
     return { user: { id: user.id, email: user.email }, token };
   }
+
+  logout(userId: string) {
+    return this.usersService.invalidateSessions(userId);
+  }
 }

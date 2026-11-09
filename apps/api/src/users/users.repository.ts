@@ -16,4 +16,12 @@ export class UsersRepository {
   findByEmail(email: string) {
     return this.prisma.user.findUnique({ where: { email } });
   }
+
+  // Incremento atômico no banco: invalida todos os tokens emitidos (CA8).
+  incrementTokenVersion(id: string) {
+    return this.prisma.user.update({
+      where: { id },
+      data: { tokenVersion: { increment: 1 } },
+    });
+  }
 }
