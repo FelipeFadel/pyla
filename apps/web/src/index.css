@@ -30,6 +30,16 @@
   /* Famílias com pilha de fallback; os arquivos das fontes entram com a tela. */
   --font-display: 'Saira Stencil One', 'Trebuchet MS', sans-serif;
   --font-corpo: 'Saira', system-ui, sans-serif;
+
+  /* Tamanhos da tabela de tipografia: --text-legenda gera text-legenda. */
+  --text-titulo-pagina: 2rem;
+  --text-titulo-card: 1.125rem;
+  --text-corpo: 1rem;
+  --text-legenda: 0.8125rem;
+  --text-numero: 1.625rem;
+
+  /* Transição do hover de botão (estados de botão). */
+  --default-transition-duration: 120ms;
 }
 
 @layer base {

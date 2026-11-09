@@ -77,7 +77,7 @@
   - Teste primeiro: teste do cliente HTTP que prova `credentials: 'include'`, a conversão de `{ data }` e do erro, e o redirecionamento ao login em 401 **exceto** nas chamadas de `/auth/login`, `/auth/register` e `/auth/me`. Falha antes porque o cliente não existe.
   - Arquivos previstos: `apps/web/vite.config.ts`, `apps/web/src/index.css` (`@theme` com os tokens), `apps/web/src/main.tsx`, `apps/web/src/app/` (rotas), `apps/web/src/shared/http/`, `apps/web/package.json` (`react-router`, `tailwindcss`, `@tailwindcss/vite`)
 
-- [ ] **Tarefa 9 — Criar as telas de cadastro e de login**
+- [x] **Tarefa 9 — Criar as telas de cadastro e de login**
   - Cobre: CA1, CA5, CA6 (na tela), CA10, CA11
   - Teste primeiro: testes de componente por papel e rótulo: campo de senha com `maxlength` 72, rótulo em todo campo, erro ligado ao campo por `aria-describedby`, envio por teclado, mensagem de erro em português e formulário preservado quando a requisição falha (rede), e erro genérico do login sem recarregar a tela. Falha antes porque as telas não existem.
   - Arquivos previstos: `apps/web/src/features/auth/pages/`, `apps/web/src/features/auth/components/`, `apps/web/src/features/auth/api/`, testes ao lado
