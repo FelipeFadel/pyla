@@ -526,7 +526,7 @@ pedido para apontar (RN18).
 | --- | --- | --- |
 | 1 | ~~**Emendar a RN16** para permitir a ativação por reconciliação ativa com o gateway~~ — **resolvida**: RN16 emendada no `prd.md` | Você, numa nova versão do `prd.md` |
 | 2 | ~~Confirmar que NestJS 12 (ESM) + Prisma 7 (client gerado) funcionam juntos~~ — **resolvida**: o client gerado compilou com `nest build` em ESM e carregou no Node | `/utf-setup` |
-| 3 | Confirmar que o Prisma 7 suporta o PostgreSQL 18 — **conexão testada**: `prisma migrate status` alcançou o `postgres:18` do `docker-compose.yml`. Falta a primeira migration real | Primeira Issue com banco |
+| 3 | ~~Confirmar que o Prisma 7 suporta o PostgreSQL 18~~ — **resolvida**: a primeira migration real (`20261103000000_criar_user`, US01) foi aplicada e os e2e rodam contra o banco | Primeira Issue com banco |
 | 4 | ~~Conferir o lint do template `react-ts` e adicionar o script `test` no web~~ — **resolvida**: o template traz oxlint; o setup adicionou `test` (Vitest + jsdom) | `/utf-setup` |
 | 5 | Conferir as condições atuais do plano gratuito do Render e da Vercel e o build nativo do `bcrypt` no Render | Primeiro deploy |
 | 6 | Endpoint do Mercado Pago para a consulta ativa de pagamento | Spec da US07 |
