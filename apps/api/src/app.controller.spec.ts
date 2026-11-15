@@ -16,7 +16,7 @@ describe('AppController', () => {
 
   describe('root', () => {
     it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Quebrado de propósito 2');
+      expect(appController.getHello()).toBe('Quebrado de propósito');
     });
   });
 });
