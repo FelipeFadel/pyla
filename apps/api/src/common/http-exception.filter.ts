@@ -32,7 +32,26 @@ const DEFAULTS: Record<number, { error: string; message: string }> = {
 
 const FALLBACK = { error: 'Error', message: 'Não foi possível concluir a requisição.' };
 
-const UNIQUE_VIOLATION_MESSAGE = 'Não foi possível concluir o cadastro.';
+// Erros conhecidos do Prisma (PrismaClientKnownRequestError) traduzidos para
+// 4xx com texto próprio. `meta`, valores e o texto do Prisma nunca saem.
+// Código que não está aqui cai no 500 genérico e vai para o log.
+const PRISMA_ERRORS: Record<string, { statusCode: number; message: string }> = {
+  // Valor maior que a coluna aceita.
+  P2000: { statusCode: HttpStatus.BAD_REQUEST, message: 'Dados inválidos.' },
+  // Unicidade violada. 400 genérico, sem dizer qual valor repetiu
+  // (US01, CA2/CA9: não revelar se o e-mail já existe).
+  P2002: {
+    statusCode: HttpStatus.BAD_REQUEST,
+    message: 'Não foi possível concluir o cadastro.',
+  },
+  // Chave estrangeira violada: o registro relacionado não existe ou está em uso.
+  P2003: {
+    statusCode: HttpStatus.CONFLICT,
+    message: 'Conflito com registros relacionados.',
+  },
+  // Registro exigido pela operação não encontrado (update/delete sem alvo).
+  P2025: { statusCode: HttpStatus.NOT_FOUND, message: 'Recurso não encontrado.' },
+};
 
 // Converte todo erro em { statusCode, error, message, details?, path, timestamp }.
 // Stack e texto de erro desconhecido ficam só no log, nunca na resposta.
@@ -47,15 +66,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     let statusCode: number = HttpStatus.INTERNAL_SERVER_ERROR;
     let custom: { message?: string; details?: ErrorDetail[] } = {};
+    const prismaError = this.knownPrismaError(exception);
 
     if (exception instanceof HttpException) {
       statusCode = exception.getStatus();
       custom = this.customPart(exception.getResponse());
-    } else if (this.isUniqueViolation(exception)) {
-      // P2002: unicidade violada no banco. Resposta genérica, sem o valor
-      // repetido nem o `meta` do Prisma.
-      statusCode = HttpStatus.BAD_REQUEST;
-      custom = { message: UNIQUE_VIOLATION_MESSAGE };
+    } else if (prismaError) {
+      statusCode = prismaError.statusCode;
+      custom = { message: prismaError.message };
     } else {
       this.logger.error(
         exception instanceof Error ? exception.stack : String(exception),
@@ -74,12 +92,14 @@ export class AllExceptionsFilter implements ExceptionFilter {
   }
 
   // Reconhece pelo `code` para o filtro não importar o Prisma Client.
-  private isUniqueViolation(exception: unknown): boolean {
-    return (
-      typeof exception === 'object' &&
-      exception !== null &&
-      (exception as { code?: unknown }).code === 'P2002'
-    );
+  private knownPrismaError(
+    exception: unknown,
+  ): { statusCode: number; message: string } | undefined {
+    if (typeof exception !== 'object' || exception === null) return undefined;
+    const code = (exception as { code?: unknown }).code;
+    return typeof code === 'string' && Object.hasOwn(PRISMA_ERRORS, code)
+      ? PRISMA_ERRORS[code]
+      : undefined;
   }
 
   // Só aproveita o texto das exceções que carregam mensagem própria (em
