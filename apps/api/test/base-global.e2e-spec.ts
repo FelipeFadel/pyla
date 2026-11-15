@@ -7,6 +7,7 @@ import { Test } from '@nestjs/testing';
 import { IsEmail, IsString } from 'class-validator';
 import request from 'supertest';
 import { App } from 'supertest/types.js';
+import { GLOBAL_PROVIDERS } from '../src/common/global-providers.js';
 import { configureApp } from '../src/common/setup-app.js';
 
 // Controller e DTO só de teste: exercitam a configuração global real.
@@ -39,6 +40,7 @@ describe('Base global da API (e2e)', () => {
     const moduleRef = await Test.createTestingModule({
       imports: [ConfigModule.forRoot({ isGlobal: true })],
       controllers: [ProbeController],
+      providers: GLOBAL_PROVIDERS,
     }).compile();
     app = moduleRef.createNestApplication();
     configureApp(app);
