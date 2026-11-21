@@ -1,6 +1,6 @@
 ---
 issue: 30
-status: rascunho
+status: aprovada
 ---
 
 # US15 — Gerenciar os planos de assinatura
@@ -60,11 +60,11 @@ Hoje o Pyla não tem quem o administre: toda conta nasce igual, e não existe o 
 
 ## Assume que
 
-| Premissa | Issue que fecha |
-| --- | --- |
-| Assinantes só existem se forem criados direto no banco ou nos testes: nenhuma rota cria assinatura. A regra de exclusão (CA11) e a do preço contratado (CA6) funcionam, mas ainda não há como um usuário real virar assinante. | #7 (US06) |
+| Premissa                                                                                                                                                                                                                       | Issue que fecha |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------|
+| Assinantes só existem se forem criados direto no banco ou nos testes: nenhuma rota cria assinatura. A regra de exclusão (CA11) e a do preço contratado (CA6) funcionam, mas ainda não há como um usuário real virar assinante. | #7 (US06)       |
 
 ## Dúvidas em aberto
 
 | # | Dúvida | Quem responde |
-| --- | --- | --- |
+|---|--------|---------------|
