@@ -1,3 +1,7 @@
+@import '@fontsource/saira/400.css';
+@import '@fontsource/saira/600.css';
+@import '@fontsource/saira/700.css';
+@import '@fontsource/saira-stencil-one/400.css';
 @import 'tailwindcss';
 
 /* Tokens de docs/design-tokens.md. O nome do papel vira a classe (bg-primaria). */
@@ -30,7 +34,10 @@
   /* Largura das telas. Não use max-w-md: no Tailwind v4 ele lê --spacing-md (1.5rem). */
   --container-formulario: 28rem;
 
-  /* Famílias com pilha de fallback; os arquivos das fontes entram com a tela. */
+  /* Sombra do card de login e cadastro: --shadow-card gera shadow-card. */
+  --shadow-card: 0 4px 12px rgba(22, 23, 43, 0.08);
+
+  /* Famílias com pilha de fallback; os arquivos vêm dos pacotes @fontsource (importados no topo). */
   --font-display: 'Saira Stencil One', 'Trebuchet MS', sans-serif;
   --font-corpo: 'Saira', system-ui, sans-serif;
 

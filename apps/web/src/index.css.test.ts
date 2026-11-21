@@ -51,6 +51,17 @@ describe('largura das telas', () => {
     expect(tema).toMatch(/--container-formulario:\s*28rem;/);
   });
 
+  it('o @theme declara o token de sombra do card', () => {
+    const css = readFileSync(join(pastaSrc, 'index.css'), 'utf-8');
+    const tema = css.match(/@theme\s*\{[\s\S]*?\n\}/)?.[0] ?? '';
+    expect(tema).toMatch(/--shadow-card:\s*0 4px 12px rgba\(22, 23, 43, 0\.08\);/);
+  });
+
+  it.each(['@fontsource/saira', '@fontsource/saira-stencil-one'])('o CSS importa %s', (pacote) => {
+    const css = readFileSync(join(pastaSrc, 'index.css'), 'utf-8');
+    expect(css).toContain(`@import '${pacote}/`);
+  });
+
   it('nenhum .tsx usa nome de espaçamento como largura/altura', () => {
     const usos = listarTsx(pastaSrc).flatMap((arquivo) =>
       acharUsosInvalidos(readFileSync(arquivo, 'utf-8')).map((uso) => `${arquivo}: ${uso}`),
