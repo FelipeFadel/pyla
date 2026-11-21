@@ -56,24 +56,24 @@ entre lojas e a exportação dos dados.
 > Os termos do negócio, como o cliente fala. É daqui que o `architecture.md`
 > deriva os nomes das entidades.
 
-| Termo                       | Significa                                                                                                                        | Não confundir com                                                                                                       |
-|:----------------------------|:---------------------------------------------------------------------------------------------------------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| **Usuário**                 | A pessoa que tem conta no Pyla, identificada pelo e-mail. É gratuita por padrão e premium enquanto tiver assinatura ativa.       | Visitante — o visitante ainda não tem conta ou não está logado. "Conta" e "usuário" são a mesma coisa.                  |
-| **Compra**                  | Uma ida ao mercado: o conjunto de itens levados de uma vez, com uma loja e uma data.                                             | Item de compra — a compra é o todo, o item é cada linha dela.                                                           |
-| **Item de compra**          | Cada produto levado numa compra, com quantidade, peso/volume da embalagem e preço pago.                                          | Produto — o item é o produto naquela compra, com aquele preço; o produto é a coisa em si.                               |
-| **Produto**                 | Aquilo que se compra, identificado de forma estável para acompanhar preço ao longo do tempo (ex.: "arroz branco 5 kg, marca X"). | Item de compra — o produto se repete entre compras; o item é único de uma compra.                                       |
-| **Categoria**               | O grupo ao qual um produto pertence para efeito de resumo de gasto (ex.: carne, limpeza, bebida).                                | Loja — categoria agrupa o que se comprou, não onde.                                                                     |
-| **Loja**                    | O estabelecimento onde a compra foi feita.                                                                                       | Marca — a loja é onde se compra; a marca é de quem fabrica o produto.                                                   |
-| **Custo por unidade**       | O preço do produto reduzido a uma base comparável: por quilo, por litro ou por unidade avulsa.                                   | Preço pago — o preço pago é o da embalagem inteira; o custo por unidade é ele dividido pelo conteúdo.                   |
-| **Histórico de preço**      | A sequência de preços já registrados para um mesmo produto, com loja e data de cada um.                                          | Resumo do mês — o histórico é por produto ao longo do tempo; o resumo é por categoria num período.                      |
-| **Resumo do mês**           | A visão de quanto se gastou em cada categoria e em cada loja num período.                                                        | Histórico de preço — ver acima.                                                                                         |
-| **Plano / Assinatura**      | O vínculo do usuário com o Pyla: gratuito por padrão, premium enquanto a assinatura estiver ativa e paga.                        | Pagamento — a assinatura é o vínculo contínuo; o pagamento é cada cobrança dela.                                        |
-| **Plano (oferta)**          | Cada opção de assinatura que o Pyla oferece, com nome e preço, que o administrador cria, edita, ativa, desativa e exclui.         | Plano / Assinatura — a oferta é o que está à venda; o vínculo do usuário é a assinatura que nasce quando ele paga por uma oferta. |
-| **Pedido de assinatura**    | Cada tentativa de assinar o premium: nasce pendente e termina paga, recusada ou expirada (24 horas sem confirmação).             | Assinatura — o pedido é a tentativa; a assinatura é o vínculo que nasce quando um pedido é pago.                        |
-| **Pagamento**               | Cada cobrança da assinatura premium, processada por um gateway externo.                                                          | Assinatura — ver acima.                                                                                                 |
-| **Evento de webhook**       | Cada notificação que o gateway envia ao Pyla sobre um pagamento. Toda notificação é registrada, mesmo a inválida ou a de pedido desconhecido. | Pagamento — o evento é o aviso que chega; o pagamento é a cobrança que ele confirma.                                    |
-| **Base coletiva de preços** | O conjunto anônimo de preços de produtos por loja e data, formado pela contribuição automática de todas as compras confirmadas.  | Histórico de preço — o histórico é do próprio usuário; a base coletiva agrega preços de todos, sem identificar ninguém. |
-| **Rascunho de compra**      | Uma compra começada e ainda não confirmada; fica guardada para o usuário retomar ou descartar.                                   | Compra — só a compra confirmada conta para resumo, histórico e base coletiva.                                           |
+| Termo                       | Significa                                                                                                                                     | Não confundir com                                                                                                                 |
+|:----------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------|
+| **Usuário**                 | A pessoa que tem conta no Pyla, identificada pelo e-mail. É gratuita por padrão e premium enquanto tiver assinatura ativa.                    | Visitante — o visitante ainda não tem conta ou não está logado. "Conta" e "usuário" são a mesma coisa.                            |
+| **Compra**                  | Uma ida ao mercado: o conjunto de itens levados de uma vez, com uma loja e uma data.                                                          | Item de compra — a compra é o todo, o item é cada linha dela.                                                                     |
+| **Item de compra**          | Cada produto levado numa compra, com quantidade, peso/volume da embalagem e preço pago.                                                       | Produto — o item é o produto naquela compra, com aquele preço; o produto é a coisa em si.                                         |
+| **Produto**                 | Aquilo que se compra, identificado de forma estável para acompanhar preço ao longo do tempo (ex.: "arroz branco 5 kg, marca X").              | Item de compra — o produto se repete entre compras; o item é único de uma compra.                                                 |
+| **Categoria**               | O grupo ao qual um produto pertence para efeito de resumo de gasto (ex.: carne, limpeza, bebida).                                             | Loja — categoria agrupa o que se comprou, não onde.                                                                               |
+| **Loja**                    | O estabelecimento onde a compra foi feita.                                                                                                    | Marca — a loja é onde se compra; a marca é de quem fabrica o produto.                                                             |
+| **Custo por unidade**       | O preço do produto reduzido a uma base comparável: por quilo, por litro ou por unidade avulsa.                                                | Preço pago — o preço pago é o da embalagem inteira; o custo por unidade é ele dividido pelo conteúdo.                             |
+| **Histórico de preço**      | A sequência de preços já registrados para um mesmo produto, com loja e data de cada um.                                                       | Resumo do mês — o histórico é por produto ao longo do tempo; o resumo é por categoria num período.                                |
+| **Resumo do mês**           | A visão de quanto se gastou em cada categoria e em cada loja num período.                                                                     | Histórico de preço — ver acima.                                                                                                   |
+| **Plano / Assinatura**      | O vínculo do usuário com o Pyla: gratuito por padrão, premium enquanto a assinatura estiver ativa e paga.                                     | Pagamento — a assinatura é o vínculo contínuo; o pagamento é cada cobrança dela.                                                  |
+| **Plano (oferta)**          | Cada opção de assinatura que o Pyla oferece, com nome e preço, que o administrador cria, edita, ativa, desativa e exclui.                     | Plano / Assinatura — a oferta é o que está à venda; o vínculo do usuário é a assinatura que nasce quando ele paga por uma oferta. |
+| **Pedido de assinatura**    | Cada tentativa de assinar o premium: nasce pendente e termina paga, recusada ou expirada (24 horas sem confirmação).                          | Assinatura — o pedido é a tentativa; a assinatura é o vínculo que nasce quando um pedido é pago.                                  |
+| **Pagamento**               | Cada cobrança da assinatura premium, processada por um gateway externo.                                                                       | Assinatura — ver acima.                                                                                                           |
+| **Evento de webhook**       | Cada notificação que o gateway envia ao Pyla sobre um pagamento. Toda notificação é registrada, mesmo a inválida ou a de pedido desconhecido. | Pagamento — o evento é o aviso que chega; o pagamento é a cobrança que ele confirma.                                              |
+| **Base coletiva de preços** | O conjunto anônimo de preços de produtos por loja e data, formado pela contribuição automática de todas as compras confirmadas.               | Histórico de preço — o histórico é do próprio usuário; a base coletiva agrega preços de todos, sem identificar ninguém.           |
+| **Rascunho de compra**      | Uma compra começada e ainda não confirmada; fica guardada para o usuário retomar ou descartar.                                                | Compra — só a compra confirmada conta para resumo, histórico e base coletiva.                                                     |
 
 ---
 
@@ -377,7 +377,7 @@ nem a base de preços.
 
 ---
 
-### US15 — Gerenciar os planos de assinatura · `Must Have` · `M` · Status: `⚪ Draft`
+### US15 — Gerenciar os planos de assinatura · `Must Have` · `M` · Status: ` 🟡 Ready`
 
 **Como** administrador, **eu quero** criar, editar, ativar, desativar e excluir os
 planos de assinatura, **para que** o Pyla ofereça o premium com o nome e o preço
@@ -428,11 +428,11 @@ que eu definir, sem mexer no que quem já assina contratou.
 | RN21 | Todo dado de compra, produto, histórico e assinatura é privado do seu dono. Nenhum usuário acessa, edita ou exclui dado de outro. A única informação que circula entre usuários é o preço agregado e anônimo da base coletiva.                                                                                                                                                                 |
 | RN22 | O preço colaborativo exibido é um agregado robusto (ex.: mediana) que descarta valores extremos, e só é mostrado quando há um número mínimo de registros de terceiros. Os limiares ficam para a spec da US13.                                                                                                                                                                                  |
 | RN23 | O total pago informado pelo usuário é ≥ 0 e ≤ soma dos itens (já com os descontos de item). Valor fora disso é recusado no registro da compra.                                                                                                                                                                                                                                                 |
-| RN24 | Todo plano tem nome obrigatório e único entre os planos, e preço maior que zero. |
-| RN25 | Um plano que tem assinantes não pode ser excluído; só pode ser desativado. Plano sem assinantes pode ser excluído. |
-| RN26 | Um plano desativado não é oferecido a novos assinantes; quem já assina continua nele normalmente. |
-| RN27 | A mudança de preço de um plano vale só para quem assina depois dela; quem já assina continua pagando o preço antigo. |
-| RN28 | Só o administrador gerencia planos. Usuário comum autenticado que tenta é negado; visitante sem sessão é levado ao login. Ninguém vira administrador pelo sistema. |
+| RN24 | Todo plano tem nome obrigatório e único entre os planos, e preço maior que zero.                                                                                                                                                                                                                                                                                                               |
+| RN25 | Um plano que tem assinantes não pode ser excluído; só pode ser desativado. Plano sem assinantes pode ser excluído.                                                                                                                                                                                                                                                                             |
+| RN26 | Um plano desativado não é oferecido a novos assinantes; quem já assina continua nele normalmente.                                                                                                                                                                                                                                                                                              |
+| RN27 | A mudança de preço de um plano vale só para quem assina depois dela; quem já assina continua pagando o preço antigo.                                                                                                                                                                                                                                                                           |
+| RN28 | Só o administrador gerencia planos. Usuário comum autenticado que tenta é negado; visitante sem sessão é levado ao login. Ninguém vira administrador pelo sistema.                                                                                                                                                                                                                             |
 
 ---
 
@@ -471,7 +471,7 @@ que eu definir, sem mexer no que quem já assina contratou.
 
 ## 🛠️ 8. Histórico
 
-| Data       | Versão | O que mudou                   |
-|:-----------|:-------|:------------------------------|
-| 2026-09-05 | 1.0.0  | Versão inicial via `/utf-prd` |
+| Data       | Versão | O que mudou                                                                          |
+|:-----------|:-------|:-------------------------------------------------------------------------------------|
+| 2026-09-05 | 1.0.0  | Versão inicial via `/utf-prd`                                                        |
 | 2026-11-21 | 1.1.0  | US15 (gerenciar planos), ator Administrador, RN24–RN28 e novo item em Fora de Escopo |
