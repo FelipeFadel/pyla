@@ -150,6 +150,12 @@ sans-serif` e `"Saira", system-ui, sans-serif`.
 - **Corpo em 16px, não menos.** É o mínimo confortável para o formulário longo da US02
   em tela de celular.
 
+## Sombra
+
+| Token | Valor | Onde se usa |
+| --- | --- | --- |
+| `shadow-card` | `0 4px 12px rgba(22, 23, 43, 0.08)` | card das telas de login e cadastro |
+
 ## Estados de botão
 
 Aprovados em 2026-09-20. Valem para todas as variantes (primário, secundário,

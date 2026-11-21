@@ -7,8 +7,13 @@ export default function LoginPage() {
 
   return (
     <AuthForm
-      title="Entrar"
+      tabs={[
+        { label: 'Entrar', to: '/login', current: true },
+        { label: 'Criar conta', to: '/cadastro', current: false },
+      ]}
+      footer={{ text: 'Não tem uma conta?', linkLabel: 'Criar conta', to: '/cadastro' }}
       submitLabel="Entrar"
+      errorTitle="Erro de autenticação"
       passwordAutoComplete="current-password"
       onSubmit={async (credentials) => {
         await login(credentials)

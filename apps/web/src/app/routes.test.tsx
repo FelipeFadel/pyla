@@ -19,7 +19,7 @@ describe('área interna protegida', () => {
     const fetchMock = stubFetch(jsonResponse(401, { message: 'Não autenticado.' }))
     renderApp('/')
 
-    expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Entrar' })).toBeInTheDocument()
     expect(fetchMock.mock.calls[0][0]).toMatch(/\/auth\/me$/)
   })
 
@@ -36,7 +36,7 @@ describe('área interna protegida', () => {
     renderApp('/')
 
     expect(await screen.findByRole('status')).toHaveTextContent('Carregando…')
-    expect(screen.queryByRole('heading', { name: 'Entrar' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Entrar' })).not.toBeInTheDocument()
   })
 
   it('falha de rede em /auth/me mostra erro e permite tentar de novo, sem ir ao login', async () => {
@@ -45,7 +45,7 @@ describe('área interna protegida', () => {
     renderApp('/')
 
     expect(await screen.findByRole('alert')).toHaveTextContent('Não foi possível conectar')
-    expect(screen.queryByRole('heading', { name: 'Entrar' })).not.toBeInTheDocument()
+    expect(screen.queryByRole('button', { name: 'Entrar' })).not.toBeInTheDocument()
 
     await user.click(screen.getByRole('button', { name: 'Tentar de novo' }))
 
@@ -59,7 +59,7 @@ describe('área interna protegida', () => {
 
     await user.click(await screen.findByRole('button', { name: 'Sair' }))
 
-    expect(await screen.findByRole('heading', { name: 'Entrar' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Entrar' })).toBeInTheDocument()
     expect(fetchMock.mock.calls[1][0]).toMatch(/\/auth\/logout$/)
     expect(fetchMock.mock.calls[1][1].method).toBe('POST')
   })
@@ -79,7 +79,7 @@ describe('área interna protegida', () => {
     const fetchMock = stubFetch()
     renderApp('/cadastro')
 
-    expect(await screen.findByRole('heading', { name: 'Criar conta' })).toBeInTheDocument()
+    expect(await screen.findByRole('button', { name: 'Criar conta' })).toBeInTheDocument()
     expect(fetchMock).not.toHaveBeenCalled()
   })
 })

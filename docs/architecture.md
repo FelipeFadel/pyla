@@ -64,6 +64,8 @@
 | Roteamento | **React Router** | Lazy loading por rota de feature |
 | Estado do servidor | **Hooks próprios sobre `fetch`** | Sem biblioteca de cache; os hooks vivem em `features/*/api` |
 | Estilo | **Tailwind CSS** + `@tailwindcss/vite` | Os tokens de `design-tokens.md` entram em `@theme` com o nome semântico (`--color-primaria` → `bg-primaria`) |
+| Fonte do corpo | `@fontsource/saira` | Saira self-hosted, importada no `index.css`; sem CDN |
+| Fonte de display | `@fontsource/saira-stencil-one` | Saira Stencil One self-hosted, importada no `index.css`; sem CDN |
 
 ### Padrões de código do frontend (ratificados)
 
