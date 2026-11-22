@@ -59,7 +59,7 @@
   - Teste primeiro: e2e do `GET /purchases`: o usuário recebe só as dele, da mais recente para a mais antiga (data, depois criação), cada uma com loja, total e quantidade de itens; sem compras recebe `[]`; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/purchases/*` (controller, service, repository, `dto/`), `apps/api/test/purchases-list.e2e-spec.ts`
 
-- [ ] **Tarefa 8 — Consultar uma compra com seus itens**
+- [x] **Tarefa 8 — Consultar uma compra com seus itens**
   - Cobre: CA18, CA19, CA22 (em `GET /purchases/:id`)
   - Teste primeiro: e2e do `GET /purchases/:id`: devolve a compra com os itens, cada um com produto (nome e categoria), valores informados e valor com desconto, e traz soma dos itens, desconto de caixa e total; id inexistente e id de outro usuário dão 404 com corpo idêntico; id que não é UUID dá 400; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/purchases/*` (controller, service, repository, `dto/`), `apps/api/test/purchases-detail.e2e-spec.ts`

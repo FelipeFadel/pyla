@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { Unit } from '../generated/prisma/enums.js';
+import type { Prisma } from '../generated/prisma/client.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
 interface ItemPricing {
@@ -19,6 +20,17 @@ export type NewPurchaseItem = ItemPricing &
 export type NewPurchaseStore =
   | { storeId: string }
   | { name: string; normalizedName: string };
+
+// Compra completa: loja (sem coordenadas), itens, produto e categoria.
+const detailInclude = {
+  store: { select: { id: true, name: true } },
+  items: {
+    include: {
+      product: { include: { category: { select: { id: true, name: true } } } },
+    },
+    orderBy: { id: 'asc' },
+  },
+} satisfies Prisma.PurchaseInclude;
 
 @Injectable()
 export class PurchasesRepository {
@@ -42,11 +54,19 @@ export class PurchasesRepository {
       where: { userId, status: 'CONFIRMED' },
       orderBy: [{ date: 'desc' }, { confirmedAt: 'desc' }, { id: 'desc' }],
       include: {
-        store: true,
+        store: { select: { id: true, name: true } },
         items: {
           select: { quantity: true, fullPriceCents: true, discountCents: true },
         },
       },
+    });
+  }
+
+  // Sempre filtra userId e CONFIRMED: de outro usuário ou rascunho = null.
+  findConfirmedById(userId: string, id: string) {
+    return this.prisma.purchase.findFirst({
+      where: { id, userId, status: 'CONFIRMED' },
+      include: detailInclude,
     });
   }
 
@@ -154,10 +174,7 @@ export class PurchasesRepository {
       // RN07: leitura de compra sempre filtra CONFIRMED.
       return tx.purchase.findFirstOrThrow({
         where: { id: purchase.id, userId: data.userId, status: 'CONFIRMED' },
-        include: {
-          store: true,
-          items: { include: { product: true }, orderBy: { id: 'asc' } },
-        },
+        include: detailInclude,
       });
     });
   }

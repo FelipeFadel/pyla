@@ -1,13 +1,18 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { Clock, dateInSaoPaulo } from '../common/clock.js';
 import { normalizeName } from '../common/normalize-name.js';
 import type { CreatePurchaseDto } from './dto/create-purchase.dto.js';
+import { itemFullValueCents, sumItemsCents } from './purchase-calculations.js';
 import {
-  itemFullValueCents,
-  itemValueCents,
-  sumItemsCents,
-} from './purchase-calculations.js';
-import { toDateString, toPurchaseTotals } from './purchase-mapper.js';
+  toDateString,
+  toPurchaseDto,
+  toPurchaseTotals,
+  toStoreRef,
+} from './purchase-mapper.js';
 import {
   type NewPurchaseStore,
   PurchasesRepository,
@@ -159,38 +164,14 @@ export class PurchasesService {
       }),
     });
 
-    const items = purchase.items.map((item) => {
-      const priced = {
-        quantity: Number(item.quantity),
-        fullPriceCents: item.fullPriceCents,
-        discountCents: item.discountCents,
-      };
-      return {
-        id: item.id,
-        product: {
-          id: item.product.id,
-          name: item.product.name,
-          categoryId: item.product.categoryId,
-        },
-        quantity: priced.quantity,
-        packageSize: Number(item.packageSize),
-        unit: item.unit,
-        fullPriceCents: item.fullPriceCents,
-        discountCents: item.discountCents,
-        valueCents: itemValueCents(priced),
-      };
-    });
+    return toPurchaseDto(purchase);
+  }
 
-    return {
-      id: purchase.id,
-      date: toDateString(purchase.date),
-      status: purchase.status,
-      store: purchase.store
-        ? { id: purchase.store.id, name: purchase.store.name }
-        : null,
-      items,
-      ...toPurchaseTotals(purchase.items, purchase.paidTotalCents),
-    };
+  // Compra de outro usuário, inexistente ou em rascunho: mesma resposta (CA19).
+  async findOne(userId: string, id: string) {
+    const purchase = await this.repository.findConfirmedById(userId, id);
+    if (!purchase) throw new NotFoundException('Compra não encontrada.');
+    return toPurchaseDto(purchase);
   }
 
   async list(userId: string) {
@@ -198,9 +179,7 @@ export class PurchasesService {
     return purchases.map((purchase) => ({
       id: purchase.id,
       date: toDateString(purchase.date),
-      store: purchase.store
-        ? { id: purchase.store.id, name: purchase.store.name }
-        : null,
+      store: toStoreRef(purchase.store),
       totalCents: toPurchaseTotals(purchase.items, purchase.paidTotalCents)
         .totalCents,
       itemsCount: purchase.items.length,

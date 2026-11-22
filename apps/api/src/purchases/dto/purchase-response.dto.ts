@@ -2,12 +2,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Unit } from '../../generated/prisma/enums.js';
 
+export class PurchaseItemCategoryDto {
+  id: string;
+
+  name: string;
+}
+
 export class PurchaseItemProductDto {
   id: string;
 
   name: string;
 
   categoryId: string;
+
+  category: PurchaseItemCategoryDto;
 }
 
 export class PurchaseItemDto {
