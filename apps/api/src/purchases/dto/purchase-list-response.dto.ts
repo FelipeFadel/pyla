@@ -10,8 +10,11 @@ export class PurchaseSummaryDto {
   @ApiProperty({ type: String, example: '2026-11-22' })
   date: string;
 
+  // Tipo inline de propósito (Issue #34): o plugin do Swagger gera um import
+  // quebrado quando o caminho do projeto tem acento. O @ApiProperty acima já
+  // documenta o schema (PurchaseStoreDto).
   @ApiProperty({ type: PurchaseStoreDto, nullable: true })
-  store: PurchaseStoreDto | null;
+  store: { id: string; name: string } | null;
 
   /** Total da compra (soma dos itens com desconto − desconto de caixa), em centavos. */
   @ApiProperty({ type: Number })
