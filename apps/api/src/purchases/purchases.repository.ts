@@ -1,16 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import type { Unit } from '../generated/prisma/enums.js';
 import { PrismaService } from '../prisma/prisma.service.js';
 
-export interface NewPurchaseItem {
-  name: string;
-  normalizedName: string;
-  categoryId: string;
+interface ItemPricing {
   quantity: number;
   packageSize: number;
   unit: Unit;
   fullPriceCents: number;
 }
+
+export type NewPurchaseItem = ItemPricing &
+  (
+    | { productId: string }
+    | { name: string; normalizedName: string; categoryId: string }
+  );
 
 @Injectable()
 export class PurchasesRepository {
@@ -31,19 +34,50 @@ export class PurchasesRepository {
           confirmedAt: new Date(),
         },
       });
-      for (const item of data.items) {
-        const product = await tx.product.create({
-          data: {
-            userId: data.userId,
-            name: item.name,
-            normalizedName: item.normalizedName,
-            categoryId: item.categoryId,
+      // Cada nome é resolvido uma vez, em ordem fixa (evita deadlock entre
+      // compras simultâneas). createMany com skipDuplicates é ON CONFLICT DO
+      // NOTHING: a unicidade do banco decide a corrida sem abortar a transação.
+      const byName = new Map<string, string>();
+      const newItems = data.items.filter((item) => 'normalizedName' in item);
+      const firstByName = new Map(
+        [...newItems].reverse().map((item) => [item.normalizedName, item]),
+      );
+      for (const key of [...firstByName.keys()].sort()) {
+        const item = firstByName.get(key)!;
+        await tx.product.createMany({
+          data: [
+            {
+              userId: data.userId,
+              name: item.name,
+              normalizedName: key,
+              categoryId: item.categoryId,
+            },
+          ],
+          skipDuplicates: true,
+        });
+        const product = await tx.product.findUniqueOrThrow({
+          where: {
+            userId_normalizedName: { userId: data.userId, normalizedName: key },
           },
         });
+        byName.set(key, product.id);
+      }
+
+      for (const item of data.items) {
+        let productId: string;
+        if ('productId' in item) {
+          const product = await tx.product.findFirst({
+            where: { id: item.productId, userId: data.userId },
+          });
+          if (!product) throw new NotFoundException('Produto não encontrado.');
+          productId = product.id;
+        } else {
+          productId = byName.get(item.normalizedName)!;
+        }
         await tx.purchaseItem.create({
           data: {
             purchaseId: purchase.id,
-            productId: product.id,
+            productId,
             quantity: item.quantity,
             packageSize: item.packageSize,
             unit: item.unit,

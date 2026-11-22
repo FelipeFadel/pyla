@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { normalizeName } from '../common/normalize-name.js';
 import type { CreatePurchaseDto } from './dto/create-purchase.dto.js';
 import { itemValueCents, sumItemsCents } from './purchase-calculations.js';
@@ -12,15 +12,29 @@ export class PurchasesService {
     const purchase = await this.repository.createConfirmed({
       userId,
       date: new Date(`${dto.date}T00:00:00.000Z`),
-      items: dto.items.map((item) => ({
-        name: item.name,
-        normalizedName: normalizeName(item.name),
-        categoryId: item.categoryId,
-        quantity: item.quantity,
-        packageSize: item.packageSize,
-        unit: item.unit,
-        fullPriceCents: item.fullPriceCents,
-      })),
+      items: dto.items.map((item, index) => {
+        const priced = {
+          quantity: item.quantity,
+          packageSize: item.packageSize,
+          unit: item.unit,
+          fullPriceCents: item.fullPriceCents,
+        };
+        if (item.productId === undefined) {
+          const name = item.name as string;
+          return {
+            ...priced,
+            name,
+            normalizedName: normalizeName(name),
+            categoryId: item.categoryId as string,
+          };
+        }
+        if (item.name !== undefined || item.categoryId !== undefined) {
+          throw new BadRequestException(
+            `items.${index}.productId: informe o produto por productId OU por name e categoryId, não pelos dois.`,
+          );
+        }
+        return { ...priced, productId: item.productId };
+      }),
     });
 
     const items = purchase.items.map((item) => {

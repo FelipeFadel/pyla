@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
   ArrayNotEmpty,
@@ -11,6 +11,7 @@ import {
   IsString,
   IsUUID,
   Matches,
+  ValidateIf,
   ValidateNested,
 } from 'class-validator';
 import { Unit } from '../../generated/prisma/enums.js';
@@ -19,18 +20,32 @@ const trim = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value;
 
 export class CreatePurchaseItemDto {
-  @ApiProperty({ description: 'Nome do produto.', example: 'Arroz Branco' })
+  @ApiPropertyOptional({
+    description:
+      'Produto que o usuário já tem. Use este campo OU name + categoryId.',
+    format: 'uuid',
+  })
+  @ValidateIf((item: CreatePurchaseItemDto) => item.productId !== undefined)
+  @IsUUID(undefined, { message: 'O produto deve ser um id válido.' })
+  productId?: string;
+
+  @ApiPropertyOptional({
+    description: 'Nome do produto (obrigatório sem productId).',
+    example: 'Arroz Branco',
+  })
+  @ValidateIf((item: CreatePurchaseItemDto) => item.productId === undefined)
   @Transform(trim)
   @IsString({ message: 'O nome do produto deve ser um texto.' })
   @IsNotEmpty({ message: 'Informe o nome do produto.' })
-  name: string;
+  name?: string;
 
-  @ApiProperty({
-    description: 'Categoria fixa do sistema.',
+  @ApiPropertyOptional({
+    description: 'Categoria fixa do sistema (obrigatória sem productId).',
     format: 'uuid',
   })
+  @ValidateIf((item: CreatePurchaseItemDto) => item.productId === undefined)
   @IsUUID(undefined, { message: 'A categoria deve ser um id válido.' })
-  categoryId: string;
+  categoryId?: string;
 
   @ApiProperty({ description: 'Quantidade comprada.', example: 2 })
   @IsNumber({}, { message: 'A quantidade deve ser um número.' })

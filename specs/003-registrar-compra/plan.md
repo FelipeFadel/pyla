@@ -34,7 +34,7 @@
   - Teste primeiro: e2e do `POST /purchases`: usuário envia data de hoje e um item com `name` + `categoryId` fixa, sem loja; resposta 201 com `status` CONFIRMED, o item e o produto criado para o usuário com aquela categoria, `store` nula; a compra aparece no banco com `userId` do token; corpo com `userId`, `status` ou `confirmedAt` dá 400 e nada é gravado; sem sessão dá 401. Teste unitário de `purchase-calculations.ts` para a soma dos itens. Falham porque a rota e o módulo não existem.
   - Arquivos previstos: `apps/api/src/purchases/*` (module, controller, service, repository, `dto/`, `purchase-calculations.ts` e `.spec.ts`), `apps/api/src/common/normalize-name.ts` e `.spec.ts`, `apps/api/src/app.module.ts`, `apps/api/test/purchases-create.e2e-spec.ts`
 
-- [ ] **Tarefa 3 — Reaproveitar o produto que o usuário já tem**
+- [x] **Tarefa 3 — Reaproveitar o produto que o usuário já tem**
   - Cobre: CA2, CA5, CA6
   - Teste primeiro: e2e: item com `productId` de produto do usuário reaproveita e não cria outro; item com o mesmo nome (maiúsculas e espaços diferentes) reaproveita; `productId` inexistente ou de outro usuário dá 404 e nada é gravado; o mesmo produto novo em dois itens da mesma compra gera um só produto; duas compras simultâneas do mesmo usuário com o mesmo produto novo deixam um só produto. Falham porque cada item hoje cria produto novo.
   - Arquivos previstos: `apps/api/src/purchases/purchases.service.ts`, `purchases.repository.ts`, `dto/*`, `apps/api/test/purchases-products.e2e-spec.ts`
