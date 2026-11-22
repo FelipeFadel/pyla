@@ -22,6 +22,10 @@ model User {
   role         Role          @default(CUSTOMER)
   createdAt    DateTime      @default(now())
   subscription Subscription?
+  stores       Store[]
+  products     Product[]
+  purchases    Purchase[]
+  categories   Category[]
 }
 
 model Plan {
@@ -46,4 +50,80 @@ model Subscription {
   // Preço contratado, em centavos: não muda quando o plano muda (CA6).
   priceCents Int
   createdAt  DateTime @default(now())
+}
+
+enum PurchaseStatus {
+  DRAFT
+  CONFIRMED
+}
+
+enum Unit {
+  KG
+  G
+  L
+  ML
+  UNIT
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String
+  // Nulo = categoria fixa do sistema (seed na migration).
+  ownerId  String?
+  owner    User?     @relation(fields: [ownerId], references: [id], onDelete: Restrict)
+  products Product[]
+}
+
+// TODO(Issue a abrir — US02 sugestão de loja por localização): latitude e longitude da Store.
+model Store {
+  id             String     @id @default(uuid())
+  userId         String
+  user           User       @relation(fields: [userId], references: [id], onDelete: Restrict)
+  name           String
+  // Nome sem espaços nas pontas, em minúsculas e sem acento: a unicidade vive aqui.
+  normalizedName String
+  purchases      Purchase[]
+
+  @@unique([userId, normalizedName])
+}
+
+model Product {
+  id             String         @id @default(uuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  name           String
+  // Mesma normalização da loja: unicidade por usuário (RN10).
+  normalizedName String
+  categoryId     String
+  category       Category       @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  items          PurchaseItem[]
+
+  @@unique([userId, normalizedName])
+}
+
+model Purchase {
+  id             String         @id @default(uuid())
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Restrict)
+  storeId        String?
+  store          Store?         @relation(fields: [storeId], references: [id], onDelete: Restrict)
+  date           DateTime       @db.Date
+  status         PurchaseStatus
+  paidTotalCents Int?
+  confirmedAt    DateTime?
+  updatedAt      DateTime       @updatedAt
+  items          PurchaseItem[]
+}
+
+model PurchaseItem {
+  id             String   @id @default(uuid())
+  purchaseId     String
+  purchase       Purchase @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
+  productId      String
+  product        Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  quantity       Decimal  @db.Decimal(12, 3)
+  packageSize    Decimal  @db.Decimal(12, 3)
+  unit           Unit
+  fullPriceCents Int
+  discountCents  Int      @default(0)
 }

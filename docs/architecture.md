@@ -302,11 +302,11 @@ web). Os e2e da api ficam em `apps/api/test/`.
 | Pedido de assinatura | `SubscriptionOrder` | `id`, `userId`, `status` (PENDING/PAID/REFUSED/EXPIRED), `expiresAt` (criação + 24h), `gatewayReference`, `createdAt` |
 | Pagamento | `Payment` | `id`, `orderId`, `gatewayPaymentId` (único), `status`, `amount`, `paidAt` |
 | Evento de webhook | `WebhookEvent` | `id`, `gatewayEventId` (único), `type`, `signatureValid`, `payload`, `receivedAt`, `outcome` |
-| Categoria | `Category` | `id`, `name`, `ownerId?` (nulo = fixa do sistema), `archivedAt?` |
-| Loja | `Store` | `id`, `userId`, `name`, `latitude?`, `longitude?` |
+| Categoria | `Category` | `id`, `name`, `ownerId?` (nulo = fixa do sistema), `archivedAt?` (ainda não existe no schema: entra com a US11) |
+| Loja | `Store` | `id`, `userId`, `name`, `normalizedName`, `latitude?`, `longitude?` (as coordenadas ainda não existem no schema: entram com a sugestão por localização) |
 | Produto | `Product` | `id`, `userId`, `name`, `normalizedName`, `categoryId` |
-| Compra | `Purchase` | `id`, `userId`, `storeId?`, `date`, `status` (DRAFT/CONFIRMED), `paidTotal?`, `confirmedAt?`, `updatedAt` |
-| Item de compra | `PurchaseItem` | `id`, `purchaseId`, `productId`, `quantity`, `packageSize`, `unit` (KG/G/L/ML/UNIT), `fullPrice`, `discount` |
+| Compra | `Purchase` | `id`, `userId`, `storeId?`, `date`, `status` (DRAFT/CONFIRMED), `paidTotalCents?`, `confirmedAt?`, `updatedAt` |
+| Item de compra | `PurchaseItem` | `id`, `purchaseId`, `productId`, `quantity`, `packageSize`, `unit` (KG/G/L/ML/UNIT), `fullPriceCents`, `discountCents` |
 | Rascunho de compra | `Purchase` com `status = DRAFT` | No máximo um por usuário (§5.4) |
 | Base coletiva de preços | `CollectivePricePoint` | `id`, `productKey`, `storeKey`, `unitPrice`, `unitFamily`, `recordedAt`, `purchaseItemId` (interno) |
 
@@ -315,13 +315,14 @@ web). Os e2e da api ficam em `apps/api/test/`.
   `Subscription` com `status` ACTIVE ou CANCELED e `now < currentPeriodEnd`
   (RN19). A coluna `User.role` (CUSTOMER/ADMIN) existe só para o administrador
   (US15); ela nunca indica premium.
-- **Dinheiro é `Decimal`**, nunca `float`, em todo valor monetário e de
-  quantidade.
+- **Dinheiro é centavo inteiro (`Int`, campos `...Cents`)**, nunca `float`.
+  Quantidade e tamanho de embalagem são `Decimal`. O valor de um item é
+  `round(fullPriceCents × quantity) − discountCents`, meio-centavo para cima.
 - **Valores calculados não são persistidos:** custo por unidade, preço com
   desconto do item, total da compra e **desconto de caixa** (soma dos itens −
-  `paidTotal`, RN08).
+  `paidTotalCents`, RN08).
 - **Loja é por usuário**, como o produto. Não há catálogo global (Fora de
-  escopo do PRD).
+  escopo do PRD). O par `userId` + `normalizedName` também é único na loja.
 - **Produto é único por usuário (RN10):** o par `userId` + `normalizedName`
   é único no banco.
 - **Rascunho pode ter zero itens.** Por isso `Purchase` → `PurchaseItem` é
@@ -421,6 +422,7 @@ erDiagram
         uuid id PK
         uuid userId FK
         string name
+        string normalizedName "único por userId"
         decimal latitude
         decimal longitude
     }
@@ -437,7 +439,7 @@ erDiagram
         uuid storeId FK
         date date
         enum status "DRAFT|CONFIRMED"
-        decimal paidTotal
+        int paidTotalCents
         datetime confirmedAt
         datetime updatedAt
     }
@@ -448,8 +450,8 @@ erDiagram
         decimal quantity
         decimal packageSize
         enum unit "KG|G|L|ML|UNIT"
-        decimal fullPrice
-        decimal discount
+        int fullPriceCents
+        int discountCents
     }
     CollectivePricePoint {
         uuid id PK
@@ -525,7 +527,9 @@ pedido para apontar (RN18).
 
 | Domínio | Módulo (pasta) | Guard | Dados (repository) | US |
 | :------ | :------------- | :---- | :----------------- | :-- |
-| | | | | |
+| Categorias | `categories` | `JwtAuthGuard` global | `CategoriesRepository` | US02 |
+| Produtos | `products` | `JwtAuthGuard` global | `ProductsRepository` | US02 |
+| Compras (com lojas e itens) | `purchases` | `JwtAuthGuard` global | `PurchasesRepository` | US02 |
 
 ---
 
