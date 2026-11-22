@@ -302,8 +302,8 @@ web). Os e2e da api ficam em `apps/api/test/`.
 | Pedido de assinatura | `SubscriptionOrder` | `id`, `userId`, `status` (PENDING/PAID/REFUSED/EXPIRED), `expiresAt` (criação + 24h), `gatewayReference`, `createdAt` |
 | Pagamento | `Payment` | `id`, `orderId`, `gatewayPaymentId` (único), `status`, `amount`, `paidAt` |
 | Evento de webhook | `WebhookEvent` | `id`, `gatewayEventId` (único), `type`, `signatureValid`, `payload`, `receivedAt`, `outcome` |
-| Categoria | `Category` | `id`, `name`, `ownerId?` (nulo = fixa do sistema), `archivedAt?` |
-| Loja | `Store` | `id`, `userId`, `name`, `normalizedName`, `latitude?`, `longitude?` |
+| Categoria | `Category` | `id`, `name`, `ownerId?` (nulo = fixa do sistema), `archivedAt?` (ainda não existe no schema: entra com a US11) |
+| Loja | `Store` | `id`, `userId`, `name`, `normalizedName`, `latitude?`, `longitude?` (as coordenadas ainda não existem no schema: entram com a sugestão por localização) |
 | Produto | `Product` | `id`, `userId`, `name`, `normalizedName`, `categoryId` |
 | Compra | `Purchase` | `id`, `userId`, `storeId?`, `date`, `status` (DRAFT/CONFIRMED), `paidTotalCents?`, `confirmedAt?`, `updatedAt` |
 | Item de compra | `PurchaseItem` | `id`, `purchaseId`, `productId`, `quantity`, `packageSize`, `unit` (KG/G/L/ML/UNIT), `fullPriceCents`, `discountCents` |
@@ -527,7 +527,9 @@ pedido para apontar (RN18).
 
 | Domínio | Módulo (pasta) | Guard | Dados (repository) | US |
 | :------ | :------------- | :---- | :----------------- | :-- |
-| | | | | |
+| Categorias | `categories` | `JwtAuthGuard` global | `CategoriesRepository` | US02 |
+| Produtos | `products` | `JwtAuthGuard` global | `ProductsRepository` | US02 |
+| Compras (com lojas e itens) | `purchases` | `JwtAuthGuard` global | `PurchasesRepository` | US02 |
 
 ---
 
