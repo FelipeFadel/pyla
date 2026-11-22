@@ -69,7 +69,7 @@
   - Teste primeiro: e2e do `GET /products?search=`: devolve só produtos do usuário cujo nome contém o termo, sem diferenciar maiúsculas nem acentos, em ordem alfabética e no máximo 20; termo que não casa dá `[]`; produto de outro usuário nunca aparece; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/products/*` (module, controller, service, repository, `dto/`), `apps/api/src/app.module.ts`, `apps/api/test/products-search.e2e-spec.ts`
 
-- [ ] **Tarefa 10 — Provar o isolamento entre usuários e a documentação**
+- [x] **Tarefa 10 — Provar o isolamento entre usuários e a documentação**
   - Cobre: CA23, CA24
   - Teste primeiro: e2e com dois usuários, cada um com compras, produtos e lojas: nenhuma listagem, consulta por id ou busca de um mostra dado do outro, e o produto de mesmo nome dos dois é distinto; teste do `/docs-json` conferindo que todas as rotas da história e os campos de todos os DTOs aparecem. Falha se algum campo estiver sem `@ApiProperty` ou se alguma rota vazar dado.
   - Arquivos previstos: `apps/api/test/purchases-isolation.e2e-spec.ts`, `apps/api/test/swagger.e2e-spec.ts`, os DTOs que faltarem decorar
