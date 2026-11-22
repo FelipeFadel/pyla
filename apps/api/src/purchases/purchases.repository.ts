@@ -24,6 +24,16 @@ export type NewPurchaseStore =
 export class PurchasesRepository {
   constructor(private readonly prisma: PrismaService) {}
 
+  // Dos ids recebidos, os que são de categoria fixa do sistema (ownerId nulo).
+  async findFixedCategoryIds(ids: string[]): Promise<Set<string>> {
+    if (ids.length === 0) return new Set();
+    const rows = await this.prisma.category.findMany({
+      where: { id: { in: ids }, ownerId: null },
+      select: { id: true },
+    });
+    return new Set(rows.map((row) => row.id));
+  }
+
   // Compra, itens e produtos novos numa transação só: falhou, nada fica.
   createConfirmed(data: {
     userId: string;

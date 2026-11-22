@@ -49,7 +49,7 @@
   - Teste primeiro: unitário de `purchase-calculations.ts` (valor cheio com `quantity` decimal e arredondamento de meio-centavo, valor com desconto, desconto de caixa, total) e e2e: `discountCents` entre 0 e o valor cheio é aceito, negativo ou maior dá 400 em `items.N.discountCents` e nada é gravado; `paidTotalCents` entre 0 e a soma com descontos é aceito e a resposta traz o desconto de caixa; fora disso dá 400 em `paidTotalCents`; sem `paidTotalCents` o desconto de caixa é 0 e o total é a soma. Falham porque os campos não existem.
   - Arquivos previstos: `apps/api/src/purchases/purchase-calculations.ts` e `.spec.ts`, `purchases.service.ts`, `dto/*`, `apps/api/test/purchases-discounts.e2e-spec.ts`
 
-- [ ] **Tarefa 6 — Recusar a compra inteira quando algo é inválido**
+- [x] **Tarefa 6 — Recusar a compra inteira quando algo é inválido**
   - Cobre: CA4, CA13, CA14, CA15
   - Teste primeiro: e2e: item com `fullPriceCents` ≤ 0, `quantity` ≤ 0, `packageSize` ausente ou ≤ 0, `unit` fora da lista, nome vazio ou só espaços, nome com mais de 80 caracteres, mais de 100 itens, preço acima do limite ou mais de 3 casas decimais dão 400 com o índice do item e o campo, e nada é gravado (nem produto nem loja novos); categoria inexistente ou não fixa dá 400 em `categoryId`; data futura ou em formato inválido dá 400 em `date`, e a data de hoje é aceita (com o relógio fixado perto da meia-noite de `America/Sao_Paulo`); `items` vazio ou ausente dá 400. Falham porque as regras ainda não existem.
   - Arquivos previstos: `apps/api/src/purchases/dto/*`, `purchases.service.ts`, `apps/api/src/common/clock.ts`, `apps/api/test/purchases-validation.e2e-spec.ts`

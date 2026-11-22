@@ -1,25 +1,35 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { Transform, Type } from 'class-transformer';
 import {
+  ArrayMaxSize,
   ArrayNotEmpty,
   IsArray,
   IsEnum,
   IsInt,
   Max,
+  MaxLength,
   Min,
   IsNotEmpty,
-  IsNumber,
-  IsPositive,
   IsString,
   IsUUID,
   Matches,
   ValidateIf,
   ValidateNested,
 } from 'class-validator';
+import { IsMilliNumber } from '../../common/is-milli-number.js';
 import { Unit } from '../../generated/prisma/enums.js';
 
-// Maior Int do Postgres: evita 500 por estouro. O limite de preço é da tarefa 6.
+// Maior Int do Postgres: evita 500 por estouro (desconto e total pago).
 const INT_MAX = 2147483647;
+
+// Limites de tamanho da spec (CA13).
+const NAME_MAX = 80;
+const ITEMS_MAX = 100;
+const PRICE_MAX_CENTS = 10_000_000;
+const QUANTITY_MAX = 9999.999;
+const PACKAGE_SIZE_MAX = 99999.999;
+// Decimal(12,3): menor valor positivo.
+const DECIMAL_MIN = 0.001;
 
 const trim = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value;
@@ -42,6 +52,9 @@ export class CreatePurchaseItemDto {
   @Transform(trim)
   @IsString({ message: 'O nome do produto deve ser um texto.' })
   @IsNotEmpty({ message: 'Informe o nome do produto.' })
+  @MaxLength(NAME_MAX, {
+    message: `O nome do produto deve ter no máximo ${NAME_MAX} caracteres.`,
+  })
   name?: string;
 
   @ApiPropertyOptional({
@@ -53,13 +66,24 @@ export class CreatePurchaseItemDto {
   categoryId?: string;
 
   @ApiProperty({ description: 'Quantidade comprada.', example: 2 })
-  @IsNumber({}, { message: 'A quantidade deve ser um número.' })
-  @IsPositive({ message: 'A quantidade deve ser maior que zero.' })
+  @IsMilliNumber({
+    message: 'A quantidade deve ser um número com até 3 casas decimais.',
+  })
+  @Min(DECIMAL_MIN, { message: 'A quantidade deve ser maior que zero.' })
+  @Max(QUANTITY_MAX, { message: 'A quantidade deve ser no máximo 9999,999.' })
   quantity: number;
 
   @ApiProperty({ description: 'Tamanho da embalagem.', example: 5 })
-  @IsNumber({}, { message: 'O tamanho da embalagem deve ser um número.' })
-  @IsPositive({ message: 'O tamanho da embalagem deve ser maior que zero.' })
+  @IsMilliNumber({
+    message:
+      'O tamanho da embalagem deve ser um número com até 3 casas decimais.',
+  })
+  @Min(DECIMAL_MIN, {
+    message: 'O tamanho da embalagem deve ser maior que zero.',
+  })
+  @Max(PACKAGE_SIZE_MAX, {
+    message: 'O tamanho da embalagem deve ser no máximo 99999,999.',
+  })
   packageSize: number;
 
   @ApiProperty({ enum: Unit, example: Unit.KG })
@@ -71,7 +95,10 @@ export class CreatePurchaseItemDto {
     example: 2599,
   })
   @IsInt({ message: 'O preço deve ser um número inteiro de centavos.' })
-  @IsPositive({ message: 'O preço deve ser maior que zero.' })
+  @Min(1, { message: 'O preço deve ser maior que zero.' })
+  @Max(PRICE_MAX_CENTS, {
+    message: 'O preço deve ser no máximo 10.000.000 centavos.',
+  })
   fullPriceCents: number;
 
   @ApiPropertyOptional({
@@ -114,6 +141,9 @@ export class CreatePurchaseDto {
   @Transform(trim)
   @IsString({ message: 'O nome da loja deve ser um texto.' })
   @IsNotEmpty({ message: 'Informe o nome da loja.' })
+  @MaxLength(NAME_MAX, {
+    message: `O nome da loja deve ter no máximo ${NAME_MAX} caracteres.`,
+  })
   storeName?: string;
 
   @ApiPropertyOptional({
@@ -130,6 +160,9 @@ export class CreatePurchaseDto {
   @ApiProperty({ type: [CreatePurchaseItemDto] })
   @IsArray({ message: 'Os itens devem ser uma lista.' })
   @ArrayNotEmpty({ message: 'Informe ao menos um item.' })
+  @ArrayMaxSize(ITEMS_MAX, {
+    message: `Informe no máximo ${ITEMS_MAX} itens.`,
+  })
   @ValidateNested({ each: true })
   @Type(() => CreatePurchaseItemDto)
   items: CreatePurchaseItemDto[];

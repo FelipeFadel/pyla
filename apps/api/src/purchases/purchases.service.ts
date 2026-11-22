@@ -1,4 +1,5 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
+import { Clock, dateInSaoPaulo } from '../common/clock.js';
 import { normalizeName } from '../common/normalize-name.js';
 import type { CreatePurchaseDto } from './dto/create-purchase.dto.js';
 import {
@@ -20,15 +21,49 @@ const invalidField = (field: string, message: string) =>
     details: [{ field, messages: [message] }],
   });
 
+// Texto que o Postgres recusa (NUL, UTF-16 malformado) ou que some ao
+// normalizar (só marcas combinantes): vira 400, nunca 500.
+const nameProblem = (name: string): string | undefined => {
+  if (name.includes('\u0000') || /\p{Cs}/u.test(name)) {
+    return 'O nome tem caracteres inválidos.';
+  }
+  if (normalizeName(name) === '') return 'Informe um nome com letras ou números.';
+  return undefined;
+};
+
+// Data real do calendário (rejeita 2026-02-30) e dentro do que o Postgres guarda.
+const isRealDate = (date: string): boolean => {
+  const parsed = new Date(`${date}T00:00:00.000Z`);
+  return (
+    !Number.isNaN(parsed.getTime()) &&
+    parsed.toISOString().slice(0, 10) === date &&
+    parsed.getUTCFullYear() >= 1900
+  );
+};
+
 @Injectable()
 export class PurchasesService {
-  constructor(private readonly repository: PurchasesRepository) {}
+  constructor(
+    private readonly repository: PurchasesRepository,
+    private readonly clock: Clock,
+  ) {}
 
   async create(userId: string, dto: CreatePurchaseDto) {
+    if (!isRealDate(dto.date)) {
+      throw invalidField('date', 'Informe uma data válida (AAAA-MM-DD).');
+    }
+    if (dto.date > dateInSaoPaulo(this.clock.now())) {
+      throw invalidField('date', 'A data da compra não pode estar no futuro.');
+    }
     if (dto.storeId !== undefined && dto.storeName !== undefined) {
-      throw new BadRequestException(
-        'storeId: informe a loja por storeId OU por storeName, não pelos dois.',
+      throw invalidField(
+        'storeId',
+        'Informe a loja por storeId OU por storeName, não pelos dois.',
       );
+    }
+    if (dto.storeName !== undefined) {
+      const problem = nameProblem(dto.storeName);
+      if (problem) throw invalidField('storeName', problem);
     }
     let store: NewPurchaseStore | undefined;
     if (dto.storeId !== undefined) {
@@ -41,6 +76,39 @@ export class PurchasesService {
     }
 
     // Regras de valor antes de gravar: recusa por inteiro, nada é escrito.
+    dto.items.forEach((item, index) => {
+      if (item.productId !== undefined) {
+        if (item.name !== undefined || item.categoryId !== undefined) {
+          throw invalidField(
+            `items.${index}.productId`,
+            'Informe o produto por productId OU por name e categoryId, não pelos dois.',
+          );
+        }
+      } else {
+        const problem = nameProblem(item.name as string);
+        if (problem) throw invalidField(`items.${index}.name`, problem);
+      }
+    });
+    // Categoria precisa existir e ser fixa do sistema (CA4).
+    const categoryIds = [
+      ...new Set(
+        dto.items.flatMap((item) =>
+          item.productId === undefined ? [item.categoryId as string] : [],
+        ),
+      ),
+    ];
+    const fixedIds = await this.repository.findFixedCategoryIds(categoryIds);
+    dto.items.forEach((item, index) => {
+      if (
+        item.productId === undefined &&
+        !fixedIds.has(item.categoryId as string)
+      ) {
+        throw invalidField(
+          `items.${index}.categoryId`,
+          'A categoria não existe ou não é uma categoria fixa do sistema.',
+        );
+      }
+    });
     dto.items.forEach((item, index) => {
       const fullValue = itemFullValueCents(item);
       if ((item.discountCents ?? 0) > fullValue) {
@@ -71,7 +139,7 @@ export class PurchasesService {
       date: new Date(`${dto.date}T00:00:00.000Z`),
       paidTotalCents: dto.paidTotalCents,
       store,
-      items: dto.items.map((item, index) => {
+      items: dto.items.map((item) => {
         const priced = {
           quantity: item.quantity,
           packageSize: item.packageSize,
@@ -87,11 +155,6 @@ export class PurchasesService {
             normalizedName: normalizeName(name),
             categoryId: item.categoryId as string,
           };
-        }
-        if (item.name !== undefined || item.categoryId !== undefined) {
-          throw new BadRequestException(
-            `items.${index}.productId: informe o produto por productId OU por name e categoryId, não pelos dois.`,
-          );
         }
         return { ...priced, productId: item.productId };
       }),
