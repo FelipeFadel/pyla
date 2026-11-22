@@ -1,4 +1,5 @@
 import { createBrowserRouter, type RouteObject } from 'react-router'
+import { RequireAdmin } from './RequireAdmin'
 import { RequireSession } from './RequireSession'
 
 // Cada rota carrega sob demanda (lazy loading). Só a área interna fica atrás
@@ -24,6 +25,17 @@ export const routes: RouteObject[] = [
         lazy: async () => ({
           Component: (await import('../features/auth/pages/HomePage')).default,
         }),
+      },
+      {
+        element: <RequireAdmin />,
+        children: [
+          {
+            path: '/admin/planos',
+            lazy: async () => ({
+              Component: (await import('../features/plans/pages/PlansAdminPage')).default,
+            }),
+          },
+        ],
       },
     ],
   },

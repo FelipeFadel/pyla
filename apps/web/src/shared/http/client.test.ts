@@ -51,6 +51,12 @@ describe('cliente HTTP', () => {
     await expect(request('/auth/me')).resolves.toEqual({ id: '1', email: 'a@x.com' })
   })
 
+  it('resposta 204 sem corpo resolve sem valor', async () => {
+    fetchMock.mockReturnValue(Promise.resolve(new Response(null, { status: 204 })))
+
+    await expect(request('/plans/p1', { method: 'DELETE' })).resolves.toBeUndefined()
+  })
+
   it('converte o erro da API em ApiError', async () => {
     fetchMock.mockReturnValue(
       respond(400, {

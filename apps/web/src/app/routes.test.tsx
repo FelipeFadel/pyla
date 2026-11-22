@@ -12,7 +12,32 @@ function renderApp(path: string) {
   return render(<RouterProvider router={router} />)
 }
 
-const session = { data: { id: 'u1', email: 'a@b.com' } }
+const session = { data: { id: 'u1', email: 'a@b.com', role: 'CUSTOMER' } }
+const adminSession = { data: { id: 'u2', email: 'admin@b.com', role: 'ADMIN' } }
+
+describe('rota de administração /admin/planos', () => {
+  it('abre a gestão de planos para o administrador', async () => {
+    stubFetch(jsonResponse(200, adminSession))
+    renderApp('/admin/planos')
+
+    expect(await screen.findByRole('heading', { name: 'Gestão de planos' })).toBeInTheDocument()
+  })
+
+  it('leva o usuário comum de volta à área interna', async () => {
+    stubFetch(jsonResponse(200, session))
+    renderApp('/admin/planos')
+
+    expect(await screen.findByRole('heading', { name: 'Área interna' })).toBeInTheDocument()
+    expect(screen.queryByRole('heading', { name: 'Gestão de planos' })).not.toBeInTheDocument()
+  })
+
+  it('leva ao login quem não tem sessão', async () => {
+    stubFetch(jsonResponse(401, { message: 'Não autenticado.' }))
+    renderApp('/admin/planos')
+
+    expect(await screen.findByRole('button', { name: 'Entrar' })).toBeInTheDocument()
+  })
+})
 
 describe('área interna protegida', () => {
   it('leva ao login quem não tem sessão (401 em /auth/me)', async () => {

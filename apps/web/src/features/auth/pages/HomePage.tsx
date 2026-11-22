@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate, useOutletContext } from 'react-router'
+import { Link, useNavigate, useOutletContext } from 'react-router'
 import { ApiError } from '../../../shared/http'
 import { logout, type Session } from '../api/authApi'
 
@@ -35,6 +35,11 @@ export default function HomePage() {
         <p role="alert" className="rounded bg-perigo-fundo p-sm text-perigo">
           {error}
         </p>
+      )}
+      {session.role === 'ADMIN' && (
+        <Link to="/admin/planos" className="font-semibold text-primaria">
+          Gerenciar planos
+        </Link>
       )}
       <button
         type="button"

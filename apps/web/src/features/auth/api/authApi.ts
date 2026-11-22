@@ -16,6 +16,7 @@ export function login(credentials: Credentials) {
 export interface Session {
   id: string
   email: string
+  role: 'CUSTOMER' | 'ADMIN'
 }
 
 export function getSession() {
