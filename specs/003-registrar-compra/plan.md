@@ -54,7 +54,7 @@
   - Teste primeiro: e2e: item com `fullPriceCents` ≤ 0, `quantity` ≤ 0, `packageSize` ausente ou ≤ 0, `unit` fora da lista, nome vazio ou só espaços, nome com mais de 80 caracteres, mais de 100 itens, preço acima do limite ou mais de 3 casas decimais dão 400 com o índice do item e o campo, e nada é gravado (nem produto nem loja novos); categoria inexistente ou não fixa dá 400 em `categoryId`; data futura ou em formato inválido dá 400 em `date`, e a data de hoje é aceita (com o relógio fixado perto da meia-noite de `America/Sao_Paulo`); `items` vazio ou ausente dá 400. Falham porque as regras ainda não existem.
   - Arquivos previstos: `apps/api/src/purchases/dto/*`, `purchases.service.ts`, `apps/api/src/common/clock.ts`, `apps/api/test/purchases-validation.e2e-spec.ts`
 
-- [ ] **Tarefa 7 — Listar as compras do usuário**
+- [x] **Tarefa 7 — Listar as compras do usuário**
   - Cobre: CA17, CA22 (em `GET /purchases`)
   - Teste primeiro: e2e do `GET /purchases`: o usuário recebe só as dele, da mais recente para a mais antiga (data, depois criação), cada uma com loja, total e quantidade de itens; sem compras recebe `[]`; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/purchases/*` (controller, service, repository, `dto/`), `apps/api/test/purchases-list.e2e-spec.ts`

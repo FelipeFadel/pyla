@@ -34,6 +34,22 @@ export class PurchasesRepository {
     return new Set(rows.map((row) => row.id));
   }
 
+  // Compras confirmadas do usuário, da mais recente para a mais antiga: data e,
+  // na mesma data, a confirmada depois primeiro (Purchase não tem createdAt;
+  // confirmedAt é gravado na criação). Uma consulta só, itens inclusos.
+  findConfirmedByUser(userId: string) {
+    return this.prisma.purchase.findMany({
+      where: { userId, status: 'CONFIRMED' },
+      orderBy: [{ date: 'desc' }, { confirmedAt: 'desc' }, { id: 'desc' }],
+      include: {
+        store: true,
+        items: {
+          select: { quantity: true, fullPriceCents: true, discountCents: true },
+        },
+      },
+    });
+  }
+
   // Compra, itens e produtos novos numa transação só: falhou, nada fica.
   createConfirmed(data: {
     userId: string;

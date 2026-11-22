@@ -3,12 +3,11 @@ import { Clock, dateInSaoPaulo } from '../common/clock.js';
 import { normalizeName } from '../common/normalize-name.js';
 import type { CreatePurchaseDto } from './dto/create-purchase.dto.js';
 import {
-  cashDiscountCents,
   itemFullValueCents,
   itemValueCents,
-  purchaseTotalCents,
   sumItemsCents,
 } from './purchase-calculations.js';
+import { toDateString, toPurchaseTotals } from './purchase-mapper.js';
 import {
   type NewPurchaseStore,
   PurchasesRepository,
@@ -181,22 +180,30 @@ export class PurchasesService {
         valueCents: itemValueCents(priced),
       };
     });
-    const itemsTotalCents = sumItemsCents(items);
 
     return {
       id: purchase.id,
-      date: purchase.date.toISOString().slice(0, 10),
+      date: toDateString(purchase.date),
       status: purchase.status,
       store: purchase.store
         ? { id: purchase.store.id, name: purchase.store.name }
         : null,
       items,
-      itemsTotalCents,
-      cashDiscountCents: cashDiscountCents(
-        itemsTotalCents,
-        dto.paidTotalCents,
-      ),
-      totalCents: purchaseTotalCents(itemsTotalCents, dto.paidTotalCents),
+      ...toPurchaseTotals(purchase.items, purchase.paidTotalCents),
     };
+  }
+
+  async list(userId: string) {
+    const purchases = await this.repository.findConfirmedByUser(userId);
+    return purchases.map((purchase) => ({
+      id: purchase.id,
+      date: toDateString(purchase.date),
+      store: purchase.store
+        ? { id: purchase.store.id, name: purchase.store.name }
+        : null,
+      totalCents: toPurchaseTotals(purchase.items, purchase.paidTotalCents)
+        .totalCents,
+      itemsCount: purchase.items.length,
+    }));
   }
 }
