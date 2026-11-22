@@ -186,6 +186,10 @@ describe('Swagger da história de compra (e2e, CA24)', () => {
     ).toBe('CategoryListEnvelopeDto');
   });
 
+  it('POST /purchases documenta a resposta 404 (CA5 e CA9)', () => {
+    expect(doc.paths['/purchases'].post.responses['404']).toBeDefined();
+  });
+
   it('os schemas alcançáveis pelas rotas são exatamente os esperados', () => {
     const todos = new Set<string>();
     const entradas = [

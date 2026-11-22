@@ -40,6 +40,12 @@ export class PurchasesController {
     type: ErrorResponseDto,
   })
   @ApiResponse({
+    status: 404,
+    description:
+      'productId ou storeId inexistente ou de outro usuário (CA5 e CA9).',
+    type: ErrorResponseDto,
+  })
+  @ApiResponse({
     status: 500,
     description: 'Erro interno.',
     type: ErrorResponseDto,

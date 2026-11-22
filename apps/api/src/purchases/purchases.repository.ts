@@ -115,6 +115,8 @@ export class PurchasesRepository {
           storeId,
           date: data.date,
           paidTotalCents: data.paidTotalCents,
+          // TODO(Issue a abrir — US02 rascunho de compra): hoje a compra nasce CONFIRMED, sem rascunho.
+          // TODO(Issue a abrir — US02 base coletiva de preços): a compra confirmada ainda não alimenta a base coletiva (RN06).
           status: 'CONFIRMED',
           confirmedAt: new Date(),
         },

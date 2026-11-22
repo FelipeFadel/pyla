@@ -74,7 +74,7 @@ model Category {
   products Product[]
 }
 
-// TODO: latitude e longitude entram com a sugestão de loja por localização.
+// TODO(Issue a abrir — US02 sugestão de loja por localização): latitude e longitude da Store.
 model Store {
   id             String     @id @default(uuid())
   userId         String

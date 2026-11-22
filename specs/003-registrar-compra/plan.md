@@ -74,6 +74,12 @@
   - Teste primeiro: e2e com dois usuários, cada um com compras, produtos e lojas: nenhuma listagem, consulta por id ou busca de um mostra dado do outro, e o produto de mesmo nome dos dois é distinto; teste do `/docs-json` conferindo que todas as rotas da história e os campos de todos os DTOs aparecem. Falha se algum campo estiver sem `@ApiProperty` ou se alguma rota vazar dado.
   - Arquivos previstos: `apps/api/test/purchases-isolation.e2e-spec.ts`, `apps/api/test/swagger.e2e-spec.ts`, os DTOs que faltarem decorar
 
+- [x] **Tarefa 11 — Rastrear as premissas do "Assume que" e documentar o 404 da compra** (pendências do auditor final)
+  - Cobre: pendência 1 do auditor (rastro do "Assume que") e a lacuna do Swagger do CA5 e CA9 (404 em `POST /purchases`)
+  - Teste primeiro: no `swagger.e2e-spec.ts`, um teste que exige a resposta 404 documentada em `POST /purchases` (falha hoje: só 201, 400, 401 e 500). O restante da tarefa é comentário, sem comportamento: os `TODO #<n>` apontam para as Issues que o usuário abriu (rascunho, base coletiva, sugestão de loja por localização).
+  - Arquivos previstos: `apps/api/test/swagger.e2e-spec.ts`, `apps/api/src/purchases/purchases.controller.ts` (`@ApiResponse` 404), `apps/api/prisma/schema.prisma` (TODO de latitude e longitude com o número da Issue), `apps/api/src/purchases/purchases.repository.ts` (TODO no `status: 'CONFIRMED'` fixo, com as Issues de rascunho e base coletiva)
+  - Versão mínima (pedido do usuário para a defesa da entrega 2): os TODOs ficam como `TODO(Issue a abrir — ...)`, sem número; trocar pelos números quando as 3 Issues forem abertas.
+
 ## Critérios sem tarefa
 
 -
