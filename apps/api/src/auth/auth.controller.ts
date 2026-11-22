@@ -19,7 +19,11 @@ import { ErrorResponseDto } from '../common/dto/error-response.dto.js';
 import { AuthService } from './auth.service.js';
 import { LoginDto } from './dto/login.dto.js';
 import { RegisterDto } from './dto/register.dto.js';
-import { UserEnvelopeDto } from './dto/user-response.dto.js';
+import type { Role } from '../generated/prisma/enums.js';
+import {
+  SessionUserEnvelopeDto,
+  UserEnvelopeDto,
+} from './dto/user-response.dto.js';
 import { Public } from './public.decorator.js';
 import { SESSION_COOKIE, SESSION_MAX_AGE_MS } from './session.constants.js';
 
@@ -48,12 +52,15 @@ export class AuthController {
   @ApiResponse({
     status: 200,
     description: 'Usuário autenticado.',
-    type: UserEnvelopeDto,
+    type: SessionUserEnvelopeDto,
   })
   @ApiResponse(UNAUTHORIZED_RESPONSE)
   @ApiResponse(INTERNAL_ERROR_RESPONSE)
-  me(@Req() req: Request & { user: { id: string; email: string } }) {
-    return { id: req.user.id, email: req.user.email };
+  me(
+    @Req()
+    req: Request & { user: { id: string; email: string; role: Role } },
+  ) {
+    return { id: req.user.id, email: req.user.email, role: req.user.role };
   }
 
   @Public()

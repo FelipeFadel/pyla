@@ -99,12 +99,20 @@ describe('GET /auth/me e guard global (e2e)', () => {
     expect(res.status).toBe(401);
   });
 
-  it('sessão válida: 200 com { id, email } e sem hash', async () => {
+  it('sessão válida: 200 com { id, email, role } e sem hash', async () => {
     const { cookie, id } = await registrar();
     const res = await me(cookie);
     expect(res.status).toBe(200);
-    expect(res.body.data).toEqual({ id, email: 'a@x.com' });
+    expect(res.body.data).toEqual({ id, email: 'a@x.com', role: 'CUSTOMER' });
     expect(JSON.stringify(res.body)).not.toContain('passwordHash');
+  });
+
+  it('devolve o papel atual do banco, não o do cadastro', async () => {
+    const { cookie, id } = await registrar();
+    await prisma.user.update({ where: { id }, data: { role: 'ADMIN' } });
+    const res = await me(cookie);
+    expect(res.status).toBe(200);
+    expect(res.body.data.role).toBe('ADMIN');
   });
 
   it('register e login continuam abertas', async () => {

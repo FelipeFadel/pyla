@@ -6,7 +6,8 @@ export class UsersRepository {
   constructor(private readonly prisma: PrismaService) {}
 
   create(data: { email: string; passwordHash: string }) {
-    return this.prisma.user.create({ data });
+    // O papel nunca vem do cliente: toda conta nasce CUSTOMER (CA15).
+    return this.prisma.user.create({ data: { ...data, role: 'CUSTOMER' } });
   }
 
   findById(id: string) {

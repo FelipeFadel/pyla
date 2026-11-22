@@ -6,6 +6,14 @@ export class UserDto {
   email: string;
 }
 
+export class SessionUserDto extends UserDto {
+  role: 'CUSTOMER' | 'ADMIN';
+}
+
 export class UserEnvelopeDto {
   data: UserDto;
+}
+
+export class SessionUserEnvelopeDto {
+  data: SessionUserDto;
 }
