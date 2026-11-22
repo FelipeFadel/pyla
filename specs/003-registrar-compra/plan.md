@@ -64,7 +64,7 @@
   - Teste primeiro: e2e do `GET /purchases/:id`: devolve a compra com os itens, cada um com produto (nome e categoria), valores informados e valor com desconto, e traz soma dos itens, desconto de caixa e total; id inexistente e id de outro usuário dão 404 com corpo idêntico; id que não é UUID dá 400; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/purchases/*` (controller, service, repository, `dto/`), `apps/api/test/purchases-detail.e2e-spec.ts`
 
-- [ ] **Tarefa 9 — Buscar os produtos do usuário pelo nome**
+- [x] **Tarefa 9 — Buscar os produtos do usuário pelo nome**
   - Cobre: CA20, CA22 (em `GET /products`)
   - Teste primeiro: e2e do `GET /products?search=`: devolve só produtos do usuário cujo nome contém o termo, sem diferenciar maiúsculas nem acentos, em ordem alfabética e no máximo 20; termo que não casa dá `[]`; produto de outro usuário nunca aparece; sem sessão dá 401. Falha porque a rota não existe.
   - Arquivos previstos: `apps/api/src/products/*` (module, controller, service, repository, `dto/`), `apps/api/src/app.module.ts`, `apps/api/test/products-search.e2e-spec.ts`
