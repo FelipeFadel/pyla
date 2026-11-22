@@ -53,6 +53,9 @@ export class PurchaseDto {
   /** Soma dos itens já com desconto, em centavos. */
   itemsTotalCents: number;
 
+  /** Desconto de caixa (soma dos itens − total pago), em centavos. */
+  cashDiscountCents: number;
+
   /** Total da compra, em centavos. */
   totalCents: number;
 }

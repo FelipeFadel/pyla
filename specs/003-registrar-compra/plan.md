@@ -44,7 +44,7 @@
   - Teste primeiro: e2e: `storeId` de loja do usuário liga a compra a ela; `storeName` cria a loja quando não existe e reaproveita quando existe (maiúsculas e espaços ignorados), sem duplicar; `storeId` inexistente ou de outro usuário dá 404 e nada é gravado. Falham porque o corpo da compra ainda não aceita loja.
   - Arquivos previstos: `apps/api/src/purchases/*` (service, repository, `dto/`, resposta com `store`), `apps/api/test/purchases-store.e2e-spec.ts`
 
-- [ ] **Tarefa 5 — Aplicar descontos e total pago**
+- [x] **Tarefa 5 — Aplicar descontos e total pago**
   - Cobre: CA10, CA11, CA12
   - Teste primeiro: unitário de `purchase-calculations.ts` (valor cheio com `quantity` decimal e arredondamento de meio-centavo, valor com desconto, desconto de caixa, total) e e2e: `discountCents` entre 0 e o valor cheio é aceito, negativo ou maior dá 400 em `items.N.discountCents` e nada é gravado; `paidTotalCents` entre 0 e a soma com descontos é aceito e a resposta traz o desconto de caixa; fora disso dá 400 em `paidTotalCents`; sem `paidTotalCents` o desconto de caixa é 0 e o total é a soma. Falham porque os campos não existem.
   - Arquivos previstos: `apps/api/src/purchases/purchase-calculations.ts` e `.spec.ts`, `purchases.service.ts`, `dto/*`, `apps/api/test/purchases-discounts.e2e-spec.ts`

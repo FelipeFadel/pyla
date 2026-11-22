@@ -1,6 +1,8 @@
 import {
+  cashDiscountCents,
   itemFullValueCents,
   itemValueCents,
+  purchaseTotalCents,
   sumItemsCents,
 } from './purchase-calculations.js';
 
@@ -46,6 +48,24 @@ describe('purchase-calculations', () => {
           discountCents: 150,
         }),
       ).toBe(850);
+    });
+  });
+
+  describe('cashDiscountCents e purchaseTotalCents', () => {
+    it('sem total pago, o desconto de caixa é 0 e o total é a soma', () => {
+      expect(cashDiscountCents(1350, undefined)).toBe(0);
+      expect(purchaseTotalCents(1350, undefined)).toBe(1350);
+    });
+
+    it('com total pago, o desconto de caixa é a soma menos o pago', () => {
+      expect(cashDiscountCents(1350, 1200)).toBe(150);
+      expect(purchaseTotalCents(1350, 1200)).toBe(1200);
+    });
+
+    it('total pago igual à soma ou zero são limites válidos', () => {
+      expect(cashDiscountCents(1350, 1350)).toBe(0);
+      expect(cashDiscountCents(1350, 0)).toBe(1350);
+      expect(purchaseTotalCents(1350, 0)).toBe(0);
     });
   });
 

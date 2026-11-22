@@ -5,6 +5,8 @@ import {
   IsArray,
   IsEnum,
   IsInt,
+  Max,
+  Min,
   IsNotEmpty,
   IsNumber,
   IsPositive,
@@ -15,6 +17,9 @@ import {
   ValidateNested,
 } from 'class-validator';
 import { Unit } from '../../generated/prisma/enums.js';
+
+// Maior Int do Postgres: evita 500 por estouro. O limite de preço é da tarefa 6.
+const INT_MAX = 2147483647;
 
 const trim = ({ value }: { value: unknown }) =>
   typeof value === 'string' ? value.trim() : value;
@@ -68,6 +73,18 @@ export class CreatePurchaseItemDto {
   @IsInt({ message: 'O preço deve ser um número inteiro de centavos.' })
   @IsPositive({ message: 'O preço deve ser maior que zero.' })
   fullPriceCents: number;
+
+  @ApiPropertyOptional({
+    description:
+      'Desconto do item, em centavos (padrão 0, no máximo o valor cheio do item).',
+    example: 100,
+    default: 0,
+  })
+  @ValidateIf((item: CreatePurchaseItemDto) => item.discountCents !== undefined)
+  @IsInt({ message: 'O desconto deve ser um número inteiro de centavos.' })
+  @Min(0, { message: 'O desconto não pode ser negativo.' })
+  @Max(INT_MAX, { message: 'O desconto é grande demais.' })
+  discountCents?: number;
 }
 
 export class CreatePurchaseDto {
@@ -98,6 +115,17 @@ export class CreatePurchaseDto {
   @IsString({ message: 'O nome da loja deve ser um texto.' })
   @IsNotEmpty({ message: 'Informe o nome da loja.' })
   storeName?: string;
+
+  @ApiPropertyOptional({
+    description:
+      'Total pago na compra, em centavos (no máximo a soma dos itens com desconto). A diferença é o desconto de caixa.',
+    example: 2400,
+  })
+  @ValidateIf((dto: CreatePurchaseDto) => dto.paidTotalCents !== undefined)
+  @IsInt({ message: 'O total pago deve ser um número inteiro de centavos.' })
+  @Min(0, { message: 'O total pago não pode ser negativo.' })
+  @Max(INT_MAX, { message: 'O total pago é grande demais.' })
+  paidTotalCents?: number;
 
   @ApiProperty({ type: [CreatePurchaseItemDto] })
   @IsArray({ message: 'Os itens devem ser uma lista.' })

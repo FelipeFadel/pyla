@@ -23,3 +23,19 @@ export function itemValueCents(item: DiscountedItem): number {
 export function sumItemsCents(items: DiscountedItem[]): number {
   return items.reduce((total, item) => total + itemValueCents(item), 0);
 }
+
+// Desconto de caixa: o que a soma dos itens passa do total pago. Sem total
+// pago, não há desconto de caixa (RN08).
+export function cashDiscountCents(
+  itemsTotalCents: number,
+  paidTotalCents: number | undefined,
+): number {
+  return paidTotalCents === undefined ? 0 : itemsTotalCents - paidTotalCents;
+}
+
+export function purchaseTotalCents(
+  itemsTotalCents: number,
+  paidTotalCents: number | undefined,
+): number {
+  return paidTotalCents ?? itemsTotalCents;
+}

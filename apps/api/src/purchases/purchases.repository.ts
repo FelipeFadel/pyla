@@ -7,6 +7,7 @@ interface ItemPricing {
   packageSize: number;
   unit: Unit;
   fullPriceCents: number;
+  discountCents: number;
 }
 
 export type NewPurchaseItem = ItemPricing &
@@ -27,6 +28,7 @@ export class PurchasesRepository {
   createConfirmed(data: {
     userId: string;
     date: Date;
+    paidTotalCents?: number;
     store?: NewPurchaseStore;
     items: NewPurchaseItem[];
   }) {
@@ -66,6 +68,7 @@ export class PurchasesRepository {
           userId: data.userId,
           storeId,
           date: data.date,
+          paidTotalCents: data.paidTotalCents,
           status: 'CONFIRMED',
           confirmedAt: new Date(),
         },
@@ -118,6 +121,7 @@ export class PurchasesRepository {
             packageSize: item.packageSize,
             unit: item.unit,
             fullPriceCents: item.fullPriceCents,
+            discountCents: item.discountCents,
           },
         });
       }
