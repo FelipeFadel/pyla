@@ -5,6 +5,7 @@ import { AppService } from './app.service.js';
 import { AuthModule } from './auth/auth.module.js';
 import { CategoriesModule } from './categories/categories.module.js';
 import { PlansModule } from './plans/plans.module.js';
+import { PurchasesModule } from './purchases/purchases.module.js';
 import { GLOBAL_PROVIDERS } from './common/global-providers.js';
 import { validateEnv } from './config/env.validation.js';
 
@@ -14,6 +15,7 @@ import { validateEnv } from './config/env.validation.js';
     AuthModule,
     PlansModule,
     CategoriesModule,
+    PurchasesModule,
   ],
   controllers: [AppController],
   providers: [AppService, ...GLOBAL_PROVIDERS],

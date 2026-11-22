@@ -29,7 +29,7 @@
   - Teste primeiro: e2e do `GET /categories`: usuário autenticado recebe as 10 categorias fixas em ordem alfabética, cada uma com `id` e `name`; sem sessão dá 401. Falha porque a rota e as tabelas não existem.
   - Arquivos previstos: `apps/api/prisma/schema.prisma`, nova migration com o seed (**ler o SQL**), `apps/api/src/categories/*` (module, controller, service, repository, `dto/`), `apps/api/src/app.module.ts`, `apps/api/test/categories-list.e2e-spec.ts`
 
-- [ ] **Tarefa 2 — Registrar uma compra com um produto novo**
+- [x] **Tarefa 2 — Registrar uma compra com um produto novo**
   - Cobre: CA1, CA3, CA8, CA16, CA22 (em `POST /purchases`)
   - Teste primeiro: e2e do `POST /purchases`: usuário envia data de hoje e um item com `name` + `categoryId` fixa, sem loja; resposta 201 com `status` CONFIRMED, o item e o produto criado para o usuário com aquela categoria, `store` nula; a compra aparece no banco com `userId` do token; corpo com `userId`, `status` ou `confirmedAt` dá 400 e nada é gravado; sem sessão dá 401. Teste unitário de `purchase-calculations.ts` para a soma dos itens. Falham porque a rota e o módulo não existem.
   - Arquivos previstos: `apps/api/src/purchases/*` (module, controller, service, repository, `dto/`, `purchase-calculations.ts` e `.spec.ts`), `apps/api/src/common/normalize-name.ts` e `.spec.ts`, `apps/api/src/app.module.ts`, `apps/api/test/purchases-create.e2e-spec.ts`
