@@ -377,7 +377,7 @@ nem a base de preços.
 
 ---
 
-### US15 — Gerenciar os planos de assinatura · `Must Have` · `M` · Status: ` 🟡 Ready`
+### US15 — Gerenciar os planos de assinatura · `Must Have` · `M` · Status: `🟢 Live`
 
 **Como** administrador, **eu quero** criar, editar, ativar, desativar e excluir os
 planos de assinatura, **para que** o Pyla ofereça o premium com o nome e o preço

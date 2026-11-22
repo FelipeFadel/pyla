@@ -9,10 +9,41 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
 model User {
-  id           String   @id @default(uuid())
-  email        String   @unique
+  id           String        @id @default(uuid())
+  email        String        @unique
   passwordHash String
-  tokenVersion Int      @default(0)
-  createdAt    DateTime @default(now())
+  tokenVersion Int           @default(0)
+  role         Role          @default(CUSTOMER)
+  createdAt    DateTime      @default(now())
+  subscription Subscription?
+}
+
+model Plan {
+  id            String         @id @default(uuid())
+  name          String
+  // Nome sem espaços nas pontas e em minúsculas: a unicidade (CA4, CA5) vive aqui.
+  nameKey       String         @unique
+  priceCents    Int
+  active        Boolean        @default(true)
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  subscriptions Subscription[]
+}
+
+// TODO #7: modelo mínimo; a assinatura completa (status, período) vem com a US06.
+model Subscription {
+  id         String   @id @default(uuid())
+  userId     String   @unique
+  user       User     @relation(fields: [userId], references: [id])
+  planId     String
+  plan       Plan     @relation(fields: [planId], references: [id], onDelete: Restrict)
+  // Preço contratado, em centavos: não muda quando o plano muda (CA6).
+  priceCents Int
+  createdAt  DateTime @default(now())
 }

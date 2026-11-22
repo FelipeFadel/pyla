@@ -115,6 +115,15 @@ describe('POST /auth/register (e2e)', () => {
       expect((await prisma.user.findMany())[0].email).toBe('ana@x.com');
     });
 
+    it('grava a conta como CUSTOMER', async () => {
+      await registrar({ email: 'a@x.com', password: SENHA_VALIDA }).expect(201);
+
+      const salvo = await prisma.user.findUniqueOrThrow({
+        where: { email: 'a@x.com' },
+      });
+      expect(salvo.role).toBe('CUSTOMER');
+    });
+
     it('aceita senha acentuada', async () => {
       await registrar({ email: 'a@x.com', password: 'ação1234' }).expect(201);
       await registrar({ email: 'b@x.com', password: 'çççççççç1' }).expect(201);
@@ -172,6 +181,11 @@ describe('POST /auth/register (e2e)', () => {
         'campo extra',
         { email: 'a@x.com', password: SENHA_VALIDA, admin: true },
         'admin',
+      ],
+      [
+        'campo de papel no corpo (role ADMIN)',
+        { email: 'a@x.com', password: SENHA_VALIDA, role: 'ADMIN' },
+        'role',
       ],
     ];
 

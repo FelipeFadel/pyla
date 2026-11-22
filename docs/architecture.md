@@ -120,8 +120,13 @@
 - `JwtAuthGuard` é **global** (`APP_GUARD`). Rotas abertas são marcadas
   explicitamente com `@Public()`: cadastro, login, webhook do gateway e a
   documentação.
+- `RolesGuard` é **global** (`APP_GUARD`, depois do `JwtAuthGuard`). A rota
+  administrativa declara `@Roles(Role.ADMIN)`; quem não é admin recebe 403. O
+  papel é relido do banco a cada requisição, não confiado ao JWT. O cadastro
+  nunca cria admin: a promoção é feita direto no banco (US15).
 - `PremiumGuard` + `@RequiresPremium()` protegem os recursos premium (RN14).
-  Premium é **derivado** da `Subscription` (§5.1), nunca uma coluna de papel.
+  Premium é **derivado** da `Subscription` (§5.1), não de `User.role`: o papel
+  só distingue `CUSTOMER` de `ADMIN`.
 - Os limites de período do usuário gratuito (só o mês corrente) são regra de
   **service**, não de guard. A rota é a mesma; o que muda é o recorte.
 - **Propriedade do dado (RN21):** todo método de repository que lê ou escreve
@@ -291,7 +296,8 @@ web). Os e2e da api ficam em `apps/api/test/`.
 
 | Termo PRD (PT-BR) | Entidade técnica (EN) | Atributos principais |
 | :---------------- | :-------------------- | :------------------- |
-| Usuário | `User` | `id`, `email` (único), `passwordHash`, `tokenVersion`, `createdAt` |
+| Usuário | `User` | `id`, `email` (único), `passwordHash`, `tokenVersion`, `role` (CUSTOMER/ADMIN), `createdAt` |
+| Plano (oferta) | `Plan` | `id`, `name`, `nameKey` (único), `priceCents`, `active`, `createdAt`, `updatedAt` |
 | Plano / Assinatura | `Subscription` | `id`, `userId` (1:1), `status` (ACTIVE/CANCELED/EXPIRED), `currentPeriodEnd`, `cancelAtPeriodEnd` |
 | Pedido de assinatura | `SubscriptionOrder` | `id`, `userId`, `status` (PENDING/PAID/REFUSED/EXPIRED), `expiresAt` (criação + 24h), `gatewayReference`, `createdAt` |
 | Pagamento | `Payment` | `id`, `orderId`, `gatewayPaymentId` (único), `status`, `amount`, `paidAt` |
@@ -307,7 +313,8 @@ web). Os e2e da api ficam em `apps/api/test/`.
 **Decorrências do modelo:**
 - **Premium é derivado, não armazenado.** O usuário é premium quando tem
   `Subscription` com `status` ACTIVE ou CANCELED e `now < currentPeriodEnd`
-  (RN19). Não existe coluna de papel em `User`.
+  (RN19). A coluna `User.role` (CUSTOMER/ADMIN) existe só para o administrador
+  (US15); ela nunca indica premium.
 - **Dinheiro é `Decimal`**, nunca `float`, em todo valor monetário e de
   quantidade.
 - **Valores calculados não são persistidos:** custo por unidade, preço com
@@ -340,6 +347,7 @@ web). Os e2e da api ficam em `apps/api/test/`.
 ```mermaid
 erDiagram
     User ||--o| Subscription : "possui"
+    Plan ||--o{ Subscription : "é contratado em"
     User ||--o{ SubscriptionOrder : "gera"
     User ||--o{ Store : "cadastra"
     User ||--o{ Product : "cadastra"
@@ -357,11 +365,23 @@ erDiagram
         string email UK
         string passwordHash
         int tokenVersion
+        enum role "CUSTOMER|ADMIN"
         datetime createdAt
+    }
+    Plan {
+        uuid id PK
+        string name
+        string nameKey UK
+        int priceCents
+        boolean active
+        datetime createdAt
+        datetime updatedAt
     }
     Subscription {
         uuid id PK
         uuid userId FK, UK
+        uuid planId FK
+        int priceCents "preço contratado"
         enum status "ACTIVE|CANCELED|EXPIRED"
         datetime currentPeriodEnd
         boolean cancelAtPeriodEnd
