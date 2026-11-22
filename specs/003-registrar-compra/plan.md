@@ -39,7 +39,7 @@
   - Teste primeiro: e2e: item com `productId` de produto do usuário reaproveita e não cria outro; item com o mesmo nome (maiúsculas e espaços diferentes) reaproveita; `productId` inexistente ou de outro usuário dá 404 e nada é gravado; o mesmo produto novo em dois itens da mesma compra gera um só produto; duas compras simultâneas do mesmo usuário com o mesmo produto novo deixam um só produto. Falham porque cada item hoje cria produto novo.
   - Arquivos previstos: `apps/api/src/purchases/purchases.service.ts`, `purchases.repository.ts`, `dto/*`, `apps/api/test/purchases-products.e2e-spec.ts`
 
-- [ ] **Tarefa 4 — Ligar a compra a uma loja, existente ou nova**
+- [x] **Tarefa 4 — Ligar a compra a uma loja, existente ou nova**
   - Cobre: CA7, CA9
   - Teste primeiro: e2e: `storeId` de loja do usuário liga a compra a ela; `storeName` cria a loja quando não existe e reaproveita quando existe (maiúsculas e espaços ignorados), sem duplicar; `storeId` inexistente ou de outro usuário dá 404 e nada é gravado. Falham porque o corpo da compra ainda não aceita loja.
   - Arquivos previstos: `apps/api/src/purchases/*` (service, repository, `dto/`, resposta com `store`), `apps/api/test/purchases-store.e2e-spec.ts`

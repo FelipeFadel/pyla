@@ -2,16 +2,35 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { normalizeName } from '../common/normalize-name.js';
 import type { CreatePurchaseDto } from './dto/create-purchase.dto.js';
 import { itemValueCents, sumItemsCents } from './purchase-calculations.js';
-import { PurchasesRepository } from './purchases.repository.js';
+import {
+  type NewPurchaseStore,
+  PurchasesRepository,
+} from './purchases.repository.js';
 
 @Injectable()
 export class PurchasesService {
   constructor(private readonly repository: PurchasesRepository) {}
 
   async create(userId: string, dto: CreatePurchaseDto) {
+    if (dto.storeId !== undefined && dto.storeName !== undefined) {
+      throw new BadRequestException(
+        'storeId: informe a loja por storeId OU por storeName, não pelos dois.',
+      );
+    }
+    let store: NewPurchaseStore | undefined;
+    if (dto.storeId !== undefined) {
+      store = { storeId: dto.storeId };
+    } else if (dto.storeName !== undefined) {
+      store = {
+        name: dto.storeName,
+        normalizedName: normalizeName(dto.storeName),
+      };
+    }
+
     const purchase = await this.repository.createConfirmed({
       userId,
       date: new Date(`${dto.date}T00:00:00.000Z`),
+      store,
       items: dto.items.map((item, index) => {
         const priced = {
           quantity: item.quantity,

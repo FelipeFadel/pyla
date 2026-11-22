@@ -80,6 +80,25 @@ export class CreatePurchaseDto {
   })
   date: string;
 
+  @ApiPropertyOptional({
+    description: 'Loja que o usuário já tem. Use este campo OU storeName.',
+    format: 'uuid',
+  })
+  @ValidateIf((dto: CreatePurchaseDto) => dto.storeId !== undefined)
+  @IsUUID(undefined, { message: 'A loja deve ser um id válido.' })
+  storeId?: string;
+
+  @ApiPropertyOptional({
+    description:
+      'Nome da loja: reaproveita a do usuário com o mesmo nome ou cria uma nova.',
+    example: 'Mercado Bom',
+  })
+  @ValidateIf((dto: CreatePurchaseDto) => dto.storeName !== undefined)
+  @Transform(trim)
+  @IsString({ message: 'O nome da loja deve ser um texto.' })
+  @IsNotEmpty({ message: 'Informe o nome da loja.' })
+  storeName?: string;
+
   @ApiProperty({ type: [CreatePurchaseItemDto] })
   @IsArray({ message: 'Os itens devem ser uma lista.' })
   @ArrayNotEmpty({ message: 'Informe ao menos um item.' })

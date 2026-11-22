@@ -15,6 +15,10 @@ export type NewPurchaseItem = ItemPricing &
     | { name: string; normalizedName: string; categoryId: string }
   );
 
+export type NewPurchaseStore =
+  | { storeId: string }
+  | { name: string; normalizedName: string };
+
 @Injectable()
 export class PurchasesRepository {
   constructor(private readonly prisma: PrismaService) {}
@@ -23,12 +27,44 @@ export class PurchasesRepository {
   createConfirmed(data: {
     userId: string;
     date: Date;
+    store?: NewPurchaseStore;
     items: NewPurchaseItem[];
   }) {
     return this.prisma.$transaction(async (tx) => {
+      let storeId: string | null = null;
+      if (data.store && 'storeId' in data.store) {
+        const store = await tx.store.findFirst({
+          where: { id: data.store.storeId, userId: data.userId },
+        });
+        if (!store) throw new NotFoundException('Loja não encontrada.');
+        storeId = store.id;
+      } else if (data.store) {
+        // Mesma técnica dos produtos: a unicidade do banco decide a corrida.
+        await tx.store.createMany({
+          data: [
+            {
+              userId: data.userId,
+              name: data.store.name,
+              normalizedName: data.store.normalizedName,
+            },
+          ],
+          skipDuplicates: true,
+        });
+        const store = await tx.store.findUniqueOrThrow({
+          where: {
+            userId_normalizedName: {
+              userId: data.userId,
+              normalizedName: data.store.normalizedName,
+            },
+          },
+        });
+        storeId = store.id;
+      }
+
       const purchase = await tx.purchase.create({
         data: {
           userId: data.userId,
+          storeId,
           date: data.date,
           status: 'CONFIRMED',
           confirmedAt: new Date(),
