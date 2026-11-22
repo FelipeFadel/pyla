@@ -24,7 +24,7 @@
 
 ## Tarefas
 
-- [ ] **Tarefa 1 — Criar o modelo de compra e listar as categorias fixas**
+- [x] **Tarefa 1 — Criar o modelo de compra e listar as categorias fixas**
   - Cobre: CA21, CA22 (em `GET /categories`)
   - Teste primeiro: e2e do `GET /categories`: usuário autenticado recebe as 10 categorias fixas em ordem alfabética, cada uma com `id` e `name`; sem sessão dá 401. Falha porque a rota e as tabelas não existem.
   - Arquivos previstos: `apps/api/prisma/schema.prisma`, nova migration com o seed (**ler o SQL**), `apps/api/src/categories/*` (module, controller, service, repository, `dto/`), `apps/api/src/app.module.ts`, `apps/api/test/categories-list.e2e-spec.ts`
