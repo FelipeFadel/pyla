@@ -27,28 +27,28 @@
 
 - [x] **ID1:** Estruturou o PRD e o SDD (Diagrama Mermaid) de forma clara, utilizando a IA para modelar o negócio.
   > No ID1, "SDD" é o *Software Design Document* — neste repositório ele se chama `docs/architecture.md`, porque a sigla já significa Spec-Driven Development (o guia explica).
-- [ ] **ID2:** A aplicação foi estruturada em formato de Monorepo (Front + Back) no GitHub.
+- [x] **ID2:** A aplicação foi estruturada em formato de Monorepo (Front + Back) no GitHub.
 - [x] **ID3:** Mapeou o PRD em Histórias de Usuário no GitHub Projects, criando um backlog rastreável de Issues.
-- [ ] **ID4:** Para as histórias implementadas, registrou no repositório a especificação e o plano derivados da Issue antes da codificação.
-- [ ] **ID5:** Demonstrou domínio do GitHub Flow, isolando features em branches curtas e utilizando Pull Requests para integração na main.
+- [x] **ID4:** Para as histórias implementadas, registrou no repositório a especificação e o plano derivados da Issue antes da codificação.
+- [x] **ID5:** Demonstrou domínio do GitHub Flow, isolando features em branches curtas e utilizando Pull Requests para integração na main.
 
 ## RA2 — Desenvolvimento Backend Assistido por IA
 
-- [ ] **ID6:** O código NestJS mantém separação estrita de camadas arquiteturais (Controllers, Services, Modules).
-- [ ] **ID7:** Aplicou DTOs e ValidationPipes (com whitelist) para blindar as entradas da API.
-- [ ] **ID8:** Implementou operações CRUD relacionais utilizando Prisma ORM.
-- [ ] **ID9:** Configurou autenticação JWT e protegeu rotas através de controle de acesso (Roles/Guards).
-- [ ] **ID10:** Padronizou o tráfego com Interceptors para respostas e Exception Filters globais para erros.
+- [x] **ID6:** O código NestJS mantém separação estrita de camadas arquiteturais (Controllers, Services, Modules).
+- [x] **ID7:** Aplicou DTOs e ValidationPipes (com whitelist) para blindar as entradas da API.
+- [x] **ID8:** Implementou operações CRUD relacionais utilizando Prisma ORM.
+- [x] **ID9:** Configurou autenticação JWT e protegeu rotas através de controle de acesso (Roles/Guards).
+- [x] **ID10:** Padronizou o tráfego com Interceptors para respostas e Exception Filters globais para erros.
 
 ## RA3 — Qualidade de Software e TDD Guiado por IA
 
-- [ ] **ID11:** Orquestrou a IA no fluxo TDD, gerando testes automatizados baseados nas Issues antes da implementação da lógica.
-- [ ] **ID12:** Os testes locais e no pipeline executam com sucesso, cobrindo caminhos de sucesso e erro.
-- [ ] **ID13:** Submeteu o código à revisão de um agente distinto daquele que implementou, usando critérios fixos, e registrou no Pull Request as decisões tomadas sobre os apontamentos.
+- [x] **ID11:** Orquestrou a IA no fluxo TDD, gerando testes automatizados baseados nas Issues antes da implementação da lógica.
+- [x] **ID12:** Os testes locais e no pipeline executam com sucesso, cobrindo caminhos de sucesso e erro.
+- [x] **ID13:** Submeteu o código à revisão de um agente distinto daquele que implementou, usando critérios fixos, e registrou no Pull Request as decisões tomadas sobre os apontamentos.
 
 ## RA4 — Prototipagem e Integração Frontend
 
-- [ ] **ID14:** A API do backend expõe documentação Swagger atualizada e interativa.
+- [x] **ID14:** A API do backend expõe documentação Swagger atualizada e interativa.
 - [ ] **ID15:** Materializou o PRD em interfaces visuais (React/Angular/Vue) utilizando prototipagem assistida por IA.
 - [ ] **ID16:** A interface consome os dados reais da API NestJS de forma assíncrona, lidando corretamente com os tokens JWT.
 

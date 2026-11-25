@@ -29,7 +29,32 @@ A partir da Entrega 3.
 
 ## Quick Start
 
-A partir da Entrega 2.
+Precisa de Node 24 ou mais novo e do Docker.
+
+```bash
+git clone https://github.com/FelipeFadel/pyla.git
+cd pyla
+npm install
+cp apps/api/.env.example apps/api/.env
+cp apps/web/.env.example apps/web/.env
+docker compose up -d
+npx -w apps/api prisma migrate deploy
+npm run dev:api
+npm run dev:web
+```
+
+| Comando | O que faz |
+|---|---|
+| `git clone ...` e `cd pyla` | Baixa o repositório e entra na pasta |
+| `npm install` | Instala a API e o web de uma vez (npm workspaces) e gera o cliente do Prisma |
+| `cp apps/api/.env.example apps/api/.env` | Cria o `.env` da API. Preencha os valores antes de seguir |
+| `cp apps/web/.env.example apps/web/.env` | Cria o `.env` do web, com a URL da API |
+| `docker compose up -d` | Sobe o PostgreSQL 18 local, com usuário e senha do `apps/api/.env` |
+| `npx -w apps/api prisma migrate deploy` | Cria as tabelas no banco e as categorias fixas |
+| `npm run dev:api` | Sobe a API em `http://localhost:3000`, com o Swagger em `/docs` |
+| `npm run dev:web` | Sobe o web, em outro terminal |
+
+Para rodar os testes: `npm test` (unitários) e `npm run test:e2e -w apps/api` (e2e, com o banco no ar).
 
 ## Documentação
 
